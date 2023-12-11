@@ -1,0 +1,5 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Структура курса}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Темы лекций}{3}{0}{1}
+\beamer@sectionintoc {2}{Оценивание}{8}{0}{2}
+\beamer@sectionintoc {3}{Материалы}{11}{0}{3}

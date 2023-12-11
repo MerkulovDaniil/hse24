@@ -1,0 +1,139 @@
+- title: Вспоминаем линейную алгебру. Некоторые матричные разложения. Скорость сходимости. Одномерная оптимизация. Неточная одномерная оптимизация.
+  number: 1
+  #materials: /presentations/1.pdf
+  # notes: /notes/1.pdf
+  youtube: 
+  download: 
+
+- title: Градиент. Гессиан. Матрично-векторное дифференцирование. Автоматическое дифференцирование. Вычислительный граф.
+  number: 2
+  #materials: /presentations/2.pdf
+  # notes: /notes/2.pdf
+  youtube: 
+  download: 
+
+- title: Выпуклость. Выпуклые множества. Выпуклые функции. Неравенство Йенсена. Сильно выпуклые функции. Условие Поляка - Лоясиевича.
+  number: 3
+  #materials: /presentations/3.pdf
+  # notes: /notes/3.pdf
+  youtube: 
+  download: 
+
+- title: Условия оптимальности. Функция Лагранжа. Множители Лагранжа. Теорема Каруша - Куна - Таккера.
+  number: 4
+  #materials: /presentations/4.pdf
+  # notes: /notes/4.pdf
+  youtube: 
+  download: 
+
+- title: Двойственность. Введение в двойственность. Двойственная задача. Анализ чувствительности.
+  number: 5
+  #materials: /presentations/5.pdf
+  # notes: /notes/5.pdf
+  youtube: 
+  download: 
+
+- title: Задача линейного программирования. Симплекс метод.
+  number: 6
+  #materials: /presentations/6.pdf
+  # notes: /notes/6.pdf
+  youtube: 
+  download: 
+
+- title: Градиентный спуск. Теоремы сходимости в гладком случае (выпуклые, сильно выпуклые, PL). Верхние и нижние оценки сходимости.
+  number: 7
+  #materials: /presentations/7.pdf
+  # notes: /notes/7.pdf
+  youtube: 
+  download: 
+
+- title: Ускоренные градиентные методы. Метод Поляка, Нестерова.
+  number: 8
+  #materials: /presentations/8.pdf
+  # notes: /notes/8.pdf
+  youtube: 
+  download: 
+
+- title: Субградиент. Субдифференциал. Субградиентный спуск. Теоремы сходимости в негладком случае. Особенности работы градиентного метода в практических негладких задачах.
+  number: 9
+  #materials: /presentations/9.pdf
+  # notes: /notes/9.pdf
+  youtube: 
+  download: 
+
+- title: Метод сопряженных градиентов.
+  number: 10
+  #materials: /presentations/10.pdf
+  # notes: /notes/10.pdf
+  youtube: 
+  download: 
+
+- title: Проксимальный градиентный метод. Метод Франк-Вульфа. Метод проекции градиента.
+  number: 11
+  #materials: /presentations/11.pdf
+  # notes: /notes/11.pdf
+  youtube: 
+  download: 
+
+- title: Метод натурального градиента. Метод зеркального спуска. K-FAC.
+  number: 12
+  #materials: /presentations/12.pdf
+  # notes: /notes/12.pdf
+  youtube: 
+  download: 
+
+- title: Метод Ньютона. Квазиньютоновские методы.
+  number: 13
+  #materials: /presentations/13.pdf
+  # notes: /notes/13.pdf
+  youtube: 
+  download: 
+
+- title: Введение в методы внутренней точки.
+  number: 14
+  #materials: /presentations/14.pdf
+  # notes: /notes/14.pdf
+  youtube: 
+  download: 
+
+- title: "Стохастический градиентный спуск. Адаптивные стохастические градиентные алгоритмы: AdaDelta, RMSProp, Adam, Nadam."
+  number: 15
+  #materials: /presentations/15.pdf
+  # notes: /notes/15.pdf
+  youtube: 
+  download: 
+
+- title: "Методы редукции дисперсии: SAG, SVRG, SAGA."
+  number: 16
+  #materials: /presentations/16.pdf
+  # notes: /notes/16.pdf
+  youtube: 
+  download: 
+
+- title: Градиентный поток и диффузия. Методы оптимизации в непрерывном времени.
+  number: 17
+  #materials: /presentations/17.pdf
+  # notes: /notes/17.pdf
+  youtube: 
+  download: 
+
+- title: Седловые задачи. Минимакс. Обучение GAN.
+  number: 18
+  #materials: /presentations/18.pdf
+  # notes: /notes/18.pdf
+  youtube: 
+  download: 
+
+- title: Обобщающая способность моделей машинного обучения. Neural Tangent Kernel. Mode connectivity.
+  number: 19
+  #materials: /presentations/19.pdf
+  # notes: /notes/19.pdf
+  youtube: 
+  download: 
+
+- title: Вопросы обучения больших моделей. Lars, Lamb. Расписания learning rate. Warm-up. Клиппинг.
+  number: 20
+  #materials: /presentations/20.pdf
+  # notes: /notes/20.pdf
+  youtube: 
+  download: 

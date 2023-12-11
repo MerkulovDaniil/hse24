@@ -1,0 +1,16 @@
+```{=html}
+<% for (const item of items) { %>
+    <h3>Занятие <%= item.number %></h3>
+    <p>
+        <% 
+            var links = [];
+            if(item.materials) { links.push('<a href="' + item.materials + '">📄 Материалы</a>'); }
+            if(item.notes) { links.push('<a href="' + item.notes + '">📝 Записи</a>'); }
+            if(item.youtube) { links.push('<a href="' + item.youtube + '">▶️ Youtube</a>'); }
+            if(item.download) { links.push('<a href="' + item.download + '">💿 Скачать</a>'); }
+            print(links.join(' • '));
+        %>
+    </p>
+    <p><%= item.title %></p>
+<% } %>
+```
