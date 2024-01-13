@@ -1,0 +1,33 @@
+- name: Daniil Merkulov
+  role: Instructor
+  image: photos/dm.jpeg
+- name: Farukh Yaushev
+  role: Seminarist
+  image: photos/fy.jpeg
+- name: Kirill Nikorov
+  role: Seminarist
+  image: photos/kn.jpeg
+- name: Michael Persiianov
+  role: Seminarist
+  image: photos/mp.jpeg
+- name: Arina Kosovskaia
+  role: Assistant
+  image: photos/ak.jpeg
+- name: Daniil
+  role: Assistant
+  image: photos/d.jpeg
+- name: Maria Medvedeva
+  role: Assistant
+  image: photos/mm.jpeg
+- name: Alina Potemkina
+  role: Assistant
+  image: photos/ap.jpeg
+- name: Oleg Kurilov
+  role: Assistant
+  image: photos/ok.jpeg
+- name: Sabina
+  role: Assistant
+  image: photos/s.jpeg
+- name: Svetlana Mikhailova
+  role: Assistant
+  image: photos/sm.jpeg

@@ -1,5 +1,5 @@
 ---
-title: 🚀 Программа
+title: 🚀 Materials
 nav_order: 2
 listing:
   - id: materials

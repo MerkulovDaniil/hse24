@@ -1,5 +1,5 @@
 ---
-title: 💀 Домашка
+title: 💀 Homework
 order: 3
 toc: true
 ---

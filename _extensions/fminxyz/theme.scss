@@ -202,3 +202,53 @@ div.callout-proof.callout-style-default > .callout-header {
   padding-top: 0px;
   margin-top: 0px;
 }
+
+#listing-team {
+  .quarto-listing-container-grid {
+    .list.grid {
+      .g-col-1 {
+        .quarto-grid-item.card {
+          // Centering contents inside the card
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          .card-body.post-contents {
+            // Centering the name and role text
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            .card-title.listing-title, p {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.g-col-1 .quarto-grid-item.card .card-img-top img.thumbnail-image.card-img {
+  border-radius: 50% !important;
+  height: 100% !important;
+}
+
+.responsive-video {
+  position: relative;
+  padding-bottom: 75%; /* Aspect ratio */
+  padding-top: 25px;
+  height: 0;
+  max-width: 512px; /* Added max-width */
+  margin: 0 auto; /* Center the element */
+  
+  .video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
