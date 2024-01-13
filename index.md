@@ -6,6 +6,7 @@ listing:
       - team.yml
     template: team_listing_template.ejs
 ---
+
 # Optimization for ML
 
 * Course for 3rd year students of CS department at HSE university. 1 lecture + 1 seminar per week.
@@ -18,3 +19,4 @@ loss_surface.html
 # Team
 :::{#team}
 :::
+
