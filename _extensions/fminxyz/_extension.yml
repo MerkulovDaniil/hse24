@@ -16,11 +16,7 @@ contributes:
       include-in-header:
         - text: |
             <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js" integrity="sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A" crossorigin="anonymous"></script>
-    pdf:
-      toc: false
-      geometry:
-      - left=10mm
-      - right=10mm
+
   filters:
     - custom_callout.lua
     - custom_local_video.lua

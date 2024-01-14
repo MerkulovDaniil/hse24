@@ -6,6 +6,7 @@
             var links = [];
             if(item.materials) { links.push('<a href="' + item.materials + '">📄 Materials</a>'); }
             if(item.notes) { links.push('<a href="' + item.notes + '">📝 Notes</a>'); }
+            if(item.seminar) { links.push('<a href="' + item.seminar + '">👷‍♂️ Seminar</a>'); }
             if(item.youtube) { links.push('<a href="' + item.youtube + '">▶️ Youtube</a>'); }
             if(item.download) { links.push('<a href="' + item.download + '">💿 Download</a>'); }
             print(links.join(' • '));
