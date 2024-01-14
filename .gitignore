@@ -8,3 +8,15 @@ _site/
 /.quarto/
 
 /.luarc.json
+*.bbl
+*.aux
+*.log
+*.out
+*.gz
+*.snm
+*.nav
+*.blg
+*.toc
+*.brf
+*.synctex(busy)
+**/.DS_Store
