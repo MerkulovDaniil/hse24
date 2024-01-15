@@ -1,0 +1,57 @@
+\PassOptionsToPackage{backref=page}{hyperref}
+
+%%% === ADDITIONAL PACKAGES
+\usepackage{animate}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{cancel}
+\usepackage{booktabs}
+\usepackage{ stmaryrd }
+\usepackage[export]{adjustbox}
+\usepackage{fontawesome5}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{yfonts}
+\graphicspath{{../../files/}}
+
+% \LinesNumbered
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+\usepackage[ruled,vlined]{algorithm2e}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\newcommand{\vect}[1]{\boldsymbol{\mathbf{#1}}}
+
+
+%%% === TEMPLATE
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries, size=\fontsize{12}{14}}
+
+\setbeamersize
+{
+    text margin left=0.214cm,
+    text margin right=0.214cm
+}
+
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamertemplate{itemize items}[circle] % For level-1 itemize
+\setbeamertemplate{itemize subitem}[circle] % For level-2 (subitems)
+\setbeamertemplate{itemize subsubitem}[circle] % For level-3 (subsubitems)
+
+\addtobeamertemplate{footline}{\raisebox{-1.3pt}{\href{https://fmin.xyz}{\includegraphics[width=1cm]{logo.pdf}}} \hspace{0.2cm} \hbox{\insertsection \hspace{0.2cm}} \hfill \href{https://hse24.fmin.xyz}{\faGem[regular]} \hspace{0.04cm} \href{https://github.com/MerkulovDaniil/hse24}{\faGithub} \hspace{0.07cm} \href{https://t.me/fminxyz}{\faTelegram} \hspace{0.4cm}\hbox{\insertframenumber \hspace{0.1cm}}
+  \vskip0pt
+}
+
+\usenavigationsymbolstemplate{}
+
+%%% === ADDITIONAL COMMANDS
+\newcommand*{\Scale}[2][4]{\scalebox{#1}{$#2$}}%
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\title{Basic linear algebra recap. Convergence rates. \\Line search.}
+\author{Daniil Merkulov}
+\date{}

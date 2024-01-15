@@ -1,6 +1,7 @@
 ---
-title: Basic linear algebra recap. Convergence rates. Line search. 
+title: Basic linear algebra recap. Convergence rates. Line Search
 author: Seminar
+institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 
     beamer:
         pdf-engine: pdflatex

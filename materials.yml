@@ -1,7 +1,8 @@
 - title: Вспоминаем линейную алгебру. Некоторые матричные разложения. Скорость сходимости. Одномерная оптимизация. Неточная одномерная оптимизация.
   number: 1
-  #materials: /presentations/1.pdf
-  # notes: /notes/1.pdf
+  materials: /lectures/lec_1/lec_1.pdf
+  notes: /notes/1.pdf
+  seminar: /seminars/sem_1/sem_1.pdf
   youtube: 
   download: 
 
