@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -68,6 +102,49 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js" integrity="sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A" crossorigin="anonymous"></script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="💀 Homework">
 <meta name="twitter:title" content="💀 Homework">
@@ -114,7 +191,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#linear-algebra-basics" id="toc-linear-algebra-basics" class="nav-link active" data-scroll-target="#linear-algebra-basics">Linear algebra basics</a></li>
+  <li><a href="#convergence-rates" id="toc-convergence-rates" class="nav-link" data-scroll-target="#convergence-rates">Convergence rates</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -123,8 +207,162 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="linear-algebra-basics" class="level3">
+<h3 class="anchored" data-anchor-id="linear-algebra-basics">Linear algebra basics</h3>
+<ol type="1">
+<li><p>Prove that the matrix <span class="math inline">xy^T</span> has rank equals to one.</p></li>
+<li><p>Find SVD of the following matrices:</p>
+<ul>
+<li><span class="math inline">A = \begin{bmatrix} 1\\2\\3 \end{bmatrix}</span></li>
+<li><span class="math inline">A = \begin{bmatrix} 1 &amp; 4\\4 &amp; 8\\3 &amp; 8 \end{bmatrix}</span></li>
+<li><span class="math inline">A = \begin{bmatrix} 0 &amp; 0\\x &amp; 0\\0 &amp; 0 \end{bmatrix}</span>, where <span class="math inline">x</span> is the sum of your birthdate numbers (day + month)</li>
+</ul></li>
+<li><p>Assume we have a set of data points <span class="math inline">x^{(i)}\in\mathbb{R}^{n},\,i=1,\dots,m</span>, and decide to represent this data as a matrix</p>
+<p><span class="math display">
+X =
+     \begin{pmatrix}
+     | &amp; &amp; | \\
+     x^{(1)} &amp; \dots &amp; x^{(m)} \\
+     | &amp; &amp; | \\
+     \end{pmatrix} \in \mathbb{R}^{n \times m}.
+</span></p>
+<p>We suppose that <span class="math inline">\text{rank}\,X = r</span>.</p>
+<p>In the problem below, we ask you to find the rank of some matrix <span class="math inline">M</span> related to <span class="math inline">X</span>. In particular, you need to find relation between <span class="math inline">\text{rank}\,X = r</span> and <span class="math inline">\text{rank}\,M</span>, e.g., that the rank of <span class="math inline">M</span> is always larger/smaller than the rank of <span class="math inline">X</span> or that <span class="math inline">\text{rank}\,M = \text{rank}\,X \big / 35</span>. Please support your answer with legitimate arguments and make the answer as accurate as possible.</p>
+<p>Note that depending on the structure of the matrix <span class="math inline">X</span>, border cases are possible. Make sure to cover them in your answer correctly.</p>
+<p>In applied statistics and machine learning, data is often normalized. One particularly popular strategy is to subtract the estimated mean <span class="math inline">\mu</span> and divide by the square root of the estimated variance <span class="math inline">\sigma^2</span>. i.e.</p>
+<p><span class="math display">
+x \rightarrow (x - \mu) \big / \sigma.
+</span></p>
+<p>After the normalization, we get a new matrix</p>
+<p><span class="math display">
+     \begin{split}
+     Y &amp;:=
+     \begin{pmatrix}
+         | &amp; &amp; | \\
+         y^{(1)} &amp; \dots &amp; y^{(m)} \\
+         | &amp; &amp; | \\
+     \end{pmatrix},\\
+     y^{(i)} &amp;:= \frac{x^{(i)} - \frac{1}{m}\sum_{i=1}^{m} x^{(i)}}{\sqrt{\frac{1}{m}\sum_{i=1}^{m} \left(x^{(i)}\right)^2 - \left(\frac{1}{m}\sum_{i=1}^{m} x^{(i)}\right)^2}}.
+     \end{split}
+</span></p>
+<p>What is the rank of <span class="math inline">Y</span> if <span class="math inline">\text{rank} \; X = r</span>?</p></li>
+<li><p><strong>Image Compression with Truncated SVD</strong> Explore image compression using Truncated Singular Value Decomposition (SVD). Understand how varying the number of singular values affects the quality of the compressed image. Implement a Python script to compress a grayscale image using Truncated SVD and visualize the compression quality.</p>
+<ul>
+<li><strong>Truncated SVD</strong>: Decomposes an image <span class="math inline">A</span> into <span class="math inline">U, S,</span> and <span class="math inline">V</span> matrices. The compressed image is reconstructed using a subset of singular values.</li>
+<li><strong>Mathematical Representation</strong>: <span class="math display">
+A \approx U_k \Sigma_k V_k^T
+</span>
+<ul>
+<li><span class="math inline">U_k</span> and <span class="math inline">V_k</span> are the first <span class="math inline">k</span> columns of <span class="math inline">U</span> and <span class="math inline">V</span>, respectively.</li>
+<li><span class="math inline">\Sigma_k</span> is a diagonal matrix with the top <span class="math inline">k</span> singular values.</li>
+<li><strong>Relative Error</strong>: Measures the fidelity of the compressed image compared to the original.</li>
+</ul>
+<span class="math display">
+  \text{Relative Error} = \frac{\| A - A_k \|}{\| A \|}
+  </span></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.animation <span class="im">as</span> animation</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skimage <span class="im">import</span> io, color</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> BytesIO</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_image(url):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(url)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> io.imread(BytesIO(response.content))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> color.rgb2gray(img)  <span class="co"># Convert to grayscale</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update_plot(i, img_plot, error_plot, U, S, V, original_img, errors, ranks, ax1, ax2):</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust rank based on the frame index</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&lt;</span> <span class="dv">70</span>:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        rank <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        rank <span class="op">=</span> <span class="dv">70</span> <span class="op">+</span> (i <span class="op">-</span> <span class="dv">69</span>) <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    reconstructed_img <span class="op">=</span> ... <span class="co"># YOUR CODE HERE </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate relative error</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    relative_error <span class="op">=</span> ... <span class="co"># YOUR CODE HERE</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    errors.append(relative_error)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    ranks.append(rank)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update the image plot and title</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    img_plot.set_data(reconstructed_img)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="ss">f"Image compression with SVD</span><span class="ch">\n</span><span class="ss"> Rank </span><span class="sc">{</span>rank<span class="sc">}</span><span class="ss">; Relative error </span><span class="sc">{</span>relative_error<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Remove axis ticks and labels from the first subplot (ax1)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    ax1.set_xticks([])</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    ax1.set_yticks([])</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update the error plot</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    error_plot.set_data(ranks, errors)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    ax2.set_xlim(<span class="dv">1</span>, <span class="bu">len</span>(S))</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    ax2.grid(linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylim(<span class="fl">1e-4</span>, <span class="fl">0.5</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(<span class="st">'Relative Error'</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    ax2.set_xlabel(<span class="st">'Rank'</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="st">'Relative Error over Rank'</span>)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    ax2.semilogy()</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set xticks to show rank numbers</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    ax2.set_xticks(<span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(S)<span class="op">+</span><span class="dv">1</span>, <span class="bu">max</span>(<span class="bu">len</span>(S)<span class="op">//</span><span class="dv">10</span>, <span class="dv">1</span>)))  <span class="co"># Adjust the step size as needed</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img_plot, error_plot</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_animation(image, filename<span class="op">=</span><span class="st">'svd_animation.mp4'</span>):</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    U, S, V <span class="op">=</span> np.linalg.svd(image, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    errors <span class="op">=</span> []</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    ranks <span class="op">=</span> []</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">8</span>))</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    img_plot <span class="op">=</span> ax1.imshow(image, cmap<span class="op">=</span><span class="st">'gray'</span>, animated<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    error_plot, <span class="op">=</span> ax2.plot([], [], <span class="st">'r-'</span>, animated<span class="op">=</span><span class="va">True</span>)  <span class="co"># Initial empty plot for errors</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add watermark</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    ax1.text(<span class="dv">1</span>, <span class="fl">1.02</span>, <span class="st">'@fminxyz'</span>, transform<span class="op">=</span>ax1.transAxes, color<span class="op">=</span><span class="st">'gray'</span>, va<span class="op">=</span><span class="st">'bottom'</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determine frames for the animation</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    initial_frames <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">70</span>))  <span class="co"># First 70 ranks</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    subsequent_frames <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">70</span>, <span class="bu">len</span>(S), <span class="dv">10</span>))  <span class="co"># Every 10th rank after 70</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    frames <span class="op">=</span> initial_frames <span class="op">+</span> subsequent_frames</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    ani <span class="op">=</span> animation.FuncAnimation(fig, update_plot, frames<span class="op">=</span><span class="bu">len</span>(frames), fargs<span class="op">=</span>(img_plot, error_plot, U, S, V, image, errors, ranks, ax1, ax2), interval<span class="op">=</span><span class="dv">50</span>, blit<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    ani.save(filename, writer<span class="op">=</span><span class="st">'ffmpeg'</span>, fps<span class="op">=</span><span class="dv">8</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="co"># URL of the image</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the image and create the animation</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>image <span class="op">=</span> download_image(url)</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>create_animation(image)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+</section>
+<section id="convergence-rates" class="level3">
+<h3 class="anchored" data-anchor-id="convergence-rates">Convergence rates</h3>
+<ol type="1">
+<li><p>Determine the convergence or divergence of the given sequences</p>
+<ul>
+<li><span class="math inline">r_{k} = k^{\frac{1}{2}}</span>.</li>
+<li><span class="math inline">r_{k} = \frac{1}{\sqrt{k}}</span>.</li>
+<li><span class="math inline">r_{k} = 0.808^k</span>.</li>
+<li><span class="math inline">r_{k} = 0.808^{2^k}</span>.</li>
+</ul></li>
+<li><p>Determine the following sequence <span class="math inline">\{r_k\}</span> by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally, find out whether there is quadratic convergence.</p>
+<p><span class="math display">
+r_k = \dfrac{1}{k!}
+</span></p></li>
+<li><p>Determine the convergence or divergence of a given sequence <span class="math inline">r_k =\begin{cases} \frac{1}{k}, &amp; \text{if } k\text{ is even} \\ e^{-k}, &amp; \text{if } k\text{ is odd} \end{cases}</span>.</p></li>
+<li><p>Determine the convergence or divergence of a given sequence <span class="math inline">r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, &amp; \text{if } k\text{ is even} \\ \frac{x_{k-1}}{k}, &amp; \text{if } k\text{ is odd} \end{cases}</span>.</p></li>
+<li><p>Let <span class="math inline">\{r_k\}</span> be a sequence of non-negative numbers given as <span class="math inline">r_{k+1} = Mr_k^2</span>, where <span class="math inline">M &gt; 0</span>, <span class="math inline">r_0 \geq 0</span>. Establish a necessary and sufficient condition on <span class="math inline">M</span> and <span class="math inline">r_0</span> under which the sequence <span class="math inline">r_k</span> will converge to zero. What is the rate of convergence?</p></li>
+<li><p>Let <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> be a sequence of non-negative numbers and let <span class="math inline">s &gt; 0</span> be some integer. Prove that sequence <span class="math inline">\left\{ r_k \right\}_{k=m+s}^\infty</span> is linearly convergent with constant <span class="math inline">q</span> if and only if a the sequence <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> converged linearly with constant <span class="math inline">q</span>.</p></li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -537,4 +775,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
