@@ -6,7 +6,7 @@ toc: true
 
 ### Linear algebra basics
 
-1. Prove that the matrix $xy^T$ has rank equals to one.
+1. Prove that the matrix $xy^T$ has rank equal  to one.
 
 1. Find SVD of the following matrices:
 
@@ -35,7 +35,7 @@ toc: true
     Make sure to cover them in your answer correctly.
 
     In applied statistics and machine learning, data is often normalized.
-    One particularly popular strategy is to subtract the estimated mean $\mu$ and divide by the square root of the estimated variance $\sigma^2$. i.e.
+    One particularly popular strategy is to subtract the estimated mean $\mu$ and divide by the square root of the estimated variance $\sigma^2$, i.e.
     
     $$
     x \rightarrow (x - \mu) \big / \sigma.
