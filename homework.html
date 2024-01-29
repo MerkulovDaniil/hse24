@@ -147,7 +147,9 @@ window.Quarto = {
 </script>
 
 <meta property="og:title" content="💀 Homework">
+<meta property="og:description" content="">
 <meta name="twitter:title" content="💀 Homework">
+<meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -197,6 +199,9 @@ window.Quarto = {
   <ul>
   <li><a href="#linear-algebra-basics" id="toc-linear-algebra-basics" class="nav-link active" data-scroll-target="#linear-algebra-basics">Linear algebra basics</a></li>
   <li><a href="#convergence-rates" id="toc-convergence-rates" class="nav-link" data-scroll-target="#convergence-rates">Convergence rates</a></li>
+  <li><a href="#line-search" id="toc-line-search" class="nav-link" data-scroll-target="#line-search">Line search</a></li>
+  <li><a href="#matrix-calculus" id="toc-matrix-calculus" class="nav-link" data-scroll-target="#matrix-calculus">Matrix calculus</a></li>
+  <li><a href="#automatic-differentiation-and-jax-2-more-problems-coming" id="toc-automatic-differentiation-and-jax-2-more-problems-coming" class="nav-link" data-scroll-target="#automatic-differentiation-and-jax-2-more-problems-coming">Automatic differentiation and jax (2 more problems coming)</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -359,6 +364,164 @@ r_k = \dfrac{1}{k!}
 <li><p>Determine the convergence or divergence of a given sequence <span class="math inline">r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, &amp; \text{if } k\text{ is even} \\ \frac{r_{k-1}}{k}, &amp; \text{if } k\text{ is odd} \end{cases}</span>.</p></li>
 <li><p>Let <span class="math inline">\{r_k\}</span> be a sequence of non-negative numbers given as <span class="math inline">r_{k+1} = Mr_k^2</span>, where <span class="math inline">M &gt; 0</span>, <span class="math inline">r_0 \geq 0</span>. Establish a necessary and sufficient condition on <span class="math inline">M</span> and <span class="math inline">r_0</span> under which the sequence <span class="math inline">r_k</span> will converge to zero. What is the rate of convergence?</p></li>
 <li><p>Let <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> be a sequence of non-negative numbers and let <span class="math inline">s &gt; 0</span> be some integer. Prove that sequence <span class="math inline">\left\{ r_k \right\}_{k=m+s}^\infty</span> is linearly convergent with constant <span class="math inline">q</span> if and only if a the sequence <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> converged linearly with constant <span class="math inline">q</span>.</p></li>
+</ol>
+</section>
+<section id="line-search" class="level3">
+<h3 class="anchored" data-anchor-id="line-search">Line search</h3>
+<ol type="1">
+<li><p>Show that for a one-dimensional quadratic function decreasing at zero, its minimum satisfies Armijo’s condition for any <span class="math inline">c_1: 0 \leq c_1 \leq \dfrac12</span>:</p>
+<p><span class="math display">
+f(x_k - \alpha \nabla f (x_k)) \leq f(x_k) - c_1 \cdot \alpha\|\nabla f(x_k)\|_2^2
+</span></p></li>
+<li><p><strong>Implementing and Testing Line Search Conditions in Gradient Descent</strong></p>
+<p><span class="math display">
+x_{k+1} = x_k - \alpha \nabla f(x_k)
+</span></p>
+<p>In this assignment, you will modify an existing Python code for gradient descent to include various line search conditions. You will test these modifications on two functions: a quadratic function and the Rosenbrock function. The main objectives are to understand how different line search strategies influence the convergence of the gradient descent algorithm and to compare their efficiencies based on the number of function evaluations.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize_scalar</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">214</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the quadratic function and its gradient</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quadratic_function(x, A, b):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span> <span class="op">*</span> np.dot(x.T, np.dot(A, x)) <span class="op">-</span> np.dot(b.T, x)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_quadratic(x, A, b):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(A, x) <span class="op">-</span> b</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a 2D quadratic problem with a specified condition number</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_quadratic_problem(cond_number):</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random symmetric matrix</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> np.random.randn(<span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> np.dot(M, M.T)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ensure the matrix has the desired condition number</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    U, s, V <span class="op">=</span> np.linalg.svd(M)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> np.linspace(cond_number, <span class="dv">1</span>, <span class="bu">len</span>(s))  <span class="co"># Spread the singular values</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> np.dot(U, np.dot(np.diag(s), V))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random b</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> np.random.randn(<span class="dv">2</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A, b</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Gradient descent function</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gradient_descent(start_point, A, b, stepsize_func, max_iter<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> start_point.copy()</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    trajectory <span class="op">=</span> [x.copy()]</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        grad <span class="op">=</span> grad_quadratic(x, A, b)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        step_size <span class="op">=</span> stepsize_func(x, grad)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        x <span class="op">-=</span> step_size <span class="op">*</span> grad</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        trajectory.append(x.copy())</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(trajectory)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Backtracking line search strategy using scipy</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backtracking_line_search(x, grad, A, b, alpha<span class="op">=</span><span class="fl">0.3</span>, beta<span class="op">=</span><span class="fl">0.8</span>):</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> objective(t):</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> quadratic_function(x <span class="op">-</span> t <span class="op">*</span> grad, A, b)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize_scalar(objective, method<span class="op">=</span><span class="st">'golden'</span>)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res.x</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate ill-posed problem</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>cond_number <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>A, b <span class="op">=</span> generate_quadratic_problem(cond_number)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Starting point</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>start_point <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">1.8</span>])</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform gradient descent with both strategies</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>trajectory_fixed <span class="op">=</span> gradient_descent(start_point, A, b, <span class="kw">lambda</span> x, g: <span class="fl">5e-2</span>)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>trajectory_backtracking <span class="op">=</span> gradient_descent(start_point, A, b, <span class="kw">lambda</span> x, g: backtracking_line_search(x, g, A, b))</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the trajectories on a contour plot</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>x1, x2 <span class="op">=</span> np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">400</span>), np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">400</span>))</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> np.array([quadratic_function(np.array([x, y]), A, b) <span class="cf">for</span> x, y <span class="kw">in</span> <span class="bu">zip</span>(x1.flatten(), x2.flatten())]).reshape(x1.shape)</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>plt.contour(x1, x2, Z, levels<span class="op">=</span><span class="dv">50</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>plt.plot(trajectory_fixed[:, <span class="dv">0</span>], trajectory_fixed[:, <span class="dv">1</span>], <span class="st">'o-'</span>, label<span class="op">=</span><span class="st">'Fixed Step Size'</span>)</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>plt.plot(trajectory_backtracking[:, <span class="dv">0</span>], trajectory_backtracking[:, <span class="dv">1</span>], <span class="st">'o-'</span>, label<span class="op">=</span><span class="st">'Backtracking Line Search'</span>)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Add markers for start and optimal points</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>plt.plot(start_point[<span class="dv">0</span>], start_point[<span class="dv">1</span>], <span class="st">'ro'</span>, label<span class="op">=</span><span class="st">'Start Point'</span>)</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>optimal_point <span class="op">=</span> np.linalg.solve(A, b)</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>plt.plot(optimal_point[<span class="dv">0</span>], optimal_point[<span class="dv">1</span>], <span class="st">'y*'</span>, markersize<span class="op">=</span><span class="dv">15</span>, label<span class="op">=</span><span class="st">'Optimal Point'</span>)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Gradient Descent Trajectories on Quadratic Function'</span>)</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x1'</span>)</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'x2'</span>)</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"linesearch.svg"</span>)</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="linesearch.svg" class="img-fluid figure-img"></p>
+<figcaption>The code above plots this</figcaption>
+</figure>
+</div>
+<p>Start by reviewing the provided Python code. This code implements gradient descent with a fixed step size and a backtracking line search on a quadratic function. Familiarize yourself with how the gradient descent function and the step size strategies are implemented.</p>
+<ol type="1">
+<li><p>Modify the gradient descent function to include the following line search conditions:</p>
+<ol type="a">
+<li>Sufficient Decrease Condition</li>
+<li>Curvature Condition</li>
+<li>Goldstein Condition</li>
+<li>Wolfe Condition</li>
+<li>Dichotomy</li>
+</ol>
+<p>Test your modified gradient descent algorithm with the implemented line search conditions on the provided quadratic function. Plot the trajectories over iterations for each condition. Choose and specify hyperparameters for inexact line search condition. Choose and specify the termination criterion. Start from the point <span class="math inline">x_0 = (-1, 2)^T</span>.</p></li>
+<li><p>Compare these 7 methods from the budget perspective. Plot the graph of function value from the number of function evaluations for each method on the same graph.</p></li>
+<li><p>Plot trajectory for another function with the same set of methods</p>
+<p><span class="math display">
+f(x_1, x_2) =  10(x_2 − x_1^2)^2 + (x_1 − 1)^2
+</span></p>
+<p>with <span class="math inline">x_0 = (-1, 2)^T</span>. You might need to adjust hyperparameters.</p></li>
+<li><p>Plot the same function value from the number of function calls for this experiment.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="matrix-calculus" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-calculus">Matrix calculus</h3>
+<ol type="1">
+<li><p>Given a matrix <span class="math inline">A</span> of size <span class="math inline">m \times n</span> and a vector <span class="math inline">x</span> of size <span class="math inline">n \times 1</span>, compute the gradient of the function <span class="math inline">f(x) = \text{tr}(A^T A x x^T)</span> with respect to <span class="math inline">x</span>.</p></li>
+<li><p>Find the gradient <span class="math inline">\nabla f(x)</span> and hessian <span class="math inline">f''(x)</span>, if <span class="math inline">f(x) = \dfrac{1}{2} \Vert Ax - b\Vert^2_2</span>.</p></li>
+<li><p>Find the gradient <span class="math inline">\nabla f(x)</span> and hessian <span class="math inline">f''(x)</span>, if <span class="math display">
+f(x) = \frac1m \sum\limits_{i=1}^m \log \left( 1 + \exp(a_i^{T}x) \right) + \frac{\mu}{2}\Vert x\Vert _2^2, \; a_i, x \in \mathbb R^n, \; \mu&gt;0
+</span></p></li>
+<li><p>Compute the gradient <span class="math inline">\nabla_A f(A)</span> of the trace of the matrix exponential function <span class="math inline">f(A) = \text{tr}(e^A)</span> with respect to <span class="math inline">A</span>. Hint: hint: Use the definition of the matrix exponential. Use the definition of the differential <span class="math inline">df = f(A + dA) - f(A) + o(\Vert dA \Vert)</span> with the limit <span class="math inline">\Vert dA \Vert \to 0</span>.</p></li>
+<li><p>Calculate the first and the second derivative of the following function <span class="math inline">f : S \to \mathbb{R}</span></p>
+<p><span class="math display">
+f(t) = \text{det}(A − tI_n),
+</span></p>
+<p>where <span class="math inline">A \in \mathbb{R}^{n \times n}, S := \{t \in \mathbb{R} : \text{det}(A − tI_n) \neq 0\}</span>.</p></li>
+<li><p>Find the gradient <span class="math inline">\nabla f(X)</span>, if <span class="math inline">f(X) = \text{tr}\left( AX^2BX^{-\top} \right)</span>.</p></li>
+</ol>
+</section>
+<section id="automatic-differentiation-and-jax-2-more-problems-coming" class="level3">
+<h3 class="anchored" data-anchor-id="automatic-differentiation-and-jax-2-more-problems-coming">Automatic differentiation and jax (2 more problems coming)</h3>
+<p>You can use any automatic differentiation framework in this section (Jax, PyTorch, Autograd etc.)</p>
+<ol type="1">
+<li><p>You will work with the following function for this exercise, <span class="math display">
+f(x,y)=e^{−\left(sin(x)−cos(y)\right)^2}
+</span><br>
+Draw the computational graph for the function. Note, that it should contain only primitive operations - you need to do it automatically - <a href="https://bnikolic.co.uk/blog/python/jax/2022/02/22/jax-outputgraph-rev.html">jax example</a>, <a href="https://github.com/waleedka/hiddenlayer">PyTorch example</a> - you can google/find your way to visualize it.</p></li>
+<li><p>Compare analytic and autograd (with any framework) approach for the calculation of the gradient of:<br>
+<span class="math display">
+f(A) = \text{tr}(e^A)
+</span></p></li>
+<li><p>We can use automatic differentiation not only to calculate necessary gradients but also for tuning hyperparameters of the algorithm like learning rate in gradient descent (with gradient descent 🤯). Suppose, we have the following function <span class="math inline">f(x) = \frac{1}{2}\Vert x\Vert^2</span>, select a random point <span class="math inline">x_0 \in \mathbb{B}^{1000} = \{0 \leq x_i \leq 1 \mid \forall i\}</span>. Consider <span class="math inline">10</span> steps of the gradient descent starting from the point <span class="math inline">x_0</span>: <span class="math display">
+x_{k+1} = x_k - \alpha_k \nabla f(x_k)
+</span> Your goal in this problem is to write the function, that takes <span class="math inline">10</span> scalar values <span class="math inline">\alpha_i</span> and return the result of the gradient descent on function <span class="math inline">L = f(x_{10})</span>. And optimize this function using gradient descent on <span class="math inline">\alpha \in \mathbb{R}^{10}</span>. Suppose that each of <span class="math inline">10</span> components of <span class="math inline">\alpha</span> is uniformly distributed on <span class="math inline">[0; 0.1]</span>. <span class="math display">
+\alpha_{k+1} = \alpha_k - \beta \frac{\partial L}{\partial \alpha}
+</span> Choose any constant <span class="math inline">\beta</span> and the number of steps you need. Describe the obtained results. How would you understand, that the obtained schedule (<span class="math inline">\alpha \in \mathbb{R}^{10}</span>) becomes better than it was at the start? How do you check numerically local optimality in this problem?</p></li>
+<li><p>Compare analytic and autograd (with any framework) approach for the gradient of:<br>
+<span class="math display">
+f(X) = - \log \det X
+</span></p></li>
 </ol>
 
 
