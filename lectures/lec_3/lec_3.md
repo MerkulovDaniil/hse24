@@ -958,7 +958,7 @@ $$
 
 The animated visualization of the above approaches [\faGithub](https://github.com/cybertronai/gradient-checkpointing)
 
-An example of using a gradient checkpointing [\faGithub](https://github.com/rasbt/deeplearning-models/blob/master/pytorch_ipynb/mechanics/gradient-checkpointing-nin.ipynb)
+An example of using a gradient checkpointing [\faGithub](https://colab.research.google.com/github/oseledets/dl2023/blob/main/seminars/seminar-10/Large_model_training_practice.ipynb)
 
 
 ## What automatic differentiation (AD) is NOT:
