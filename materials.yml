@@ -6,28 +6,30 @@
   youtube: https://youtu.be/ZGgLKgG_QYg
   download: https://disk.yandex.com/i/HJ2aWkDcEznO4Q
 
-- title: Градиент. Гессиан. Матрично-векторное дифференцирование. Автоматическое дифференцирование. Вычислительный граф.
+- title: Градиент. Гессиан. Матрично-векторное дифференцирование.
   number: 2
-  #materials: /presentations/2.pdf
-  # notes: /notes/2.pdf
+  materials: /lectures/lec_2/lec_2.pdf
+  notes: /notes/2.pdf
+  seminar: /seminars/sem_2/sem_3.pdf
   youtube: 
   download: 
 
-- title: Выпуклость. Выпуклые множества. Выпуклые функции. Неравенство Йенсена. Сильно выпуклые функции. Условие Поляка - Лоясиевича.
+- title: Автоматическое дифференцирование. Вычислительный граф.
   number: 3
-  #materials: /presentations/3.pdf
-  # notes: /notes/3.pdf
+  materials: /lectures/lec_3/lec_3.pdf
+  notes: /notes/3.pdf
+  seminar: /seminars/sem_3/sem_3.pdf
   youtube: 
   download: 
 
-- title: Условия оптимальности. Функция Лагранжа. Множители Лагранжа. Теорема Каруша - Куна - Таккера.
+- title: Выпуклость. Выпуклые множества. Выпуклые функции. Неравенство Йенсена. Сильно выпуклые функции. Условие Поляка - Лоясиевича. 
   number: 4
   #materials: /presentations/4.pdf
   # notes: /notes/4.pdf
   youtube: 
   download: 
 
-- title: Двойственность. Введение в двойственность. Двойственная задача. Анализ чувствительности.
+- title: Условия оптимальности. Функция Лагранжа. Множители Лагранжа. Теорема Каруша - Куна - Таккера. Двойственность. Введение в двойственность. Двойственная задача. Анализ чувствительности.
   number: 5
   #materials: /presentations/5.pdf
   # notes: /notes/5.pdf

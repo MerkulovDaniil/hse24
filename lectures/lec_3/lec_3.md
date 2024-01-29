@@ -1,7 +1,9 @@
 ---
 title: Automatic differentiation.
 author: Daniil Merkulov
-institute: Introduction to higher-order optimization methods. Skoltech
+institute: Optimization for ML. Faculty of Computer Science. HSE University
+bibliography: ../../files/biblio.bib
+csl: ../../files/diabetologia.csl
 format: 
     beamer:
         pdf-engine: pdflatex
@@ -11,10 +13,13 @@ format:
         incremental: true
         include-in-header: ../../files/header.tex  # Custom LaTeX commands and preamble
         header-includes: |
-            \titlegraphic{\includegraphics[width=0.7\paperwidth]{autograd_expectations.jpeg}}
+            \titlegraphic{\includegraphics[width=0.5\paperwidth]{back3.png}}
 ---
 
 # Automatic differentiation
+
+## {.plain}
+![When you got the idea](autograd_expectations.jpeg)
 
 ## {.plain}
 ![This is not autograd](avtograd.jpeg){width=65%}
@@ -33,6 +38,121 @@ $$
 * You may use a lot of algorithms to approach this problem, but given the modern size of the problem, where $d$ could be dozens of billions it is very challenging to solve this problem without information about the gradients using zero-order optimization algorithms. 
 * That is why it would be beneficial to be able to calculate the gradient vector $\nabla_w L = \left( \frac{\partial L}{\partial w_1}, \ldots, \frac{\partial L}{\partial w_d}\right)^T$. 
 * Typically, first-order methods perform much better in huge-scale optimization, while second-order methods require too much memory.
+
+## Example: multidimensional scaling
+
+Suppose, we have a pairwise distance matrix for $N$ $d$-dimensional objects $D \in \mathbb{R}^{N \times N}$. Given this matrix, our goal is to recover the initial coordinates $W_i \in \mathbb{R}^d, \; i = 1, \ldots, N$.
+
+. . .
+
+$$
+L(W) = \sum_{i, j = 1}^N \left(\|W_i - W_j\|^2_2 - D_{i,j}\right)^2 \to \min_{W \in \mathbb{R}^{N \times d}}
+$$
+
+. . .
+
+Link to a nice visualization [$\clubsuit$](http://www.benfrederickson.com/numerical-optimization/), where one can see, that gradient free methods handle this problem much slower, especially in higher dimensions.
+
+:::{.callout-question}
+Is it somehow connected with PCA?
+:::
+
+## Example: Gradient Descent without gradient
+
+:::: {.columns}
+::: {.column width="50%"}
+Suppose we need to solve the following problem:
+
+$$
+L(w) \to \min_{w \in \mathbb{R}^d}
+$$
+
+. . .
+
+with the Gradient Descent (GD) algorithm:
+
+$$
+w_{k+1} = w_k - \alpha_k \nabla_w L(w_k)
+$$
+
+. . .
+
+Is it possible to replace $\nabla_w L(w_k)$ using only zero order information? 
+
+. . .
+
+Yes, but at a cost.
+
+. . .
+
+One can consider 2-point gradient estimator[^1] $G$:
+
+$$
+G = d\dfrac{L(w + \varepsilon v)- L(w - \varepsilon v)}{2 \varepsilon}v, 
+$$
+
+where $v$ is spherically symmetric.
+:::
+
+. . .
+
+::: {.column width="50%"}
+!["Illustration of two-point estimator of Gradient Descent"](zgd_2p.pdf)
+:::
+
+::::
+
+[^1]: I suggest a [nice](https://scholar.harvard.edu/files/yujietang/files/slides_2019_zero-order_opt_tutorial.pdf) presentation about gradient-free methods
+
+
+## Example: Gradient Descent without gradient
+
+:::: {.columns}
+::: {.column width="50%"}
+
+$$
+w_{k+1} = w_k - \alpha_k G
+$$
+
+. . .
+ 
+One can also consider the idea of finite differences:
+
+$$
+G =  \sum\limits_{i=1}^d\dfrac{L(w+\varepsilon e_i) - L(w-\varepsilon e_i)}{2\varepsilon} e_i
+$$
+
+[Open In Colab $\clubsuit$](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/Zero_order_GD.ipynb)
+
+:::
+
+::: {.column width="50%"}
+!["Illustration of finite differences estimator of Gradient Descent"](zgd_fd.pdf)
+:::
+
+::::
+
+## The curse of dimensionality for zero-order methods
+
+$$
+\min_{x \in \mathbb{R}^n} f(x)
+$$
+
+. . .
+
+$$
+\text{GD: } x_{k+1} = x_k - \alpha_k \nabla f(x_k) \qquad \qquad \text{Zero order GD: } x_{k+1} = x_k - \alpha_k G,
+$$
+
+where $G$ is 2-point or multi-point estimator of the gradient.
+
+. . .
+
+|  | $f(x)$ - smooth | $f(x)$ - smooth and convex | $f(x)$ - smooth and strongly convex |
+|:-:|:---:|:---:|:------:|
+| GD | $\|\nabla f(x_k)\|^2 \approx \mathcal{O} \left( \dfrac{1}{k} \right)$ | $f(x_k) - f^* \approx  \mathcal{O} \left( \dfrac{1}{k} \right)$ | $\|x_k - x^*\|^2 \approx \mathcal{O} \left( \left(1 - \dfrac{\mu}{L}\right)^k \right)$ |
+| Zero order GD | $\|\nabla f(x_k)\|^2 \approx \mathcal{O} \left( \dfrac{n}{k} \right)$ | $f(x_k) - f^* \approx  \mathcal{O} \left( \dfrac{n}{k} \right)$ | $\|x_k - x^*\|^2 \approx \mathcal{O} \left( \left(1 - \dfrac{\mu}{n L}\right)^k \right)$ |
+
 
 ## Finite differences
 
@@ -53,13 +173,13 @@ If the time needed for one calculation of $L(w)$ is $T$, what is the time needed
 
 . . .
 
-:::{.callout-theorem}
-There is an algorithm to compute $\nabla_w L$ in $\mathcal{O}(T)$ operations. [^1]
-:::
+**Theorem**
+
+There is an algorithm to compute $\nabla_w L$ in $\mathcal{O}(T)$ operations. [^2]
 
 :::
 
-[^1]: Linnainmaa S. The representation of the cumulative rounding error of an algorithm as a Taylor expansion of the local rounding errors.  Master’s Thesis (in Finnish), Univ. Helsinki, 1970.
+[^2]: Linnainmaa S. The representation of the cumulative rounding error of an algorithm as a Taylor expansion of the local rounding errors.  Master’s Thesis (in Finnish), Univ. Helsinki, 1970.
 
 ## Forward mode automatic differentiation
 
@@ -660,7 +780,7 @@ It is interesting, that the most computationally intensive part here is the matr
 
 ::: {.column width="30%"}
 
-![](SVD_layer.pdf)
+![](svd_singular_regularizer_comp_graph.pdf)
 
 :::
 
@@ -693,7 +813,7 @@ $$
 
 ::: {.column width="30%"}
 
-![](SVD_layer.pdf)
+![](svd_singular_regularizer_comp_graph.pdf)
 
 :::
 
@@ -729,7 +849,7 @@ $$
 
 ::: {.column width="30%"}
 
-![](SVD_layer.pdf)
+![](svd_singular_regularizer_comp_graph.pdf)
 
 :::
 
@@ -755,7 +875,7 @@ $$
 
 ::: {.column width="30%"}
 
-![](SVD_layer.pdf)
+![](svd_singular_regularizer_comp_graph.pdf)
 
 :::
 
@@ -782,7 +902,7 @@ $$
 
 ::: {.column width="30%"}
 
-![](SVD_layer.pdf)
+![](svd_singular_regularizer_comp_graph.pdf)
 
 :::
 
@@ -802,6 +922,43 @@ $$
 :::
 
 ::::
+
+## Hessian vector product without the hessian
+
+When you need some information about the curvature of the function you usually need to work with the hessian. However, when the dimension of the problem is large it is challenging. For a scalar-valued function $f : \mathbb{R}^n \to \mathbb{R}$, the Hessian at a point $x \in \mathbb{R}^n$ is written as $\nabla^2 f(x)$. A Hessian-vector product function is then able to evaluate
+$$
+v \mapsto \nabla^2 f(x) \cdot v
+$$
+for any vector $v \in \mathbb{R}^n$. We have to use the identity
+$$
+\nabla^2 f (x) v = \nabla [x \mapsto \nabla f(x) \cdot v] = \nabla g(x),
+$$
+where $g(x) = \nabla f(x)^T \cdot v$ is a new vector-valued function that dots the gradient of $f$ at $x$ with the vector $v$.
+
+```python
+import jax.numpy as jnp
+
+def hvp(f, x, v):
+    return grad(lambda x: jnp.vdot(grad(f)(x), v))(x)
+```
+
+## Hutchinson Trace Estimation [@article_hut]
+
+This example illustrates the estimation the Hessian trace of a neural network using Hutchinson’s method, which is an algorithm to obtain such an estimate from matrix-vector products:
+
+Let $X \in \mathbb{R}^{d \times d}$  and $v \in \mathbb{R}^d$ be a random vector such that $\mathbb{E}[vv^T] = I$. Then,
+
+$$
+\mathrm{Tr}(X) = \mathbb{E}[v^TXv] = \frac{1}{V}\sum_{i=1}^{V}v_i^TXv_i.
+$$
+
+![[Source](https://docs.backpack.pt/en/master/use_cases/example_trace_estimation.html)](https://docs.backpack.pt/en/master/_images/sphx_glr_example_trace_estimation_001.png){width=55%}
+
+## Activation checkpointing
+
+The animated visualization of the above approaches [\faGithub](https://github.com/cybertronai/gradient-checkpointing)
+
+An example of using a gradient checkpointing [\faGithub](https://github.com/rasbt/deeplearning-models/blob/master/pytorch_ipynb/mechanics/gradient-checkpointing-nin.ipynb)
 
 
 ## What automatic differentiation (AD) is NOT:
