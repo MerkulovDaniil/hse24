@@ -51,7 +51,7 @@ $$
 
 . . .
 
-Link to a nice visualization [$\clubsuit$](http://www.benfrederickson.com/numerical-optimization/), where one can see, that gradient free methods handle this problem much slower, especially in higher dimensions.
+Link to a nice visualization [$\clubsuit$](http://www.benfrederickson.com/numerical-optimization/), where one can see, that gradient-free methods handle this problem much slower, especially in higher dimensions.
 
 :::{.callout-question}
 Is it somehow connected with PCA?
@@ -77,7 +77,7 @@ $$
 
 . . .
 
-Is it possible to replace $\nabla_w L(w_k)$ using only zero order information? 
+Is it possible to replace $\nabla_w L(w_k)$ using only zero-order information? 
 
 . . .
 
@@ -144,7 +144,7 @@ $$
 \text{GD: } x_{k+1} = x_k - \alpha_k \nabla f(x_k) \qquad \qquad \text{Zero order GD: } x_{k+1} = x_k - \alpha_k G,
 $$
 
-where $G$ is 2-point or multi-point estimator of the gradient.
+where $G$ is a 2-point or multi-point estimator of the gradient.
 
 . . .
 
@@ -923,7 +923,7 @@ $$
 
 ::::
 
-## Hessian vector product without the hessian
+## Hessian vector product without the Hessian
 
 When you need some information about the curvature of the function you usually need to work with the hessian. However, when the dimension of the problem is large it is challenging. For a scalar-valued function $f : \mathbb{R}^n \to \mathbb{R}$, the Hessian at a point $x \in \mathbb{R}^n$ is written as $\nabla^2 f(x)$. A Hessian-vector product function is then able to evaluate
 $$
