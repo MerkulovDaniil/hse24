@@ -149,7 +149,7 @@ where $G$ is a 2-point or multi-point estimator of the gradient.
 . . .
 
 |  | $f(x)$ - smooth | $f(x)$ - smooth and convex | $f(x)$ - smooth and strongly convex |
-|:-:|:---:|:---:|:------:|
+|:-:|:---:|:----:|:-------:|
 | GD | $\|\nabla f(x_k)\|^2 \approx \mathcal{O} \left( \dfrac{1}{k} \right)$ | $f(x_k) - f^* \approx  \mathcal{O} \left( \dfrac{1}{k} \right)$ | $\|x_k - x^*\|^2 \approx \mathcal{O} \left( \left(1 - \dfrac{\mu}{L}\right)^k \right)$ |
 | Zero order GD | $\|\nabla f(x_k)\|^2 \approx \mathcal{O} \left( \dfrac{n}{k} \right)$ | $f(x_k) - f^* \approx  \mathcal{O} \left( \dfrac{n}{k} \right)$ | $\|x_k - x^*\|^2 \approx \mathcal{O} \left( \left(1 - \dfrac{\mu}{n L}\right)^k \right)$ |
 
