@@ -1,4 +1,4 @@
-- title: Вспоминаем линейную алгебру. Некоторые матричные разложения. Скорость сходимости. Одномерная оптимизация. Неточная одномерная оптимизация.
+- title: Вспоминаем линейную алгебру. Некоторые матричные разложения. Скорость сходимости. 
   number: 1
   materials: /lectures/lec_1/lec_1.pdf
   notes: /notes/1.pdf
@@ -6,28 +6,29 @@
   youtube: https://youtu.be/ZGgLKgG_QYg
   download: https://disk.yandex.com/i/HJ2aWkDcEznO4Q
 
-- title: Градиент. Гессиан. Матрично-векторное дифференцирование.
+- title: Одномерная оптимизация. Неточная одномерная оптимизация. Градиент. Гессиан. Матрично-векторное дифференцирование.
   number: 2
   materials: /lectures/lec_2/lec_2.pdf
   notes: /notes/2.pdf
-  seminar: /seminars/sem_2/sem_3.pdf
-  youtube: 
-  download: 
+  seminar: /seminars/sem_2/sem_2.pdf
+  youtube: https://youtu.be/deH0UvnpFJE
+  download: https://disk.yandex.com/i/LrCCKuwqxP8ixg
 
 - title: Автоматическое дифференцирование. Вычислительный граф.
   number: 3
   materials: /lectures/lec_3/lec_3.pdf
   notes: /notes/3.pdf
   seminar: /seminars/sem_3/sem_3.pdf
-  youtube: 
+  youtube: https://youtu.be/UNulwy1LY5g
   download: 
 
 - title: Выпуклость. Выпуклые множества. Выпуклые функции. Неравенство Йенсена. Сильно выпуклые функции. Условие Поляка - Лоясиевича. 
   number: 4
-  #materials: /presentations/4.pdf
-  # notes: /notes/4.pdf
-  youtube: 
-  download: 
+  materials: /lectures/lec_4/lec_4.pdf
+  seminar: /seminars/sem_4/sem_4.pdf
+  notes: /notes/4.pdf
+  # youtube: 
+  # download: 
 
 - title: Условия оптимальности. Функция Лагранжа. Множители Лагранжа. Теорема Каруша - Куна - Таккера. Двойственность. Введение в двойственность. Двойственная задача. Анализ чувствительности.
   number: 5
