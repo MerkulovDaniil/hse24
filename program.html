@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.4">
+<meta name="generator" content="quarto-1.4.467">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -50,9 +50,7 @@ ul.task-list li input[type="checkbox"] {
   "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
+    null
   ],
   "language": {
     "search-no-results-text": "No results",
@@ -62,7 +60,6 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -115,33 +112,6 @@ ul.task-list li input[type="checkbox"] {
 }}});
   </script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <meta property="og:title" content="🚀 Materials">
 <meta name="twitter:title" content="🚀 Materials">
@@ -201,23 +171,23 @@ window.Quarto = {
     <p>
         <a href="./lectures/lec_1/lec_1.pdf">📄 Materials</a> • <a href="./notes/1.pdf">📝 Notes</a> • <a href="./seminars/sem_1/sem_1.pdf">👷‍♂️ Seminar</a> • <a href="https://youtu.be/ZGgLKgG_QYg">▶️ Youtube</a> • <a href="https://disk.yandex.com/i/HJ2aWkDcEznO4Q">💿 Download</a>
     </p>
-    <p>Вспоминаем линейную алгебру. Некоторые матричные разложения. Скорость сходимости. Одномерная оптимизация. Неточная одномерная оптимизация.</p>
+    <p>Вспоминаем линейную алгебру. Некоторые матричные разложения. Скорость сходимости.</p>
 
     <h3 class="anchored">Class 2</h3>
     <p>
-        <a href="./lectures/lec_2/lec_2.pdf">📄 Materials</a> • <a href="./notes/2.pdf">📝 Notes</a> • <a href="./seminars/sem_2/sem_3.pdf">👷‍♂️ Seminar</a>
+        <a href="./lectures/lec_2/lec_2.pdf">📄 Materials</a> • <a href="./notes/2.pdf">📝 Notes</a> • <a href="./seminars/sem_2/sem_2.pdf">👷‍♂️ Seminar</a> • <a href="https://youtu.be/deH0UvnpFJE">▶️ Youtube</a> • <a href="https://disk.yandex.com/i/LrCCKuwqxP8ixg">💿 Download</a>
     </p>
-    <p>Градиент. Гессиан. Матрично-векторное дифференцирование.</p>
+    <p>Одномерная оптимизация. Неточная одномерная оптимизация. Градиент. Гессиан. Матрично-векторное дифференцирование.</p>
 
     <h3 class="anchored">Class 3</h3>
     <p>
-        <a href="./lectures/lec_3/lec_3.pdf">📄 Materials</a> • <a href="./notes/3.pdf">📝 Notes</a> • <a href="./seminars/sem_3/sem_3.pdf">👷‍♂️ Seminar</a>
+        <a href="./lectures/lec_3/lec_3.pdf">📄 Materials</a> • <a href="./notes/3.pdf">📝 Notes</a> • <a href="./seminars/sem_3/sem_3.pdf">👷‍♂️ Seminar</a> • <a href="https://youtu.be/UNulwy1LY5g">▶️ Youtube</a>
     </p>
     <p>Автоматическое дифференцирование. Вычислительный граф.</p>
 
     <h3 class="anchored">Class 4</h3>
     <p>
-        
+        <a href="./lectures/lec_4/lec_4.pdf">📄 Materials</a> • <a href="./notes/4.pdf">📝 Notes</a> • <a href="./seminars/sem_4/sem_4.pdf">👷‍♂️ Seminar</a>
     </p>
     <p>Выпуклость. Выпуклые множества. Выпуклые функции. Неравенство Йенсена. Сильно выпуклые функции. Условие Поляка - Лоясиевича.</p>
 
@@ -405,24 +375,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/hse24\.fmin\.xyz");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
-          }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -472,28 +424,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
+        typesetMath(container);
         return container.innerHTML
       } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -502,15 +464,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      typesetMath(note);
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -729,6 +684,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/hse24\.fmin\.xyz");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
 });
 </script>
 </div> <!-- /content -->
