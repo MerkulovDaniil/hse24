@@ -152,6 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools tools-wide">
     <a href="https://github.com/MerkulovDaniil/hse24" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://www.youtube.com/playlist?list=PLQSHEO58cjmPPMG0-jUeHNanO-3u6O_w4" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-youtube"></i></a>
     <a href="https://t.me/hse24_fmin" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-telegram"></i></a>
     <a href="https://fmin.xyz" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-gem"></i></a>
 </div>
@@ -339,7 +340,7 @@ r_k = \dfrac{1}{k!}
 <section id="line-search" class="level3">
 <h3 class="anchored" data-anchor-id="line-search">Line search</h3>
 <ol type="1">
-<li><p>Consider a quadratic function <span class="math inline">f: \mathbb{R}^n \rightarrow \mathbb{R}</span>, and let us start from a point <span class="math inline">x_k \in \mathbb{R}^n</span> moving in the direction of the antigradient <span class="math inline">\nabla f(x_k)</span>. Show that the minimum of <span class="math inline">f</span> along this direction as a function of the step size <span class="math inline">\alpha</span>, for a decreasing function at <span class="math inline">x_k</span>, satisfies Armijo’s condition for any <span class="math inline">c_1</span> in the range <span class="math inline">0 \leq c_1 \leq \frac{1}{2}</span>. Specifically, demonstrate that the following inequality holds at the optimal <span class="math inline">\alpha^*</span>:</p>
+<li><p>Consider a quadratic function <span class="math inline">f: \mathbb{R}^n \rightarrow \mathbb{R}</span>, and let us start from a point <span class="math inline">x_k \in \mathbb{R}^n</span> moving in the direction of the antigradient <span class="math inline">-\nabla f(x_k)</span>. Show that the minimum of <span class="math inline">f</span> along this direction as a function of the step size <span class="math inline">\alpha</span>, for a decreasing function at <span class="math inline">x_k</span>, satisfies Armijo’s condition for any <span class="math inline">c_1</span> in the range <span class="math inline">0 \leq c_1 \leq \frac{1}{2}</span>. Specifically, demonstrate that the following inequality holds at the optimal <span class="math inline">\alpha^*</span>:</p>
 <p><span class="math display">
 \varphi(\alpha) = f(x_{k+1}) = f(x_k - \alpha \nabla f(x_k)) \leq f(x_k) - c_1 \alpha \|\nabla f(x_k)\|_2^2
 </span></p></li>
