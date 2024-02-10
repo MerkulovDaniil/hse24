@@ -23,8 +23,8 @@ website:
     tools:
       - icon: github
         href: https://github.com/MerkulovDaniil/hse24
-      # - icon: youtube
-        # href: https://www.youtube.com/watch?v=duPZb4AGz3c&list=PLQSHEO58cjmMt8PY2H0ObJJ6FKbn0PoBx
+      - icon: youtube
+        href: https://www.youtube.com/playlist?list=PLQSHEO58cjmPPMG0-jUeHNanO-3u6O_w4
       - icon: telegram
         href: https://t.me/hse24_fmin
       - icon: gem
