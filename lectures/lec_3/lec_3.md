@@ -989,8 +989,3 @@ An example of using a gradient checkpointing [\faGithub](https://colab.research.
 ## Code
 
 [Open In Colab $\clubsuit$](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/Autograd_and_Jax.ipynb)
-
-### References
-
-::: {#refs}
-:::
