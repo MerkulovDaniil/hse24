@@ -19,5 +19,3 @@ contributes:
 
   filters:
     - custom_callout.lua
-    - custom_local_video.lua
-    - inline_plotly.lua
