@@ -2,8 +2,6 @@
 title: Automatic differentiation.
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
-bibliography: ../../files/biblio.bib
-# csl: ../../files/diabetologia.csl
 format: 
     beamer:
         pdf-engine: pdflatex
@@ -14,8 +12,6 @@ format:
         include-in-header: ../../files/header.tex  # Custom LaTeX commands and preamble
         header-includes: |
             \titlegraphic{\includegraphics[width=0.5\paperwidth]{back3.png}}
-        cite-method: biblatex
-        biblatexoptions: backref=true, style=numeric
 ---
 
 # Automatic differentiation
@@ -87,7 +83,7 @@ Yes, but at a cost.
 
 . . .
 
-One can consider 2-point gradient estimator[^1] $G$:
+One can consider 2-point gradient estimator^[I suggest a [nice](https://scholar.harvard.edu/files/yujietang/files/slides_2019_zero-order_opt_tutorial.pdf) presentation about gradient-free methods] $G$:
 
 $$
 G = d\dfrac{L(w + \varepsilon v)- L(w - \varepsilon v)}{2 \varepsilon}v, 
@@ -103,8 +99,6 @@ where $v$ is spherically symmetric.
 :::
 
 ::::
-
-[^1]: I suggest a [nice](https://scholar.harvard.edu/files/yujietang/files/slides_2019_zero-order_opt_tutorial.pdf) presentation about gradient-free methods
 
 
 ## Example: Gradient Descent without gradient
@@ -177,11 +171,9 @@ If the time needed for one calculation of $L(w)$ is $T$, what is the time needed
 
 **Theorem**
 
-There is an algorithm to compute $\nabla_w L$ in $\mathcal{O}(T)$ operations. [^2]
+There is an algorithm to compute $\nabla_w L$ in $\mathcal{O}(T)$ operations. ^[Linnainmaa S. The representation of the cumulative rounding error of an algorithm as a Taylor expansion of the local rounding errors.  Master’s Thesis (in Finnish), Univ. Helsinki, 1970.]
 
 :::
-
-[^2]: Linnainmaa S. The representation of the cumulative rounding error of an algorithm as a Taylor expansion of the local rounding errors.  Master’s Thesis (in Finnish), Univ. Helsinki, 1970.
 
 ## Forward mode automatic differentiation
 
@@ -944,17 +936,25 @@ def hvp(f, x, v):
     return grad(lambda x: jnp.vdot(grad(f)(x), v))(x)
 ```
 
-## Hutchinson Trace Estimation [@article_hut]
+## Hutchinson Trace Estimation ^[[A stochastic estimator of the trace of the influence matrix for Laplacian smoothing splines - M.F. Hutchinson, 1990](https://www.tandfonline.com/doi/abs/10.1080/03610919008812866)]
 
 This example illustrates the estimation the Hessian trace of a neural network using Hutchinson’s method, which is an algorithm to obtain such an estimate from matrix-vector products:
 
 Let $X \in \mathbb{R}^{d \times d}$  and $v \in \mathbb{R}^d$ be a random vector such that $\mathbb{E}[vv^T] = I$. Then,
 
+:::: {.columns}
+::: {.column width="30%"}
+
 $$
 \mathrm{Tr}(X) = \mathbb{E}[v^TXv] = \frac{1}{V}\sum_{i=1}^{V}v_i^TXv_i.
 $$
 
-![[Source](https://docs.backpack.pt/en/master/use_cases/example_trace_estimation.html)](https://docs.backpack.pt/en/master/_images/sphx_glr_example_trace_estimation_001.png){width=55%}
+:::
+::: {.column width="70%"}
+![[Source](https://docs.backpack.pt/en/master/use_cases/example_trace_estimation.html)](https://docs.backpack.pt/en/master/_images/sphx_glr_example_trace_estimation_001.png)
+:::
+::::
+
 
 ## Activation checkpointing
 
@@ -989,3 +989,8 @@ An example of using a gradient checkpointing [\faGithub](https://colab.research.
 ## Code
 
 [Open In Colab $\clubsuit$](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/Autograd_and_Jax.ipynb)
+
+### References
+
+::: {#refs}
+:::
