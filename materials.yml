@@ -22,7 +22,7 @@
   youtube: https://youtu.be/UNulwy1LY5g
   download: https://disk.yandex.com/i/Bpn08WnPc2zUfg
 
-- title: Выпуклость. Выпуклые множества. Выпуклые функции. Неравенство Йенсена. Сильно выпуклые функции. Условие Поляка - Лоясиевича. 
+- title: Выпуклость. Выпуклые множества. Выпуклые функции. Неравенство Йенсена.
   number: 4
   materials: /lectures/lec_4/lec_4.pdf
   seminar: /seminars/sem_4/sem_4.pdf
@@ -30,12 +30,12 @@
   youtube: https://youtu.be/9yfninlTKew
   download: https://disk.yandex.com/i/TR_BKZuk0XuqsA
 
-- title: Условия оптимальности. Функция Лагранжа. Множители Лагранжа. Теорема Каруша - Куна - Таккера. Двойственность. Введение в двойственность. Двойственная задача. Анализ чувствительности.
+- title: Сильно выпуклые функции. Условие Поляка - Лоясиевича. Условия оптимальности. Функция Лагранжа. Задачи с ограничениями-равенствами.
   number: 5
-  #materials: /presentations/5.pdf
+  materials: /lectures/lec_5/lec_5.pdf
   # notes: /notes/5.pdf
-  youtube: 
-  download: 
+  # youtube: 
+  # download: 
 
 - title: Задача линейного программирования. Симплекс метод.
   number: 6
