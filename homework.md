@@ -6,15 +6,15 @@ toc: true
 
 ### Linear algebra basics
 
-1. Prove that the matrix $xy^T$ has rank equals to one.
+1. Prove that the rank of the matrix $xy^T$ is equal to one.
 
-1. Find SVD of the following matrices:
+1. Determine the Singular Value Decompositions (SVDs) of the matrices listed below:
 
-    * $A = \begin{bmatrix} 1\\2\\3 \end{bmatrix}$ 
-    * $A = \begin{bmatrix} 1 & 4\\4 & 8\\3 & 8 \end{bmatrix}$ 
-    * $A = \begin{bmatrix} 0 & 0\\x & 0\\0 & 0 \end{bmatrix}$, where $x$ is the sum of your birthdate numbers (day + month)
+    * $A = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$ 
+    * $A = \begin{bmatrix} 1 & 4 \\ 4 & 8 \\ 3 & 8 \end{bmatrix}$ 
+    * $A = \begin{bmatrix} 0 & 0 \\ x & 0 \\ 0 & 0 \end{bmatrix}$, where $x$ represents the sum of your birthdate numbers (day + month)
 
-1. Assume we have a set of data points $x^{(i)}\in\mathbb{R}^{n},\,i=1,\dots,m$, and decide to represent this data as a matrix
+1. Consider a dataset comprising data points $x^{(i)} \in \mathbb{R}^n$ for $i = 1, \ldots, m$, which are organized into a matrix $X$ as shown below:
 
     $$
     X =
@@ -25,37 +25,34 @@ toc: true
         \end{pmatrix} \in \mathbb{R}^{n \times m}.
     $$
 
-    We suppose that $\text{rank}\,X = r$.
+    In the fields of applied statistics and machine learning, it is common practice to normalize data. A widely used normalization technique involves subtracting the estimated mean $\mu$ and dividing by the square root of the estimated variance $\sigma^2$, as follows:
 
-    In the problem below, we ask you to find the rank of some matrix $M$ related to $X$.
-    In particular, you need to find relation between $\text{rank}\,X = r$ and $\text{rank}\,M$, e.g., that the rank of $M$ is always larger/smaller than the rank of $X$ or that $\text{rank}\,M = \text{rank}\,X \big / 35$.
-    Please support your answer with legitimate arguments and make the answer as accurate as possible.
-
-    Note that depending on the structure of the matrix $X$, border cases are possible.
-    Make sure to cover them in your answer correctly.
-
-    In applied statistics and machine learning, data is often normalized.
-    One particularly popular strategy is to subtract the estimated mean $\mu$ and divide by the square root of the estimated variance $\sigma^2$. i.e.
-    
     $$
-    x \rightarrow (x - \mu) \big / \sigma.
+    x \rightarrow \frac{x - \mu}{\sigma}.
     $$
 
-    After the normalization, we get a new matrix
-    
+    Applying this normalization to the matrix $X$ results in a new matrix $Y$, defined by:
+
     $$
-        \begin{split}
-        Y &:=
+        Y =
         \begin{pmatrix}
             | & & | \\
-            y^{(1)} & \dots & y^{(m)} \\
+            y^{(1)} & \cdots & y^{(m)} \\
             | & & | \\
-        \end{pmatrix},\\
-        y^{(i)} &:= \frac{x^{(i)} - \frac{1}{m}\sum_{i=1}^{m} x^{(i)}}{\sqrt{\frac{1}{m}\sum_{i=1}^{m} \left(x^{(i)}\right)^2 - \left(\frac{1}{m}\sum_{i=1}^{m} x^{(i)}\right)^2}}.
-        \end{split}
+        \end{pmatrix},
     $$
-    
-    What is the rank of $Y$ if $\text{rank} \; X = r$?
+
+    where
+
+    $$
+        y^{(i)} = \frac{x^{(i)} - \frac{1}{m}\sum_{i=1}^{m} x^{(i)}}{\sqrt{\frac{1}{m}\sum_{i=1}^{m} \left(x^{(i)}\right)^2 - \left(\frac{1}{m}\sum_{i=1}^{m} x^{(i)}\right)^2}}.
+    $$
+
+    The question is: What is the rank of $Y$ given that the rank of $X$ is $r$?
+
+    Your response should consider how the rank of $Y$ compares to the rank of $X$, indicating whether the rank of $Y$ is always greater, always less, or equal to the rank of $X$ multiplied by a certain factor, for example, $\text{rank}\,Y = 35 \ \text{rank}\,X$.
+
+    Please provide a well-reasoned argument to support your answer, ensuring it is as precise as possible. Also, consider any potential edge cases based on the structure of the matrix $X$ and address them appropriately in your explanation.
 
 1. **Image Compression with Truncated SVD** Explore image compression using Truncated Singular Value Decomposition (SVD). Understand how varying the number of singular values affects the quality of the compressed image.
     Implement a Python script to compress a grayscale image using Truncated SVD and visualize the compression quality.
