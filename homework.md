@@ -192,7 +192,7 @@ toc: true
 1. Consider a quadratic function $f: \mathbb{R}^n \rightarrow \mathbb{R}$, starting from a point  $x_k \in \mathbb{R}^n$ and moving in the direction of the antigradient $-\nabla f(x_k)$. Show that the minimum of $f$ along this direction as a function of the step size $\alpha$, for a decreasing function at $x_k$, satisfies Armijo's condition for any $c_1$ in the range $0 \leq c_1 \leq \frac{1}{2}$. Specifically, demonstrate that the following inequality holds at the optimal $\alpha^*$:
 
    $$
-   \varphi(\alpha) = f(x_{k+1}) = f(x_k - \alpha \nabla f(x_k)) \leq f(x_k) - c_1 \alpha \|\nabla f(x_k)\|_2^2
+   \varphi(\alpha) = f(x_{k+1}) = f(x_k - \alpha \nabla f(x_k)) \leq f(x_k) - c_1 \alpha \|\nabla f(x_k)\|_2^2.
    $$
 
 1. **Implementing and Testing Line Search Conditions in Gradient Descent**
@@ -200,8 +200,8 @@ toc: true
     $$
     x_{k+1} = x_k - \alpha \nabla f(x_k)
     $$
-    
-    In this assignment, you will modify an existing Python code for gradient descent to include various line search conditions. You will test these modifications on two functions: a quadratic function and the Rosenbrock function. The main objectives are to understand how different line search strategies influence the convergence of the gradient descent algorithm and to compare their efficiencies based on the number of function evaluations.
+
+    In this assignment, you will enhance an existing Python code for the gradient descent algorithm by incorporating various line search strategies. You'll apply these enhancements to two specific functions: a quadratic function and the Rosenbrock function. The primary goals are to explore how different line search techniques affect the convergence behavior of the gradient descent method and to evaluate their efficiency based on the number of function evaluations required.
 
     ```python
     import numpy as np
@@ -287,9 +287,9 @@ toc: true
 
     ![The code above plots this](linesearch.svg)
 
-    Start by reviewing the provided Python code. This code implements gradient descent with a fixed step size and a backtracking line search on a quadratic function. Familiarize yourself with how the gradient descent function and the step size strategies are implemented.
+    Begin by examining the provided Python code, which implements the gradient descent method with both a fixed step size and a backtracking line search for a quadratic function. Get acquainted with the implementation details of the gradient descent function and the step size determination strategies.
 
-    1. Modify the gradient descent function to include the following line search conditions:
+    1. Modify the gradient descent function to incorporate the following line search conditions:
         
         a. Sufficient Decrease Condition
         b. Curvature Condition
@@ -297,20 +297,19 @@ toc: true
         d. Wolfe Condition
         e. Dichotomy
         
-        Test your modified gradient descent algorithm with the implemented line search conditions on the provided quadratic function. Plot the trajectories over iterations for each condition. Choose and specify hyperparameters for inexact line search condition. Choose and specify the termination criterion. Start from the point $x_0 = (-1, 2)^T$.
+        Apply your updated gradient descent algorithm with these line search conditions to the given quadratic function. For each condition, plot the iteration trajectories. Select and specify the hyperparameters for the inexact line search conditions and define the termination criteria. Use the initial point $x_0 = (-1, 2)^T$.
 
-    1. Compare these 7 methods from the budget perspective. Plot the graph of function value from the number of function evaluations for each method on the same graph.
+    1. Compare the seven methods (including the fixed step size and backtracking line search) from the perspective of computational budget. Plot a graph showing the function values against the number of function evaluations for each method on the same graph.
 
-    1. Plot trajectory for another function with the same set of methods
+    1. Plot the trajectory for another function with the same set of methods
     
         $$
         f(x_1, x_2) =  10(x_2 − x_1^2)^2 + (x_1 − 1)^2
         $$
 
-        with $x_0 = (-1, 2)^T$. You might need to adjust hyperparameters.
+        starting from $x_0 = (-1, 2)^T$. It may be necessary to adjust the hyperparameters for this function.
 
-    1. Plot the same function value from the number of function calls for this experiment.
-
+    1. For the previous experiment, plot the function value against the number of function calls for each method.
 
 ### Matrix calculus
 
