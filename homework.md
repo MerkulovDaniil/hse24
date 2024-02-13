@@ -176,14 +176,14 @@ toc: true
     .
     $$
 
-1. Determine the convergence or divergence of the given sequence 
+1. Determine the convergence or divergence of the given sequence:
     
     $$
     r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, & \text{if } k\text{ is even} \\ \frac{r_{k-1}}{k}, & \text{if } k\text{ is odd} \end{cases}
     .
     $$
 
-1. Let $\{r_k\}$ be a sequence of non-negative numbers given as $r_{k+1} = Mr_k^2$, where $M > 0$, $r_0 \geq 0$. Establish a necessary and sufficient condition on $M$ and $r_0$ under which the sequence $r_k$ will converge to zero. What is the rate of convergence?
+1. Let $\{r_k\}$ be a sequence of non-negative numbers defined by $r_{k+1} = Mr_k^2$, where $M > 0$ and $r_0 \ge 0$. Establish a necessary and sufficient condition on $M$ and $r_0$ under which the sequence $r_k$ will converge to zero. Additionally, determine the rate of convergence.
 
 1. Let $\left\{ r_k \right\}_{k=m}^\infty$ be a sequence of non-negative numbers and let $s > 0$ be some integer. Prove that sequence $\left\{ r_k \right\}_{k=m+s}^\infty$ is linearly convergent with constant $q$ if and only if a the sequence $\left\{ r_k \right\}_{k=m}^\infty$ converged linearly with constant $q$.
 
