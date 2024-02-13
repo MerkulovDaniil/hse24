@@ -163,7 +163,7 @@ toc: true
     * $r_{k} = 0.808^k$.
     * $r_{k} = 0.808^{2^k}$.
 
-1. [10 points] Determine the following sequence $\{r_k\}$ by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally, find out whether there is quadratic convergence.
+1. Determine the convergence rate (linear, sublinear, superlinear) of the following sequence $\{r_k\}$. 
 
     $$
     r_k = \dfrac{1}{k!}
