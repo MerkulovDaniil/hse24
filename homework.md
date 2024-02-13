@@ -185,7 +185,7 @@ toc: true
 
 1. Let $\{r_k\}$ be a sequence of non-negative numbers defined by $r_{k+1} = Mr_k^2$, where $M > 0$ and $r_0 \ge 0$. Establish a necessary and sufficient condition on $M$ and $r_0$ under which the sequence $r_k$ will converge to zero. Additionally, determine the rate of convergence.
 
-1. Let $\left\{ r_k \right\}_{k=m}^\infty$ be a sequence of non-negative numbers and let $s > 0$ be some integer. Prove that sequence $\left\{ r_k \right\}_{k=m+s}^\infty$ is linearly convergent with constant $q$ if and only if a the sequence $\left\{ r_k \right\}_{k=m}^\infty$ converged linearly with constant $q$.
+1. Let $\left\{ r_k \right\}_{k=m}^\infty$ be a sequence of non-negative numbers and let $s > 0$ be some integer. Prove that the sequence $\left\{ r_k \right\}_{k=m+s}^\infty$ is linearly convergent with constant $q$ if and only if the sequence $\left\{ r_k \right\}_{k=m}^\infty$ converges linearly with constant $q$.
 
 ### Line search
 
