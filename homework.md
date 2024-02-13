@@ -156,7 +156,7 @@ toc: true
 
 ### Convergence rates
 
-1. [10 points] Determine the convergence or divergence of the given sequences
+1. Determine the convergence or divergence of the given sequences:
 
     * $r_{k} = k^{\frac{1}{2}}$.
     * $r_{k} = \frac{1}{\sqrt{k}}$.
