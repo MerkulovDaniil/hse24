@@ -54,21 +54,22 @@ toc: true
 
     Please provide a well-reasoned argument to support your answer, ensuring it is as precise as possible. Also, consider any potential edge cases based on the structure of the matrix $X$ and address them appropriately in your explanation.
 
-1. **Image Compression with Truncated SVD** Explore image compression using Truncated Singular Value Decomposition (SVD). Understand how varying the number of singular values affects the quality of the compressed image.
-    Implement a Python script to compress a grayscale image using Truncated SVD and visualize the compression quality.
+1. **Image Compression with Truncated SVD.** Investigate the application of Truncated Singular Value Decomposition (SVD) in image compression. The goal is to understand how the number of singular values retained in the compression process influences the quality of the resulting compressed image.
     
-    * **Truncated SVD**: Decomposes an image $A$ into $U, S,$ and $V$ matrices. The compressed image is reconstructed using a subset of singular values.
+    * **Truncated SVD**: A technique that decomposes an image matrix $A$ into three matrices $U$, $S$, and $V$, reconstructing the image using only a subset of the most significant singular values for compression.
     * **Mathematical Representation**: 
     $$
     A \approx U_k \Sigma_k V_k^T
     $$
-        * $U_k$ and $V_k$ are the first $k$ columns of $U$ and $V$, respectively.
-        * $\Sigma_k$ is a diagonal matrix with the top $k$ singular values.
-        * **Relative Error**: Measures the fidelity of the compressed image compared to the original. 
+        * $U_k$ and $V_k$ are the first $k$ columns of matrices $U$ and $V$, respectively.
+        * $\Sigma_k$ is a diagonal matrix containing the top $k$ singular values.
+        * **Relative Error**: A metric to quantify the accuracy of compression, comparing the compressed image $A_k$ to the original image $A$, calculated as: 
     
         $$
         \text{Relative Error} = \frac{\| A - A_k \|}{\| A \|}
         $$
+
+    Develop a Python script that applies Truncated SVD for compressing a grayscale image. The script should enable varying the number $k$ of singular values used in the reconstruction to observe its effect on image quality. Visualize the compressed images alongside their relative errors to evaluate the trade-off between compression and image fidelity.
 
     ```python
     import matplotlib.pyplot as plt
@@ -170,11 +171,7 @@ toc: true
 
 1. Determine the convergence or divergence of a given sequence $r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, & \text{if } k\text{ is even} \\ \frac{r_{k-1}}{k}, & \text{if } k\text{ is odd} \end{cases}$.
 
-
-
-
 1. Let $\{r_k\}$ be a sequence of non-negative numbers given as $r_{k+1} = Mr_k^2$, where $M > 0$, $r_0 \geq 0$. Establish a necessary and sufficient condition on $M$ and $r_0$ under which the sequence $r_k$ will converge to zero. What is the rate of convergence?
-
 
 1. Let $\left\{ r_k \right\}_{k=m}^\infty$ be a sequence of non-negative numbers and let $s > 0$ be some integer. Prove that sequence $\left\{ r_k \right\}_{k=m+s}^\infty$ is linearly convergent with constant $q$ if and only if a the sequence $\left\{ r_k \right\}_{k=m}^\infty$ converged linearly with constant $q$.
 
