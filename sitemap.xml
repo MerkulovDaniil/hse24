@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hse24.fmin.xyz/program.html</loc>
-    <lastmod>2024-02-12T10:42:54.456Z</lastmod>
-  </url>
-  <url>
     <loc>https://hse24.fmin.xyz/files/mds.html</loc>
-    <lastmod>2024-02-12T10:42:54.132Z</lastmod>
-  </url>
-  <url>
-    <loc>https://hse24.fmin.xyz/homework.html</loc>
-    <lastmod>2024-02-12T10:42:54.180Z</lastmod>
+    <lastmod>2024-02-18T16:49:08.909Z</lastmod>
   </url>
   <url>
     <loc>https://hse24.fmin.xyz/index.html</loc>
-    <lastmod>2024-02-12T10:42:54.180Z</lastmod>
+    <lastmod>2024-02-18T16:49:08.957Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hse24.fmin.xyz/program.html</loc>
+    <lastmod>2024-02-18T16:49:09.233Z</lastmod>
+  </url>
+  <url>
+    <loc>https://hse24.fmin.xyz/homework.html</loc>
+    <lastmod>2024-02-18T16:49:08.957Z</lastmod>
   </url>
 </urlset>
