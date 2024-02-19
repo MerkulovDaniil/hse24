@@ -30,113 +30,128 @@
   youtube: https://youtu.be/9yfninlTKew
   download: https://disk.yandex.com/i/TR_BKZuk0XuqsA
 
-- title: Сильно выпуклые функции. Условие Поляка - Лоясиевича. Условия оптимальности. Функция Лагранжа. Задачи с ограничениями-равенствами.
+- title: Сильно выпуклые функции. Условие Поляка - Лоясиевича. Линейная регрессия. Регуляризация. Выпуклость нейронных сетей.
   number: 5
   materials: /lectures/lec_5/lec_5.pdf
+  seminar: /seminars/sem_4/sem_5.pdf
+  notes: /notes/5.pdf
+  youtube: https://youtu.be/kfHoH1Hloe0
+  download: https://disk.yandex.com/i/gU3D_P4yxa0z7g
+
+- title: Условия оптимальности. Функция Лагранжа. Задачи с ограничениями-равенствами. Задачи с ограничениями-равенствами. Теорема Каруша - Куна - Таккера.
+  number: 6
+  materials: /lectures/lec_6/lec_6.pdf
+  notes: /notes/6.pdf
+  youtube: 
+  # download: https://disk.yandex.com/i/gU3D_P4yxa0z7g
+
+- title: Двойственность.
+  number: 7
+  # materials: /lectures/lec_5/lec_5.pdf
   # notes: /notes/5.pdf
   # youtube: 
   # download: 
 
 - title: Задача линейного программирования. Симплекс метод.
-  number: 6
+  number: 8
   #materials: /presentations/6.pdf
   # notes: /notes/6.pdf
   youtube: 
   download: 
 
 - title: Градиентный спуск. Теоремы сходимости в гладком случае (выпуклые, сильно выпуклые, PL). Верхние и нижние оценки сходимости.
-  number: 7
+  number: 9
   #materials: /presentations/7.pdf
   # notes: /notes/7.pdf
   youtube: 
   download: 
 
 - title: Ускоренные градиентные методы. Метод Поляка, Нестерова.
-  number: 8
+  number: 10
   #materials: /presentations/8.pdf
   # notes: /notes/8.pdf
   youtube: 
   download: 
 
 - title: Субградиент. Субдифференциал. Субградиентный спуск. Теоремы сходимости в негладком случае. Особенности работы градиентного метода в практических негладких задачах.
-  number: 9
+  number: 11
   #materials: /presentations/9.pdf
   # notes: /notes/9.pdf
   youtube: 
   download: 
 
 - title: Метод сопряженных градиентов.
-  number: 10
+  number: 12
   #materials: /presentations/10.pdf
   # notes: /notes/10.pdf
   youtube: 
   download: 
 
 - title: Проксимальный градиентный метод. Метод Франк-Вульфа. Метод проекции градиента.
-  number: 11
+  number: 13
   #materials: /presentations/11.pdf
   # notes: /notes/11.pdf
   youtube: 
   download: 
 
 - title: Метод натурального градиента. Метод зеркального спуска. K-FAC.
-  number: 12
+  number: 14
   #materials: /presentations/12.pdf
   # notes: /notes/12.pdf
   youtube: 
   download: 
 
 - title: Метод Ньютона. Квазиньютоновские методы.
-  number: 13
+  number: 15
   #materials: /presentations/13.pdf
   # notes: /notes/13.pdf
   youtube: 
   download: 
 
 - title: Введение в методы внутренней точки.
-  number: 14
+  number: 16
   #materials: /presentations/14.pdf
   # notes: /notes/14.pdf
   youtube: 
   download: 
 
 - title: "Стохастический градиентный спуск. Адаптивные стохастические градиентные алгоритмы: AdaDelta, RMSProp, Adam, Nadam."
-  number: 15
+  number: 17
   #materials: /presentations/15.pdf
   # notes: /notes/15.pdf
   youtube: 
   download: 
 
 - title: "Методы редукции дисперсии: SAG, SVRG, SAGA."
-  number: 16
+  number: 18
   #materials: /presentations/16.pdf
   # notes: /notes/16.pdf
   youtube: 
   download: 
 
 - title: Градиентный поток и диффузия. Методы оптимизации в непрерывном времени.
-  number: 17
+  number: 19
   #materials: /presentations/17.pdf
   # notes: /notes/17.pdf
   youtube: 
   download: 
 
-- title: Седловые задачи. Минимакс. Обучение GAN.
-  number: 18
-  #materials: /presentations/18.pdf
-  # notes: /notes/18.pdf
-  youtube: 
-  download: 
-
 - title: Обобщающая способность моделей машинного обучения. Neural Tangent Kernel. Mode connectivity.
-  number: 19
+  number: 20
   #materials: /presentations/19.pdf
   # notes: /notes/19.pdf
   youtube: 
   download: 
 
+- title: Седловые задачи. Минимакс. Обучение GAN.
+  number: 21
+  #materials: /presentations/18.pdf
+  # notes: /notes/18.pdf
+  youtube: 
+  download: 
+
 - title: Вопросы обучения больших моделей. Lars, Lamb. Расписания learning rate. Warm-up. Клиппинг.
-  number: 20
+  number: 22
   #materials: /presentations/20.pdf
   # notes: /notes/20.pdf
   youtube: 
