@@ -33,7 +33,7 @@
 - title: Сильно выпуклые функции. Условие Поляка - Лоясиевича. Линейная регрессия. Регуляризация. Выпуклость нейронных сетей.
   number: 5
   materials: /lectures/lec_5/lec_5.pdf
-  seminar: /seminars/sem_4/sem_5.pdf
+  seminar: /seminars/sem_5/sem_5.pdf
   notes: /notes/5.pdf
   youtube: https://youtu.be/kfHoH1Hloe0
   download: https://disk.yandex.com/i/gU3D_P4yxa0z7g
@@ -42,13 +42,15 @@
   number: 6
   materials: /lectures/lec_6/lec_6.pdf
   notes: /notes/6.pdf
-  youtube: 
-  # download: https://disk.yandex.com/i/gU3D_P4yxa0z7g
+  seminar: /seminars/sem_6/sem_6.pdf
+  youtube: https://youtu.be/8sG2Sq3ghLU
+  download: https://disk.yandex.com/i/6ZPWjn9wxQ9zHA
 
 - title: Двойственность.
   number: 7
-  # materials: /lectures/lec_5/lec_5.pdf
-  # notes: /notes/5.pdf
+  materials: /lectures/lec_7/lec_7.pdf
+  # notes: /notes/7.pdf
+  seminar: /seminars/sem_7/sem_7.pdf
   # youtube: 
   # download: 
 
