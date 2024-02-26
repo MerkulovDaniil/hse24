@@ -49,10 +49,10 @@
 - title: Двойственность.
   number: 7
   materials: /lectures/lec_7/lec_7.pdf
-  # notes: /notes/7.pdf
+  notes: /notes/7.pdf
   seminar: /seminars/sem_7/sem_7.pdf
   # youtube: 
-  # download: 
+  download: https://disk.yandex.com/i/EXyp5q2b_XG41Q
 
 - title: Задача линейного программирования. Симплекс метод.
   number: 8
