@@ -351,3 +351,210 @@ You can use any automatic differentiation framework in this section (Jax, PyTorc
     $$
     f(X) = - \log \det X
     $$
+
+
+### Convexity
+
+1. Show, that $\mathbf{conv}\{xx^\top: x \in \mathbb{R}^n, \Vert x\Vert  = 1\} = \{A \in \mathbb{S}^n_+: \text{tr}(A) = 1\}$.
+1. Prove that the set of $\{x \in \mathbb{R}^2 \mid e^{x_1}\le x_2\}$ is convex.
+1. Show that the set of directions of the non-strict local descending of the differentiable function in a point is a convex cone.
+1. Is the following set convex
+    $$
+    S = \left\{ a \in \mathbb{R}^k \mid p(0) = 1, \vert p(t) \vert\leq 1 \text{ for } \alpha\leq t \leq \beta\right\},
+    $$
+    where
+    $$
+    p(t) = a_1 + a_2 t + \ldots + a_k t^{k-1} \;?
+    $$
+
+1. Consider the function $f(x) = x^d$, where $x \in \mathbb{R}_{+}$. Fill the following table with ✅ or ❎. Explain your answers
+
+    | $d$ | Convex | Concave | Strictly Convex | $\mu$-strongly convex |
+    |:-:|:-:|:-:|:-:|:-:|
+    | $-2, x \in \mathbb{R}_{++}$| | | | |
+    | $-1, x \in \mathbb{R}_{++}$| | | | |
+    | $0$| | | | |
+    | $0.5$ | | | | |
+    |$1$ | | | | |
+    | $\in (1; 2)$ | | | | |
+    | $2$| | | | |
+    | $> 2$| | | | 
+
+    : {.responsive}
+
+1. Prove that the entropy function, defined as
+
+    $$
+    f(x) = -\sum_{i=1}^n x_i \log(x_i),
+    $$
+
+    with $\text{dom}(f) = \{x \in \R^n_{++} : \sum_{i=1}^n x_i = 1\}$, is strictly concave.  
+
+1. Show, that the function $f: \mathbb{R}^n_{++} \to \mathbb{R}$ is convex if $f(x) = - \prod\limits_{i=1}^n x_i^{\alpha_i}$ if $\mathbf{1}^T \alpha = 1, \alpha \succeq 0$.
+
+1. Show that the maximum of a convex function $f$ over the polyhedron $P = \text{conv}\{v_1, \ldots, v_k\}$ is achieved at one of its vertices, i.e.,
+
+    $$
+    \sup_{x \in P} f(x) = \max_{i=1, \ldots, k} f(v_i).
+    $$
+
+    A stronger statement is: the maximum of a convex function over a closed bounded convex set is achieved at an extreme point, i.e., a point in the set that is not a convex combination of any other points in the set. (you do not have to prove it). *Hint:* Assume the statement is false, and use Jensen’s inequality.
+
+1. Show, that the two definitions of $\mu$-strongly convex functions are equivalent:
+    1. $f(x)$ is $\mu$-strongly convex $\iff$ for any $x_1, x_2 \in S$ and $0 \le \lambda \le 1$ for some $\mu > 0$:
+        
+        $$
+        f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \frac{\mu}{2} \lambda (1 - \lambda)\|x_1 - x_2\|^2
+        $$
+
+    1. $f(x)$ is $\mu$-strongly convex $\iff$ if there exists $\mu>0$ such that the function $f(x) - \dfrac{\mu}{2}\Vert x\Vert^2$ is convex.
+
+### Optimality conditions
+
+In this section, you can consider either the arbitrary norm or the Euclidian norm if nothing else is specified.
+
+1. **Toy example**
+    $$
+    \begin{split}
+    & x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
+    \text{s.t. } & (x-2)(x-4) \leq 0
+    \end{split}
+    $$
+
+    1. Give the feasible set, the optimal value, and the optimal solution.
+    1.  Plot the objective $x^2 +1$ versus $x$. On the same plot, show the feasible set, optimal point, and value, and plot the Lagrangian $L(x,\mu)$ versus $x$ for a few positive values of $\mu$. Verify the lower bound property ($p^* \geq \inf_x L(x, \mu)$for $\mu \geq 0$). Derive and sketch the Lagrange dual function $g$.
+    1. State the dual problem, and verify that it is a concave maximization problem. Find the dual optimal value and dual optimal solution $\mu^*$. Does strong duality hold?
+    1.  Let $p^*(u)$ denote the optimal value of the problem
+
+    $$
+    \begin{split}
+    & x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
+    \text{s.t. } & (x-2)(x-4) \leq u
+    \end{split}
+    $$
+
+    as a function of the parameter $u$. Plot $p^*(u)$. Verify that $\dfrac{dp^*(0)}{du} = -\mu^*$ 
+
+1. Derive the dual problem for the Ridge regression problem with $A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m, \lambda > 0$:
+
+    $$
+    \begin{split}
+    \dfrac{1}{2}\|y-b\|^2 + \dfrac{\lambda}{2}\|x\|^2 &\to \min\limits_{x \in \mathbb{R}^n, y \in \mathbb{R}^m }\\
+    \text{s.t. } & y = Ax
+    \end{split}
+    $$
+
+1. Derive the dual problem for the support vector machine problem with $A \in \mathbb{R}^{m \times n}, \mathbf{1} \in \mathbb{R}^m \in \mathbb{R}^m, \lambda > 0$:
+
+    $$
+    \begin{split}
+    \langle \mathbf{1}, t\rangle + \dfrac{\lambda}{2}\|x\|^2 &\to \min\limits_{x \in \mathbb{R}^n, t \in \mathbb{R}^m }\\
+    \text{s.t. } & Ax \succeq \mathbf{1} - t \\
+    & t \succeq 0
+    \end{split}
+    $$
+
+1. Give an explicit solution to the following LP.
+    
+    $$
+    \begin{split}
+    & c^\top x \to \min\limits_{x \in \mathbb{R}^n }\\
+    \text{s.t. } & 1^\top x = 1, \\
+    & x \succeq 0 
+    \end{split}
+    $$
+
+    This problem can be considered the simplest portfolio optimization problem.
+
+1. Show, that the following problem has a unique solution and find it:
+
+    $$
+    \begin{split}
+    & \langle C^{-1}, X\rangle - \log \det X \to \min\limits_{x \in \mathbb{R}^{n \times n} }\\
+    \text{s.t. } & \langle Xa, a\rangle \leq 1,
+    \end{split}
+    $$
+
+    where $C \in \mathbb{S}^n_{++}, a \in \mathbb{R}^n \neq 0$. The answer should not involve inversion of the matrix $C$.
+
+1. Give an explicit solution to the following QP.
+    
+    $$
+    \begin{split}
+    & c^\top x \to \min\limits_{x \in \mathbb{R}^n }\\
+    \text{s.t. } & (x - x_c)^\top A (x - x_c) \leq 1,
+    \end{split}
+    $$
+
+    where $A \in \mathbb{S}^n_{++}, c \neq 0, x_c \in \mathbb{R}^n$.
+
+1.  Consider the equality-constrained least-squares problem
+    
+    $$
+    \begin{split}
+    & \|Ax - b\|_2^2 \to \min\limits_{x \in \mathbb{R}^n }\\
+    \text{s.t. } & Cx = d,
+    \end{split}
+    $$
+
+    where $A \in \mathbb{R}^{m \times n}$ with $\mathbf{rank }A = n$, and $C \in \mathbb{R}^{k \times n}$ with $\mathbf{rank }C = k$. Give the KKT conditions, and derive expressions for the primal solution $x^*$ and the dual solution $\lambda^*$.
+
+1. Derive the KKT conditions for the problem
+    
+    $$
+    \begin{split}
+    & \mathbf{tr \;}X - \log\text{det }X \to \min\limits_{X \in \mathbb{S}^n_{++} }\\
+    \text{s.t. } & Xs = y,
+    \end{split}
+    $$
+
+    where $y \in \mathbb{R}^n$ and $s \in \mathbb{R}^n$ are given with $y^\top s = 1$. Verify that the optimal solution is given by
+
+    $$
+    X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
+    $$
+
+1.  **Supporting hyperplane interpretation of KKT conditions**. Consider a **convex** problem with no equality constraints
+    
+    $$
+    \begin{split}
+    & f_0(x) \to \min\limits_{x \in \mathbb{R}^n }\\
+    \text{s.t. } & f_i(x) \leq 0, \quad i = [1,m]
+    \end{split}
+    $$
+
+    Assume, that $\exists x^* \in \mathbb{R}^n, \mu^* \in \mathbb{R}^m$ satisfy the KKT conditions
+    
+    $$
+    \begin{split}
+    & \nabla_x L (x^*, \mu^*) = \nabla f_0(x^*) + \sum\limits_{i=1}^m\mu_i^*\nabla f_i(x^*) = 0 \\
+    & \mu^*_i \geq 0, \quad i = [1,m] \\
+    & \mu^*_i f_i(x^*) = 0, \quad i = [1,m]\\
+    & f_i(x^*) \leq 0, \quad i = [1,m]
+    \end{split}
+    $$
+
+    Show that
+
+    $$
+    \nabla f_0(x^*)^\top (x - x^*) \geq 0
+    $$
+
+    for all feasible $x$. In other words, the KKT conditions imply the simple optimality criterion or $\nabla f_0(x^*)$ defines a supporting hyperplane to the feasible set at $x^*$.
+    
+1. **A penalty method for equality constraints.** We consider the problem of minimization
+
+    $$
+    \begin{split}
+    & f_0(x) \to \min\limits_{x \in \mathbb{R}^{n} }\\
+    \text{s.t. } & Ax = b,
+    \end{split}
+    $$
+    
+    where $f_0(x): \mathbb{R}^n \to\mathbb{R} $ is convex and differentiable, and $A \in \mathbb{R}^{m \times n}$ with $\mathbf{rank }A = m$. In a quadratic penalty method, we form an auxiliary function
+
+    $$
+    \phi(x) = f_0(x) + \alpha \|Ax - b\|_2^2,
+    $$
+    
+    where $\alpha > 0$ is a parameter. This auxiliary function consists of the objective plus the penalty term $\alpha \Vert Ax - b\Vert_2^2$. The idea is that a minimizer of the auxiliary function, $\tilde{x}$, should be an approximate solution to the original problem. Intuition suggests that the larger the penalty weight $\alpha$, the better the approximation $\tilde{x}$ to a solution of the original problem. Suppose $\tilde{x}$ is a minimizer of $\phi(x)$. Show how to find, from $\tilde{x}$, a dual feasible point for the original problem. Find the corresponding lower bound on the optimal value of the original problem.
