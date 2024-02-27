@@ -203,6 +203,8 @@ window.Quarto = {
   <li><a href="#line-search" id="toc-line-search" class="nav-link" data-scroll-target="#line-search">Line search</a></li>
   <li><a href="#matrix-calculus" id="toc-matrix-calculus" class="nav-link" data-scroll-target="#matrix-calculus">Matrix calculus</a></li>
   <li><a href="#automatic-differentiation-and-jax-2-more-problems-coming" id="toc-automatic-differentiation-and-jax-2-more-problems-coming" class="nav-link" data-scroll-target="#automatic-differentiation-and-jax-2-more-problems-coming">Automatic differentiation and jax (2 more problems coming)</a></li>
+  <li><a href="#convexity" id="toc-convexity" class="nav-link" data-scroll-target="#convexity">Convexity</a></li>
+  <li><a href="#optimality-conditions" id="toc-optimality-conditions" class="nav-link" data-scroll-target="#optimality-conditions">Optimality conditions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -523,6 +525,227 @@ x_{k+1} = x_k - \alpha_k \nabla f(x_k)
 <span class="math display">
 f(X) = - \log \det X
 </span></p></li>
+</ol>
+</section>
+<section id="convexity" class="level3">
+<h3 class="anchored" data-anchor-id="convexity">Convexity</h3>
+<ol type="1">
+<li><p>Show, that <span class="math inline">\mathbf{conv}\{xx^\top: x \in \mathbb{R}^n, \Vert x\Vert  = 1\} = \{A \in \mathbb{S}^n_+: \text{tr}(A) = 1\}</span>.</p></li>
+<li><p>Prove that the set of <span class="math inline">\{x \in \mathbb{R}^2 \mid e^{x_1}\le x_2\}</span> is convex.</p></li>
+<li><p>Show that the set of directions of the non-strict local descending of the differentiable function in a point is a convex cone.</p></li>
+<li><p>Is the following set convex <span class="math display">
+S = \left\{ a \in \mathbb{R}^k \mid p(0) = 1, \vert p(t) \vert\leq 1 \text{ for } \alpha\leq t \leq \beta\right\},
+</span> where <span class="math display">
+p(t) = a_1 + a_2 t + \ldots + a_k t^{k-1} \;?
+</span></p></li>
+<li><p>Consider the function <span class="math inline">f(x) = x^d</span>, where <span class="math inline">x \in \mathbb{R}_{+}</span>. Fill the following table with ✅ or ❎. Explain your answers</p>
+<div class="table-responsive">
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">d</span></th>
+<th style="text-align: center;">Convex</th>
+<th style="text-align: center;">Concave</th>
+<th style="text-align: center;">Strictly Convex</th>
+<th style="text-align: center;"><span class="math inline">\mu</span>-strongly convex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">-2, x \in \mathbb{R}_{++}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">-1, x \in \mathbb{R}_{++}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">0</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">0.5</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">1</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\in (1; 2)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">2</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">&gt; 2</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</div></li>
+<li><p>Prove that the entropy function, defined as</p>
+<p><span class="math display">
+f(x) = -\sum_{i=1}^n x_i \log(x_i),
+</span></p>
+<p>with <span class="math inline">\text{dom}(f) = \{x \in \R^n_{++} : \sum_{i=1}^n x_i = 1\}</span>, is strictly concave.</p></li>
+<li><p>Show, that the function <span class="math inline">f: \mathbb{R}^n_{++} \to \mathbb{R}</span> is convex if <span class="math inline">f(x) = - \prod\limits_{i=1}^n x_i^{\alpha_i}</span> if <span class="math inline">\mathbf{1}^T \alpha = 1, \alpha \succeq 0</span>.</p></li>
+<li><p>Show that the maximum of a convex function <span class="math inline">f</span> over the polyhedron <span class="math inline">P = \text{conv}\{v_1, \ldots, v_k\}</span> is achieved at one of its vertices, i.e.,</p>
+<p><span class="math display">
+\sup_{x \in P} f(x) = \max_{i=1, \ldots, k} f(v_i).
+</span></p>
+<p>A stronger statement is: the maximum of a convex function over a closed bounded convex set is achieved at an extreme point, i.e., a point in the set that is not a convex combination of any other points in the set. (you do not have to prove it). <em>Hint:</em> Assume the statement is false, and use Jensen’s inequality.</p></li>
+<li><p>Show, that the two definitions of <span class="math inline">\mu</span>-strongly convex functions are equivalent:</p>
+<ol type="1">
+<li><p><span class="math inline">f(x)</span> is <span class="math inline">\mu</span>-strongly convex <span class="math inline">\iff</span> for any <span class="math inline">x_1, x_2 \in S</span> and <span class="math inline">0 \le \lambda \le 1</span> for some <span class="math inline">\mu &gt; 0</span>:</p>
+<p><span class="math display">
+f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \frac{\mu}{2} \lambda (1 - \lambda)\|x_1 - x_2\|^2
+</span></p></li>
+<li><p><span class="math inline">f(x)</span> is <span class="math inline">\mu</span>-strongly convex <span class="math inline">\iff</span> if there exists <span class="math inline">\mu&gt;0</span> such that the function <span class="math inline">f(x) - \dfrac{\mu}{2}\Vert x\Vert^2</span> is convex.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="optimality-conditions" class="level3">
+<h3 class="anchored" data-anchor-id="optimality-conditions">Optimality conditions</h3>
+<p>In this section, you can consider either the arbitrary norm or the Euclidian norm if nothing else is specified.</p>
+<ol type="1">
+<li><p><strong>Toy example</strong> <span class="math display">
+\begin{split}
+&amp; x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
+\text{s.t. } &amp; (x-2)(x-4) \leq 0
+\end{split}
+</span></p>
+<ol type="1">
+<li>Give the feasible set, the optimal value, and the optimal solution.</li>
+<li>Plot the objective <span class="math inline">x^2 +1</span> versus <span class="math inline">x</span>. On the same plot, show the feasible set, optimal point, and value, and plot the Lagrangian <span class="math inline">L(x,\mu)</span> versus <span class="math inline">x</span> for a few positive values of <span class="math inline">\mu</span>. Verify the lower bound property (<span class="math inline">p^* \geq \inf_x L(x, \mu)</span>for <span class="math inline">\mu \geq 0</span>). Derive and sketch the Lagrange dual function <span class="math inline">g</span>.</li>
+<li>State the dual problem, and verify that it is a concave maximization problem. Find the dual optimal value and dual optimal solution <span class="math inline">\mu^*</span>. Does strong duality hold?</li>
+<li>Let <span class="math inline">p^*(u)</span> denote the optimal value of the problem</li>
+</ol>
+<p><span class="math display">
+\begin{split}
+&amp; x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
+\text{s.t. } &amp; (x-2)(x-4) \leq u
+\end{split}
+</span></p>
+<p>as a function of the parameter <span class="math inline">u</span>. Plot <span class="math inline">p^*(u)</span>. Verify that <span class="math inline">\dfrac{dp^*(0)}{du} = -\mu^*</span></p></li>
+<li><p>Derive the dual problem for the Ridge regression problem with <span class="math inline">A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m, \lambda &gt; 0</span>:</p>
+<p><span class="math display">
+\begin{split}
+\dfrac{1}{2}\|y-b\|^2 + \dfrac{\lambda}{2}\|x\|^2 &amp;\to \min\limits_{x \in \mathbb{R}^n, y \in \mathbb{R}^m }\\
+\text{s.t. } &amp; y = Ax
+\end{split}
+</span></p></li>
+<li><p>Derive the dual problem for the support vector machine problem with <span class="math inline">A \in \mathbb{R}^{m \times n}, \mathbf{1} \in \mathbb{R}^m \in \mathbb{R}^m, \lambda &gt; 0</span>:</p>
+<p><span class="math display">
+\begin{split}
+\langle \mathbf{1}, t\rangle + \dfrac{\lambda}{2}\|x\|^2 &amp;\to \min\limits_{x \in \mathbb{R}^n, t \in \mathbb{R}^m }\\
+\text{s.t. } &amp; Ax \succeq \mathbf{1} - t \\
+&amp; t \succeq 0
+\end{split}
+</span></p></li>
+<li><p>Give an explicit solution to the following LP.</p>
+<p><span class="math display">
+\begin{split}
+&amp; c^\top x \to \min\limits_{x \in \mathbb{R}^n }\\
+\text{s.t. } &amp; 1^\top x = 1, \\
+&amp; x \succeq 0
+\end{split}
+</span></p>
+<p>This problem can be considered the simplest portfolio optimization problem.</p></li>
+<li><p>Show, that the following problem has a unique solution and find it:</p>
+<p><span class="math display">
+\begin{split}
+&amp; \langle C^{-1}, X\rangle - \log \det X \to \min\limits_{x \in \mathbb{R}^{n \times n} }\\
+\text{s.t. } &amp; \langle Xa, a\rangle \leq 1,
+\end{split}
+</span></p>
+<p>where <span class="math inline">C \in \mathbb{S}^n_{++}, a \in \mathbb{R}^n \neq 0</span>. The answer should not involve inversion of the matrix <span class="math inline">C</span>.</p></li>
+<li><p>Give an explicit solution to the following QP.</p>
+<p><span class="math display">
+\begin{split}
+&amp; c^\top x \to \min\limits_{x \in \mathbb{R}^n }\\
+\text{s.t. } &amp; (x - x_c)^\top A (x - x_c) \leq 1,
+\end{split}
+</span></p>
+<p>where <span class="math inline">A \in \mathbb{S}^n_{++}, c \neq 0, x_c \in \mathbb{R}^n</span>.</p></li>
+<li><p>Consider the equality-constrained least-squares problem</p>
+<p><span class="math display">
+\begin{split}
+&amp; \|Ax - b\|_2^2 \to \min\limits_{x \in \mathbb{R}^n }\\
+\text{s.t. } &amp; Cx = d,
+\end{split}
+</span></p>
+<p>where <span class="math inline">A \in \mathbb{R}^{m \times n}</span> with <span class="math inline">\mathbf{rank }A = n</span>, and <span class="math inline">C \in \mathbb{R}^{k \times n}</span> with <span class="math inline">\mathbf{rank }C = k</span>. Give the KKT conditions, and derive expressions for the primal solution <span class="math inline">x^*</span> and the dual solution <span class="math inline">\lambda^*</span>.</p></li>
+<li><p>Derive the KKT conditions for the problem</p>
+<p><span class="math display">
+\begin{split}
+&amp; \mathbf{tr \;}X - \log\text{det }X \to \min\limits_{X \in \mathbb{S}^n_{++} }\\
+\text{s.t. } &amp; Xs = y,
+\end{split}
+</span></p>
+<p>where <span class="math inline">y \in \mathbb{R}^n</span> and <span class="math inline">s \in \mathbb{R}^n</span> are given with <span class="math inline">y^\top s = 1</span>. Verify that the optimal solution is given by</p>
+<p><span class="math display">
+X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
+</span></p></li>
+<li><p><strong>Supporting hyperplane interpretation of KKT conditions</strong>. Consider a <strong>convex</strong> problem with no equality constraints</p>
+<p><span class="math display">
+\begin{split}
+&amp; f_0(x) \to \min\limits_{x \in \mathbb{R}^n }\\
+\text{s.t. } &amp; f_i(x) \leq 0, \quad i = [1,m]
+\end{split}
+</span></p>
+<p>Assume, that <span class="math inline">\exists x^* \in \mathbb{R}^n, \mu^* \in \mathbb{R}^m</span> satisfy the KKT conditions</p>
+<p><span class="math display">
+\begin{split}
+&amp; \nabla_x L (x^*, \mu^*) = \nabla f_0(x^*) + \sum\limits_{i=1}^m\mu_i^*\nabla f_i(x^*) = 0 \\
+&amp; \mu^*_i \geq 0, \quad i = [1,m] \\
+&amp; \mu^*_i f_i(x^*) = 0, \quad i = [1,m]\\
+&amp; f_i(x^*) \leq 0, \quad i = [1,m]
+\end{split}
+</span></p>
+<p>Show that</p>
+<p><span class="math display">
+\nabla f_0(x^*)^\top (x - x^*) \geq 0
+</span></p>
+<p>for all feasible <span class="math inline">x</span>. In other words, the KKT conditions imply the simple optimality criterion or <span class="math inline">\nabla f_0(x^*)</span> defines a supporting hyperplane to the feasible set at <span class="math inline">x^*</span>.</p></li>
+<li><p><strong>A penalty method for equality constraints.</strong> We consider the problem of minimization</p>
+<p><span class="math display">
+\begin{split}
+&amp; f_0(x) \to \min\limits_{x \in \mathbb{R}^{n} }\\
+\text{s.t. } &amp; Ax = b,
+\end{split}
+</span></p>
+<p>where $f_0(x): ^n $ is convex and differentiable, and <span class="math inline">A \in \mathbb{R}^{m \times n}</span> with <span class="math inline">\mathbf{rank }A = m</span>. In a quadratic penalty method, we form an auxiliary function</p>
+<p><span class="math display">
+\phi(x) = f_0(x) + \alpha \|Ax - b\|_2^2,
+</span></p>
+<p>where <span class="math inline">\alpha &gt; 0</span> is a parameter. This auxiliary function consists of the objective plus the penalty term <span class="math inline">\alpha \Vert Ax - b\Vert_2^2</span>. The idea is that a minimizer of the auxiliary function, <span class="math inline">\tilde{x}</span>, should be an approximate solution to the original problem. Intuition suggests that the larger the penalty weight <span class="math inline">\alpha</span>, the better the approximation <span class="math inline">\tilde{x}</span> to a solution of the original problem. Suppose <span class="math inline">\tilde{x}</span> is a minimizer of <span class="math inline">\phi(x)</span>. Show how to find, from <span class="math inline">\tilde{x}</span>, a dual feasible point for the original problem. Find the corresponding lower bound on the optimal value of the original problem.</p></li>
 </ol>
 
 
