@@ -57,14 +57,16 @@
 - title: Задача линейного программирования. Симплекс метод.
   number: 8
   materials: /lectures/lec_8/lec_8.pdf
-  # notes: /notes/6.pdf
-  youtube: 
+  notes: /notes/8.pdf
+  seminar: /seminars/sem_8/sem_8.pdf
+  youtube: https://youtu.be/OLIlonDqefU
   download: 
 
 - title: Градиентный спуск. Теоремы сходимости в гладком случае (выпуклые, сильно выпуклые, PL). Верхние и нижние оценки сходимости.
   number: 9
-  #materials: /presentations/7.pdf
-  # notes: /notes/7.pdf
+  materials: /lectures/lec_9/lec_9.pdf
+  notes: /notes/9.pdf
+  seminar: /seminars/sem_9/sem_9.pdf
   youtube: 
   download: 
 
