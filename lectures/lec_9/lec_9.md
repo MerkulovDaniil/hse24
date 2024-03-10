@@ -90,7 +90,7 @@ $$
 :::: {.columns}
 ::: {.column width="78%"}
 
-Let's consider the following ODE, which is referred as Gradient Flow equation.
+Let's consider the following ODE, which is referred to as the Gradient Flow equation.
 
 $$
 \tag{GF}
@@ -142,7 +142,7 @@ $$
 $$
 More theoretical than practical approach. It also allows you to analyze the convergence, but often exact line search can be difficult if the function calculation takes too long or costs a lot.
 
-Interesting theoretical property of this method is that each following iteration is orthogonal to the previous one:
+An interesting theoretical property of this method is that each following iteration is orthogonal to the previous one:
 $$
 \alpha_k = \text{arg}\min_{\alpha \in \mathbb{R^+}} f(x_k - \alpha \nabla f(x_k))
 $$
@@ -187,7 +187,7 @@ $$
     $$
     A = Q \Lambda Q^T
     $$
-* Let's show, that we can switch coordinates in order to make an analysis a little bit easier. Let $\hat{x} = Q^T(x - x^*)$, where $x^*$ is the minimum point of initial function, defined by $Ax^* = b$. At the same time $x = Q\hat{x} + x^*$.
+* Let's show, that we can switch coordinates to make an analysis a little bit easier. Let $\hat{x} = Q^T(x - x^*)$, where $x^*$ is the minimum point of initial function, defined by $Ax^* = b$. At the same time $x = Q\hat{x} + x^*$.
     $$
     \begin{split}
     \uncover<+->{ f(\hat{x}) &= \frac12  (Q\hat{x} + x^*)^\top  A (Q\hat{x} + x^*) - b^\top  (Q\hat{x} + x^*) \\}
@@ -254,7 +254,7 @@ $\alpha < \frac{2}{L}$ is needed for convergence.
 . . .
 
 ::: {.column width="50%"}
-Now we would like to choose $\alpha$ in order to choose the best (lowest) convergence rate
+Now we would like to tune $\alpha$ to choose the best (lowest) convergence rate
 
 $$
 \begin{split}
@@ -270,7 +270,7 @@ $$
 
 ## Convergence analysis
 
-So, we have a linear convergence in domain with rate $\frac{\kappa - 1}{\kappa + 1} = 1 - \frac{2}{\kappa + 1}$, where $\kappa = \frac{L}{\mu}$ is sometimes called *condition number* of the quadratic problem.
+So, we have a linear convergence in the domain with rate $\frac{\kappa - 1}{\kappa + 1} = 1 - \frac{2}{\kappa + 1}$, where $\kappa = \frac{L}{\mu}$ is sometimes called *condition number* of the quadratic problem.
 
 | $\kappa$ | $\rho$ | Iterations to decrease domain gap $10$ times | Iterations to decrease function gap $10$ times |
 |:-:|:-:|:-----------:|:-----------:|
@@ -291,9 +291,9 @@ PL inequality holds if the following condition is satisfied for some $\mu > 0$,
 $$
 \Vert \nabla f(x) \Vert^2 \geq 2 \mu (f(x) - f^*) \quad \forall x
 $$
-It is interesting, that Gradient Descent algorithm has
+It is interesting, that the Gradient Descent algorithm might converge linearly even without convexity.
 
-The following functions satisfy the PL-condition, but are not convex. [\faPython Link to the code](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/PL_function.ipynb)
+The following functions satisfy the PL condition but are not convex. [\faPython Link to the code](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/PL_function.ipynb)
 
 :::: {.columns}
 
@@ -362,12 +362,12 @@ $$
 f(x^{k+1}) \leq f(x^{k}) - \alpha \mu (f(x^{k}) - f^*).
 $$
 
-The conclusion follows after subtracting $f^*$ on both sides of this inequality, and using recursion.
+The conclusion follows after subtracting $f^*$ on both sides of this inequality and using recursion.
 
 ## Any $\mu$-strongly convex differentiable function is a PL-function
 
 :::{.callout-theorem}
-If a function $f(x)$ is differentiable and $\mu$-strongly convex, then it is a PL-function.
+If a function $f(x)$ is differentiable and $\mu$-strongly convex, then it is a PL function.
 :::
 
 **Proof**
@@ -377,13 +377,10 @@ If a function $f(x)$ is differentiable and $\mu$-strongly convex, then it is a P
 ::: {.column width="60%"}
 
 By first order strong convexity criterion:
-
 $$
 f(y) \geq f(x) + \nabla f(x)^T(y-x) + \dfrac{\mu}{2}\|y-x\|_2^2
 $$
-
 Putting $y = x^*$:
-
 $$
 \begin{split}
 \uncover<+->{ f(x^*) &\geq f(x) + \nabla f(x)^T(x^*-x) + \dfrac{\mu}{2}\|x^*-x\|_2^2 \\ }
@@ -417,7 +414,7 @@ $$
 
 . . .
 
-which is exactly PL-condition. It means, that we already have linear convergence proof for any strongly convex function.
+which is exactly the PL condition. It means, that we already have linear convergence proof for any strongly convex function.
 
 # Smooth convex case
 
@@ -441,7 +438,7 @@ $$
 
 ## Convergence analysis
 
-* As it was before, we firstly use smoothness:
+* As it was before, we first use smoothness:
     $$
     \begin{split}
     f(x^{k+1})& \leq f(x^{k}) + \langle \nabla f(x^{k}), x^{k+1}-x^{k} \rangle +\frac{L}{2} \| x^{k+1}-x^{k}\|^2\\
@@ -452,7 +449,7 @@ $$
     \end{split}
     $$ {#eq-gd-cs-smoothness}
     Typically, for the convergent gradient descent algorithm the higher the learning rate the faster the convergence. That is why we often will use $\alpha = \frac1L$.
- * After it we add convexity:
+ * After that we add convexity:
     $$
     \begin{split}
     \uncover<+->{ f(y) &\geq f(x) + \langle \nabla f(x), y-x\rangle} \uncover<+->{ \text{ with } y = x^*, x = x^k} \\
@@ -465,17 +462,17 @@ $$
 * Now we put @eq-gd-cs-convexity to @eq-gd-cs-smoothness:
     $$
     \begin{split}
-    f(x^{k+1}) &\leq f(x^{k}) -\frac{\alpha}{2} \Vert \nabla f(x^{k})\Vert^2 \leq f^* + \langle \nabla f(x^k), x^k-x^*\rangle - \frac{\alpha}{2} \Vert \nabla f(x^{k})\Vert^2 \\
-    &= f^* + \langle \nabla f(x^k), x^k-x^* - \frac{\alpha}{2} \nabla f(x^{k})\rangle \\
-    &= f^* + \frac{1}{2 \alpha}\left\langle \alpha \nabla f(x^k), 2\left(x^k-x^* - \frac{\alpha}{2} \nabla f(x^{k})\right)\right\rangle
+    \uncover<+->{ f(x^{k+1}) &\leq f(x^{k}) -\frac{\alpha}{2} \Vert \nabla f(x^{k})\Vert^2 \leq f^* + \langle \nabla f(x^k), x^k-x^*\rangle - \frac{\alpha}{2} \Vert \nabla f(x^{k})\Vert^2 \\ }
+    \uncover<+->{ &= f^* + \langle \nabla f(x^k), x^k-x^* - \frac{\alpha}{2} \nabla f(x^{k})\rangle \\ }
+    \uncover<+->{ &= f^* + \frac{1}{2 \alpha}\left\langle \alpha \nabla f(x^k), 2\left(x^k-x^* - \frac{\alpha}{2} \nabla f(x^{k})\right)\right\rangle }
     \end{split}
     $$
     \uncover<+->{ Let $a = x^k-x^*$ and $b =x^k-x^* - \alpha\nabla f(x^k)$.} \uncover<+->{Then $a+b = \alpha \nabla f(x^k)$ and $a-b=2\left(x^k-x^* - \frac{\alpha}{2} \nabla f(x^{k})\right)$.}
     $$
     \begin{split}
-    f(x^{k+1}) &\leq f^* + \frac{1}{2 \alpha}\left[ \|x^k-x^*\|_2^2 - \|x^k-x^* - \alpha\nabla f(x^k)\|_2^2\right] \\
-    &\leq f^* + \frac{1}{2 \alpha}\left[ \|x^k-x^*\|_2^2 - \|x^{k+1}-x^*\|_2^2\right] \\
-    2\alpha \left(f(x^{k+1}) - f^*\right) &\leq \|x^k-x^*\|_2^2 - \|x^{k+1}-x^*\|_2^2
+    \uncover<+->{ f(x^{k+1}) &\leq f^* + \frac{1}{2 \alpha}\left[ \|x^k-x^*\|_2^2 - \|x^k-x^* - \alpha\nabla f(x^k)\|_2^2\right] \\ }
+    \uncover<+->{ &\leq f^* + \frac{1}{2 \alpha}\left[ \|x^k-x^*\|_2^2 - \|x^{k+1}-x^*\|_2^2\right] \\ }
+    \uncover<+->{ 2\alpha \left(f(x^{k+1}) - f^*\right) &\leq \|x^k-x^*\|_2^2 - \|x^{k+1}-x^*\|_2^2 }
     \end{split}
     $$
 * Now suppose, that the last line is defined for some index $i$ and we sum over $i \in [0, k-1]$. Almost all summands will vanish due to the telescopic nature of the sum:
@@ -494,8 +491,8 @@ $$
 * Now putting it to @eq-gd-sc-telescopic:
     $$
     \begin{split}
-    2\alpha kf(x^k) - 2\alpha kf^* &\leq 2\alpha \sum\limits_{i=0}^{k-1} \left(f(x^{i+1}) - f^*\right)  \leq \|x^0-x^*\|_2^2 \\
-    f(x^k) - f^* &\leq \frac{\|x^0-x^*\|_2^2}{2 \alpha k} \leq  \frac{L \|x^0-x^*\|_2^2}{2 k}
+    \uncover<+->{ 2\alpha kf(x^k) - 2\alpha kf^* &\leq 2\alpha \sum\limits_{i=0}^{k-1} \left(f(x^{i+1}) - f^*\right)  \leq \|x^0-x^*\|_2^2 \\ }
+    \uncover<+->{ f(x^k) - f^* &\leq \frac{\|x^0-x^*\|_2^2}{2 \alpha k} } \uncover<+->{ \leq  \frac{L \|x^0-x^*\|_2^2}{2 k} }
     \end{split}
     $$
 
@@ -513,7 +510,7 @@ $$
     &= x^0 - \sum\limits_{i=0}^k \alpha^{k-i} \nabla f(x^{k-i})
     \end{aligned}
     $$
-* Consider a family of first order methods, where
+* Consider a family of first-order methods, where
     $$
     x^{k+1} \in x^0 + \text{span} \left\{\nabla f(x^{0}), \nabla f(x^{1}), \ldots, \nabla f(x^{k})\right\}
     $$ {#eq-fom}
@@ -530,7 +527,7 @@ $$
 . . .
 
 * No matter what gradient method you provide, there is always a function $f$ that, when you apply your gradient method on minimizing such $f$, the convergence rate is lower bounded as $\mathcal{O}\left(\frac{1}{k^2}\right)$.
-* The key of the proof is to explicitly build a special function $f$.
+* The key to the proof is to explicitly build a special function $f$.
 
 ## Nesterov’s worst function
 
@@ -552,7 +549,7 @@ $$
     $$
     x^T A x = x[1]^2 + x[d]^2 + \sum_{i=1}^{d-1} (x[i] - x[i+1])^2,
     $$
-    and, from this expression, it's a simple to check $0 \preceq A \preceq 4I$.
+    and, from this expression, it's simple to check $0 \preceq A \preceq 4I$.
 * Define the following $L$-smooth convex function
     $$
     f(x) = \frac{L}{8} x^T A x - \frac{L}{4}\langle x, e_1 \rangle.
@@ -572,5 +569,3 @@ $$
     $$
 :::
 ::::
-
-
