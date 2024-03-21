@@ -6,7 +6,7 @@ toc: true
 
 ### Linear algebra basics
 
-1. Prove that the matrix $xy^T$ has rank equals to one.
+1. Prove that the matrix $xy^T$ has rank equals to one or zero.
 
 1. Find SVD of the following matrices:
 
