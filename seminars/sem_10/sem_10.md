@@ -171,9 +171,9 @@ $$
 $$
 \text{NAG}_z (\beta,p,y,v) = 
 \left[\begin{gathered}
-      \text{NAG}_z (\beta(1-\alpha\lambda_1),[p]_1,[y]_1, [v]_1)\\
+      \text{HBM}_z (\beta(1-\alpha\lambda_1),[p]_1,[y]_1, [v]_1)\\
       \vdots\\
-      \text{NAG}_z (\beta(1-\alpha\lambda_n),[p]_n,[y]_n, [v]_n)\\
+      \text{HBM}_z (\beta(1-\alpha\lambda_n),[p]_n,[y]_n, [v]_n)\\
     \end{gathered}
 \right]
 $$
