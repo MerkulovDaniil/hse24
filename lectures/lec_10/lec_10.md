@@ -278,7 +278,7 @@ $$
 
 The method will be convergent if $\rho(M) < 1$, and the optimal parameters can be computed by optimizing the spectral radius
 $$
-\alpha^*, \beta^* = \arg \min_{\alpha, \beta} \max_{\lambda \in [\mu, L]} \rho(M) \quad \alpha^* = \dfrac{4}{(\sqrt{L} + \sqrt{\mu})^2}; \quad \beta^* = \left(\dfrac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^2.
+\alpha^*, \beta^* = \arg \min_{\alpha, \beta} \max_{i} \rho(M_i) \quad \alpha^* = \dfrac{4}{(\sqrt{L} + \sqrt{\mu})^2}; \quad \beta^* = \left(\dfrac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^2.
 $$
 
 . . .
