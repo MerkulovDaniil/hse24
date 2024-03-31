@@ -177,7 +177,7 @@ $$
 Let's introduce the idea of momentum, proposed by Polyak in 1964. Recall that the momentum update is
 
 $$
-x^{k+1} = x^k - \alpha \nabla f(x^k) + \beta (x^k - x_{k-1}).
+x^{k+1} = x^k - \alpha \nabla f(x^k) + \beta (x^k - x^{k-1}).
 $$
 
 . . .
