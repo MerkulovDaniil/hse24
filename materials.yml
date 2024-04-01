@@ -80,8 +80,9 @@
 
 - title: Субградиент. Субдифференциал. Субградиентный спуск. Теоремы сходимости в негладком случае. Особенности работы градиентного метода в практических негладких задачах.
   number: 11
-  #materials: /presentations/9.pdf
-  # notes: /notes/9.pdf
+  materials: /lectures/lec_11/lec_11.pdf
+  notes: /notes/11.pdf
+  seminar: /seminars/sem_11/sem_11.pdf
   youtube: 
   download: 
 

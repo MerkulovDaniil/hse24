@@ -68,13 +68,13 @@ There are four possibilities:
 
 ::: {.column width="50%"}
 
-![Simplex Algorithm main notions.](simplex_algo_basis.pdf){width=150}
+![Simplex Algorithm main notions.](LP_basis.pdf){width=150}
 
 :::
 
 ::: {.column width="50%"}
 
-![Simplex Algorithm basis change.](simplex_algo_basis_change.pdf){width=150}
+![Simplex Algorithm basis change.](LP_change.pdf){width=150}
 
 :::
 
@@ -95,13 +95,13 @@ There are four possibilities:
 
 ::: {.column width="50%"}
 
-![Simplex Algorithm main notions.](simplex_algo_basis.pdf){width=150}
+![Simplex Algorithm main notions.](LP_basis.pdf){width=150}
 
 :::
 
 ::: {.column width="50%"}
 
-![Simplex Algorithm basis change.](simplex_algo_basis_change.pdf){width=150}
+![Simplex Algorithm basis change.](LP_change.pdf){width=150}
 
 :::
 
@@ -120,13 +120,13 @@ There are four possibilities:
 
 ::: {.column width="50%"}
 
-![Simplex Algorithm main notions.](simplex_algo_basis.pdf){width=150}
+![Simplex Algorithm main notions.](LP_basis.pdf){width=150}
 
 :::
 
 ::: {.column width="50%"}
 
-![Simplex Algorithm basis change.](simplex_algo_basis_change.pdf){width=150}
+![Simplex Algorithm basis change.](LP_change.pdf){width=150}
 
 :::
 
@@ -148,13 +148,13 @@ There are four possibilities:
 
 ::: {.column width="50%"}
 
-![Simplex Algorithm main notions.](simplex_algo_basis.pdf){width=150}
+![Simplex Algorithm main notions.](LP_basis.pdf){width=150}
 
 :::
 
 ::: {.column width="50%"}
 
-![Simplex Algorithm basis change.](simplex_algo_basis_change.pdf){width=150}
+![Simplex Algorithm basis change.](LP_change.pdf){width=150}
 
 :::
 

@@ -23,7 +23,7 @@ For a domain set $E \in \mathbb{R}^n$ and a function $f: E \rightarrow \mathbb{R
 $$  f(y) \geq f(x) + g^T(y-x)$$ 
 * A set $\partial f(x)$ is called **subdifferential** of the function $f$ at $x\in E$ if:
 $$ \partial f(x)  = \{g \in \mathbb{R}^n \,|\, f(y) \geq f(x) + g^T(y-x)\} \forall y \in E$$
-* $f(\cdot)$ is called **subdifferentiable** at point $x \in E$ if $\partial f(x) \neq \empty$ 
+* $f(\cdot)$ is called **subdifferentiable** at point $x \in E$ if $\partial f(x) \neq \emptyset$ 
 
 ::: 
 
