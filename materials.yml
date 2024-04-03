@@ -76,15 +76,15 @@
   notes: /notes/10.pdf
   seminar: /seminars/sem_10/sem_10.pdf
   youtube: https://youtu.be/yv4mls_fb_c
-  download: 
+  download: https://disk.yandex.com/i/dJEiyp6bvnoZOQ
 
 - title: Субградиент. Субдифференциал. Субградиентный спуск. Теоремы сходимости в негладком случае. Особенности работы градиентного метода в практических негладких задачах.
   number: 11
   materials: /lectures/lec_11/lec_11.pdf
   notes: /notes/11.pdf
   seminar: /seminars/sem_11/sem_11.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/HzaEACIVcrU
+  download: https://disk.yandex.com/i/s6rAEBb5gWbdiw
 
 - title: Метод сопряженных градиентов.
   number: 12
