@@ -88,10 +88,11 @@
 
 - title: Метод сопряженных градиентов.
   number: 12
-  #materials: /presentations/10.pdf
-  # notes: /notes/10.pdf
-  youtube: 
-  download: 
+  materials: /lectures/lec_12/lec_12.pdf
+  notes: /notes/12.pdf
+  seminar: /seminars/sem_12/sem_12.pdf
+  # youtube: https://youtu.be/HzaEACIVcrU
+  # download: https://disk.yandex.com/i/s6rAEBb5gWbdiw
 
 - title: Проксимальный градиентный метод. Метод Франк-Вульфа. Метод проекции градиента.
   number: 13
