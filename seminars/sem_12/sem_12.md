@@ -29,7 +29,7 @@ $$
 ::: {.column width="40%"}
 Optimality conditions:
 $$
-\Delta f(x^{*}) = Ax^* - b = 0 \iff Ax^* = b
+\nabla f(x^{*}) = Ax^* - b = 0 \iff Ax^* = b
 $$
 :::
 ::::
@@ -165,7 +165,7 @@ $$
 . . .
 
 $\text{Numerator: }r_{k+1}^{\top} A d_k=\frac{1}{\alpha_k} r_{k+1}^{\top}\left(r_k-r_{k+1}\right)= [r_{k+1}^{\top} r_{k} = 0] = -\frac{1}{\alpha_k} r_{k+1}^{\top} r_{k+1}$
-$\text{Denominator: }d_k^{\top} A d_k=\left(r_k+\beta_{k-1} p_{k-1}\right)^{\top} {A} {p}_k=\frac{1}{\alpha_k} {r}_k^{\top}\left({r}_k-{r}_{k+1}\right)=\frac{1}{\alpha_k} {r}_k^{\top} {r}_k$
+$\text{Denominator: }d_k^{\top} A d_k=\left(r_k+\beta_{k-1} d_{k-1}\right)^{\top} {A} {d}_k=\frac{1}{\alpha_k} {r}_k^{\top}\left({r}_k-{r}_{k+1}\right)=\frac{1}{\alpha_k} {r}_k^{\top} {r}_k$
 
 . . .
 
