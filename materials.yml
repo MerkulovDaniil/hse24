@@ -94,31 +94,31 @@
   # youtube: https://youtu.be/HzaEACIVcrU
   # download: https://disk.yandex.com/i/s6rAEBb5gWbdiw
 
-- title: Проксимальный градиентный метод. Метод Франк-Вульфа. Метод проекции градиента.
+- title: Градиентные методы в условных задачах оптимизации - метод проекции градиента. Метод Франк - Вульфа. Идея метода зеркального спуска.
   number: 13
   #materials: /presentations/11.pdf
   # notes: /notes/11.pdf
   youtube: 
   download: 
 
-- title: Метод натурального градиента. Метод зеркального спуска. K-FAC.
+- title: Проксимальный градиентный метод.
   number: 14
+  #materials: /presentations/11.pdf
+  # notes: /notes/11.pdf
+  youtube: 
+  download: 
+
+- title: Метод натурального градиента. Метод зеркального спуска. K-FAC.
+  number: 15
   #materials: /presentations/12.pdf
   # notes: /notes/12.pdf
   youtube: 
   download: 
 
 - title: Метод Ньютона. Квазиньютоновские методы.
-  number: 15
+  number: 16
   #materials: /presentations/13.pdf
   # notes: /notes/13.pdf
-  youtube: 
-  download: 
-
-- title: Введение в методы внутренней точки.
-  number: 16
-  #materials: /presentations/14.pdf
-  # notes: /notes/14.pdf
   youtube: 
   download: 
 
