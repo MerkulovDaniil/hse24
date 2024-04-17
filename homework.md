@@ -6,15 +6,15 @@ toc: true
 
 ### Linear algebra basics
 
-1. Prove that the matrix $xy^T$ has rank equals to one.
+1. Prove that the rank of the matrix $xy^T$ is equal to one.
 
-1. Find SVD of the following matrices:
+1. Determine the Singular Value Decompositions (SVDs) of the matrices listed below:
 
-    * $A = \begin{bmatrix} 1\\2\\3 \end{bmatrix}$ 
-    * $A = \begin{bmatrix} 1 & 4\\4 & 8\\3 & 8 \end{bmatrix}$ 
-    * $A = \begin{bmatrix} 0 & 0\\x & 0\\0 & 0 \end{bmatrix}$, where $x$ is the sum of your birthdate numbers (day + month)
+    * $A = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}$ 
+    * $A = \begin{bmatrix} 1 & 4 \\ 4 & 8 \\ 3 & 8 \end{bmatrix}$ 
+    * $A = \begin{bmatrix} 0 & 0 \\ x & 0 \\ 0 & 0 \end{bmatrix}$, where $x$ represents the sum of your birthdate numbers (day + month)
 
-1. Assume we have a set of data points $x^{(i)}\in\mathbb{R}^{n},\,i=1,\dots,m$, and decide to represent this data as a matrix
+1. Consider a dataset comprising data points $x^{(i)} \in \mathbb{R}^n$ for $i = 1, \ldots, m$, which are organized into a matrix $X$ as shown below:
 
     $$
     X =
@@ -25,53 +25,51 @@ toc: true
         \end{pmatrix} \in \mathbb{R}^{n \times m}.
     $$
 
-    We suppose that $\text{rank}\,X = r$.
+    In the fields of applied statistics and machine learning, it is common practice to normalize data. A widely used normalization technique involves subtracting the estimated mean $\mu$ and dividing by the square root of the estimated variance $\sigma^2$, as follows:
 
-    In the problem below, we ask you to find the rank of some matrix $M$ related to $X$.
-    In particular, you need to find relation between $\text{rank}\,X = r$ and $\text{rank}\,M$, e.g., that the rank of $M$ is always larger/smaller than the rank of $X$ or that $\text{rank}\,M = \text{rank}\,X \big / 35$.
-    Please support your answer with legitimate arguments and make the answer as accurate as possible.
-
-    Note that depending on the structure of the matrix $X$, border cases are possible.
-    Make sure to cover them in your answer correctly.
-
-    In applied statistics and machine learning, data is often normalized.
-    One particularly popular strategy is to subtract the estimated mean $\mu$ and divide by the square root of the estimated variance $\sigma^2$. i.e.
-    
     $$
-    x \rightarrow (x - \mu) \big / \sigma.
+    x \rightarrow \frac{x - \mu}{\sigma}.
     $$
 
-    After the normalization, we get a new matrix
-    
+    Applying this normalization to the matrix $X$ results in a new matrix $Y$, defined by:
+
     $$
-        \begin{split}
-        Y &:=
+        Y =
         \begin{pmatrix}
             | & & | \\
-            y^{(1)} & \dots & y^{(m)} \\
+            y^{(1)} & \cdots & y^{(m)} \\
             | & & | \\
-        \end{pmatrix},\\
-        y^{(i)} &:= \frac{x^{(i)} - \frac{1}{m}\sum_{i=1}^{m} x^{(i)}}{\sqrt{\frac{1}{m}\sum_{i=1}^{m} \left(x^{(i)}\right)^2 - \left(\frac{1}{m}\sum_{i=1}^{m} x^{(i)}\right)^2}}.
-        \end{split}
+        \end{pmatrix},
     $$
-    
-    What is the rank of $Y$ if $\text{rank} \; X = r$?
 
-1. **Image Compression with Truncated SVD** Explore image compression using Truncated Singular Value Decomposition (SVD). Understand how varying the number of singular values affects the quality of the compressed image.
-    Implement a Python script to compress a grayscale image using Truncated SVD and visualize the compression quality.
+    where
+
+    $$
+        y^{(i)} = \frac{x^{(i)} - \frac{1}{m}\sum_{i=1}^{m} x^{(i)}}{\sqrt{\frac{1}{m}\sum_{i=1}^{m} \left(x^{(i)}\right)^2 - \left(\frac{1}{m}\sum_{i=1}^{m} x^{(i)}\right)^2}}.
+    $$
+
+    The question is: What is the rank of $Y$ given that the rank of $X$ is $r$?
+
+    Your response should consider how the rank of $Y$ compares to the rank of $X$, indicating whether the rank of $Y$ is always greater, always less, or equal to the rank of $X$ multiplied by a certain factor, for example, $\text{rank}\,Y = 35 \ \text{rank}\,X$.
+
+    Please provide a well-reasoned argument to support your answer, ensuring it is as precise as possible. Also, consider any potential edge cases based on the structure of the matrix $X$ and address them appropriately in your explanation.
+
+1. **Image Compression with Truncated SVD.** Investigate the application of Truncated Singular Value Decomposition (SVD) in image compression. The goal is to understand how the number of singular values retained in the compression process influences the quality of the resulting compressed image.
     
-    * **Truncated SVD**: Decomposes an image $A$ into $U, S,$ and $V$ matrices. The compressed image is reconstructed using a subset of singular values.
+    * **Truncated SVD**: A technique that decomposes an image matrix $A$ into three matrices $U$, $S$, and $V$, reconstructing the image using only a subset of the most significant singular values for compression.
     * **Mathematical Representation**: 
     $$
     A \approx U_k \Sigma_k V_k^T
     $$
-        * $U_k$ and $V_k$ are the first $k$ columns of $U$ and $V$, respectively.
-        * $\Sigma_k$ is a diagonal matrix with the top $k$ singular values.
-        * **Relative Error**: Measures the fidelity of the compressed image compared to the original. 
+        * $U_k$ and $V_k$ are the first $k$ columns of matrices $U$ and $V$, respectively.
+        * $\Sigma_k$ is a diagonal matrix containing the top $k$ singular values.
+        * **Relative Error**: A metric to quantify the accuracy of compression, comparing the compressed image $A_k$ to the original image $A$, calculated as: 
     
         $$
         \text{Relative Error} = \frac{\| A - A_k \|}{\| A \|}
         $$
+
+    Develop a Python script that applies Truncated SVD for compressing a grayscale image. The script should enable varying the number $k$ of singular values used in the reconstruction to observe its effect on image quality. Visualize the compressed images alongside their relative errors to evaluate the trade-off between compression and image fidelity.
 
     ```python
     import matplotlib.pyplot as plt
@@ -156,37 +154,45 @@ toc: true
 
 ### Convergence rates
 
-1. Determine the convergence or divergence of the given sequences
+1. Determine the convergence or divergence of the given sequences:
 
     * $r_{k} = k^{\frac{1}{2}}$.
     * $r_{k} = \frac{1}{\sqrt{k}}$.
     * $r_{k} = 0.808^k$.
     * $r_{k} = 0.808^{2^k}$.
 
-1. Determine the following sequence $\{r_k\}$ by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally, find out whether there is quadratic convergence.
+1. Determine the convergence rate (linear, sublinear, superlinear) of the following sequence $\{r_k\}$. 
 
     $$
-    r_k = \dfrac{1}{k!}
+    r_k = \dfrac{1}{k!}.
     $$
 
-1. Determine the convergence or divergence of a given sequence $r_k =\begin{cases} \frac{1}{k}, & \text{if } k\text{ is even} \\ e^{-k}, & \text{if } k\text{ is odd} \end{cases}$.
+    In the case of superlinear convergence, additionally, determine whether the convergence is quadratic.
 
-1. Determine the convergence or divergence of a given sequence $r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, & \text{if } k\text{ is even} \\ \frac{r_{k-1}}{k}, & \text{if } k\text{ is odd} \end{cases}$.
+1. Determine the convergence or divergence of the given sequence:
 
+    $$
+    r_k =\begin{cases} \frac{1}{k}, & \text{if } k\text{ is even} \\ e^{-k}, & \text{if } k\text{ is odd} \end{cases}
+    .
+    $$
 
+1. Determine the convergence or divergence of the given sequence:
+    
+    $$
+    r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, & \text{if } k\text{ is even} \\ \frac{r_{k-1}}{k}, & \text{if } k\text{ is odd} \end{cases}
+    .
+    $$
 
+1. Let $\{r_k\}$ be a sequence of non-negative numbers defined by $r_{k+1} = Mr_k^2$, where $M > 0$ and $r_0 \ge 0$. Establish a necessary and sufficient condition on $M$ and $r_0$ under which the sequence $r_k$ will converge to zero. Additionally, determine the rate of convergence.
 
-1. Let $\{r_k\}$ be a sequence of non-negative numbers given as $r_{k+1} = Mr_k^2$, where $M > 0$, $r_0 \geq 0$. Establish a necessary and sufficient condition on $M$ and $r_0$ under which the sequence $r_k$ will converge to zero. What is the rate of convergence?
-
-
-1. Let $\left\{ r_k \right\}_{k=m}^\infty$ be a sequence of non-negative numbers and let $s > 0$ be some integer. Prove that sequence $\left\{ r_k \right\}_{k=m+s}^\infty$ is linearly convergent with constant $q$ if and only if a the sequence $\left\{ r_k \right\}_{k=m}^\infty$ converged linearly with constant $q$.
+1. Let $\left\{ r_k \right\}_{k=1}^\infty$ be a sequence of non-negative numbers and let $s > 1$ be some integer. Prove that the sequence $\left\{ r_k \right\}_{k=s}^\infty$ is linearly convergent with constant $q$ if and only if the sequence $\left\{ r_k \right\}_{k=1}^\infty$ converges linearly with constant $q$.
 
 ### Line search
 
-1. Consider a quadratic function $f: \mathbb{R}^n \rightarrow \mathbb{R}$, and let us start from a point $x_k \in \mathbb{R}^n$ moving in the direction of the antigradient $-\nabla f(x_k)$. Show that the minimum of $f$ along this direction as a function of the step size $\alpha$, for a decreasing function at $x_k$, satisfies Armijo's condition for any $c_1$ in the range $0 \leq c_1 \leq \frac{1}{2}$. Specifically, demonstrate that the following inequality holds at the optimal $\alpha^*$:
+1. Consider a quadratic function $f: \mathbb{R}^n \rightarrow \mathbb{R}$, starting from a point  $x_k \in \mathbb{R}^n$ and moving in the direction of the antigradient $-\nabla f(x_k)$. Show that the minimum of $f$ along this direction as a function of the step size $\alpha$, for a decreasing function at $x_k$, satisfies Armijo's condition for any $c_1$ in the range $0 \leq c_1 \leq \frac{1}{2}$. Specifically, demonstrate that the following inequality holds at the optimal $\alpha^*$:
 
    $$
-   \varphi(\alpha) = f(x_{k+1}) = f(x_k - \alpha \nabla f(x_k)) \leq f(x_k) - c_1 \alpha \|\nabla f(x_k)\|_2^2
+   \varphi(\alpha) = f(x_{k+1}) = f(x_k - \alpha \nabla f(x_k)) \leq f(x_k) - c_1 \alpha \|\nabla f(x_k)\|_2^2.
    $$
 
 1. **Implementing and Testing Line Search Conditions in Gradient Descent**
@@ -194,8 +200,8 @@ toc: true
     $$
     x_{k+1} = x_k - \alpha \nabla f(x_k)
     $$
-    
-    In this assignment, you will modify an existing Python code for gradient descent to include various line search conditions. You will test these modifications on two functions: a quadratic function and the Rosenbrock function. The main objectives are to understand how different line search strategies influence the convergence of the gradient descent algorithm and to compare their efficiencies based on the number of function evaluations.
+
+    In this assignment, you will enhance an existing Python code for the gradient descent algorithm by incorporating various line search strategies. You'll apply these enhancements to two specific functions: a quadratic function and the Rosenbrock function. The primary goals are to explore how different line search techniques affect the convergence behavior of the gradient descent method and to evaluate their efficiency based on the number of function evaluations required.
 
     ```python
     import numpy as np
@@ -281,9 +287,9 @@ toc: true
 
     ![The code above plots this](linesearch.svg)
 
-    Start by reviewing the provided Python code. This code implements gradient descent with a fixed step size and a backtracking line search on a quadratic function. Familiarize yourself with how the gradient descent function and the step size strategies are implemented.
+    Begin by examining the provided Python code, which implements the gradient descent method with both a fixed step size and a backtracking line search for a quadratic function. Get acquainted with the implementation details of the gradient descent function and the step size determination strategies.
 
-    1. Modify the gradient descent function to include the following line search conditions:
+    1. Modify the gradient descent function to incorporate the following line search conditions:
         
         a. Sufficient Decrease Condition
         b. Curvature Condition
@@ -291,30 +297,33 @@ toc: true
         d. Wolfe Condition
         e. Dichotomy
         
-        Test your modified gradient descent algorithm with the implemented line search conditions on the provided quadratic function. Plot the trajectories over iterations for each condition. Choose and specify hyperparameters for inexact line search condition. Choose and specify the termination criterion. Start from the point $x_0 = (-1, 2)^T$.
+        Apply your updated gradient descent algorithm with these line search conditions to the given quadratic function. For each condition, plot the iteration trajectories. Select and specify the hyperparameters for the inexact line search conditions and define the termination criteria. Use the initial point $x_0 = (-1, 2)^T$.
 
-    1. Compare these 7 methods from the budget perspective. Plot the graph of function value from the number of function evaluations for each method on the same graph.
+    1. Compare the seven methods (including the fixed step size and backtracking line search) from the perspective of computational budget. Plot a graph showing the function values against the number of function evaluations for each method on the same graph.
 
-    1. Plot trajectory for another function with the same set of methods
+    1. Plot the trajectory for another function with the same set of methods
     
         $$
         f(x_1, x_2) =  10(x_2 − x_1^2)^2 + (x_1 − 1)^2
         $$
 
-        with $x_0 = (-1, 2)^T$. You might need to adjust hyperparameters.
+        starting from $x_0 = (-1, 2)^T$. It may be necessary to adjust the hyperparameters for this function.
 
-    1. Plot the same function value from the number of function calls for this experiment.
-
+    1. For the previous experiment, plot the function value against the number of function calls for each method.
 
 ### Matrix calculus
 
 1. Given a matrix $A$ of size $m \times n$ and a vector $x$ of size $n \times 1$, compute the gradient of the function $f(x) = \text{tr}(A^T A x x^T)$ with respect to $x$.
+
 1. Find the gradient $\nabla f(x)$ and hessian $f''(x)$, if $f(x) = \dfrac{1}{2} \Vert Ax - b\Vert^2_2$.
+
 1. Find the gradient $\nabla f(x)$ and hessian $f''(x)$, if 
     $$
     f(x) = \frac1m \sum\limits_{i=1}^m \log \left( 1 + \exp(a_i^{T}x) \right) + \frac{\mu}{2}\Vert x\Vert _2^2, \; a_i, x \in \mathbb R^n, \; \mu>0
     $$
-1. Compute the gradient $\nabla_A f(A)$ of the trace of the matrix exponential function $f(A) = \text{tr}(e^A)$ with respect to $A$. Hint: hint: Use the definition of the matrix exponential. Use the definition of the differential $df = f(A + dA) - f(A) + o(\Vert dA \Vert)$ with the limit $\Vert dA \Vert \to 0$.
+
+1. Compute the gradient $\nabla_A f(A)$ of the trace of the matrix exponential function $f(A) = \text{tr}(e^A)$ with respect to $A$. Hint: Use the definition of the matrix exponential. Use the definition of the differential $df = f(A + dA) - f(A) + o(\Vert dA \Vert)$ with the limit $\Vert dA \Vert \to 0$.
+
 1. Calculate the first and the second derivative of the following function $f : S \to \mathbb{R}$
 
     $$
@@ -323,6 +332,7 @@ toc: true
 
 
     where $A \in \mathbb{R}^{n \times n}, S := \{t \in \mathbb{R} : \text{det}(A − tI_n) \neq 0\}$.
+
 1. Find the gradient $\nabla f(X)$, if $f(X) = \text{tr}\left( AX^2BX^{-\top} \right)$.
 
 ### Automatic differentiation and jax (2 more problems coming)
