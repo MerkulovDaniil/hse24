@@ -74,6 +74,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -205,6 +207,11 @@ window.Quarto = {
   <li><a href="#automatic-differentiation-and-jax-2-more-problems-coming" id="toc-automatic-differentiation-and-jax-2-more-problems-coming" class="nav-link" data-scroll-target="#automatic-differentiation-and-jax-2-more-problems-coming">Automatic differentiation and jax (2 more problems coming)</a></li>
   <li><a href="#convexity" id="toc-convexity" class="nav-link" data-scroll-target="#convexity">Convexity</a></li>
   <li><a href="#optimality-conditions" id="toc-optimality-conditions" class="nav-link" data-scroll-target="#optimality-conditions">Optimality conditions</a></li>
+  <li><a href="#linear-programming" id="toc-linear-programming" class="nav-link" data-scroll-target="#linear-programming">Linear programming</a></li>
+  <li><a href="#gradient-descent" id="toc-gradient-descent" class="nav-link" data-scroll-target="#gradient-descent">Gradient Descent</a></li>
+  <li><a href="#accelerated-methods" id="toc-accelerated-methods" class="nav-link" data-scroll-target="#accelerated-methods">Accelerated methods</a></li>
+  <li><a href="#subgradient-descent" id="toc-subgradient-descent" class="nav-link" data-scroll-target="#subgradient-descent">Subgradient Descent</a></li>
+  <li><a href="#conjugate-gradients" id="toc-conjugate-gradients" class="nav-link" data-scroll-target="#conjugate-gradients">Conjugate gradients</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -747,6 +754,437 @@ X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
 </span></p>
 <p>where <span class="math inline">\alpha &gt; 0</span> is a parameter. This auxiliary function consists of the objective plus the penalty term <span class="math inline">\alpha \Vert Ax - b\Vert_2^2</span>. The idea is that a minimizer of the auxiliary function, <span class="math inline">\tilde{x}</span>, should be an approximate solution to the original problem. Intuition suggests that the larger the penalty weight <span class="math inline">\alpha</span>, the better the approximation <span class="math inline">\tilde{x}</span> to a solution of the original problem. Suppose <span class="math inline">\tilde{x}</span> is a minimizer of <span class="math inline">\phi(x)</span>. Show how to find, from <span class="math inline">\tilde{x}</span>, a dual feasible point for the original problem. Find the corresponding lower bound on the optimal value of the original problem.</p></li>
 </ol>
+</section>
+<section id="linear-programming" class="level3">
+<h3 class="anchored" data-anchor-id="linear-programming">Linear programming</h3>
+<ol type="1">
+<li><p><strong>📱🎧💻 Covers manufacturing.</strong> Lyzard Corp is producing covers for the following products:</p>
+<ul>
+<li>📱 phones</li>
+<li>🎧 headphones</li>
+<li>💻 laptops</li>
+</ul>
+<p>The company’s production facilities are such that if we devote the entire production to headphone covers, we can produce 5000 of them in one day. If we devote the entire production to phone covers or laptop covers, we can produce 4000 or 2000 of them in one day.</p>
+<p>The production schedule is one week (6 working days), and the week’s production must be stored before distribution. Storing 1000 headphone covers (packaging included) takes up 30 cubic feet of space. Storing 1000 phone covers (packaging included) takes up 50 cubic feet of space, and storing 1000 laptop covers (packaging included) takes up 220 cubic feet of space. The total storage space available is 1500 cubic feet.</p>
+<p>Due to commercial agreements with Lyzard Corp has to deliver at least 4500 headphone covers and 4000 laptop covers per week to strengthen the product’s diffusion.</p>
+<p>The marketing department estimates that the weekly demand for headphones covers, phone, and laptop covers does not exceed 10000 14000, and 7000 units, therefore the company does not want to produce more than these amounts for headphones, phone, and laptop covers.</p>
+<p>Finally, the net profit per headphone cover, phone cover, and laptop cover are $5, $7, and $12, respectively.</p>
+<p>The aim is to determine a weekly production schedule that maximizes the total net profit.</p>
+<ol type="1">
+<li><p>Write a Linear Programming formulation for the problem. Use the following variables:</p>
+<ul>
+<li><span class="math inline">y_1</span> = number of headphones covers produced over the week,<br>
+</li>
+<li><span class="math inline">y_2</span> = number of phone covers produced over the week,<br>
+</li>
+<li><span class="math inline">y_3</span> = number of laptop covers produced over the week.</li>
+</ul></li>
+<li><p>Find the solution to the problem using <a href="http://www.pyomo.org">PyOMO</a></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install pyomo</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> sudo apt<span class="op">-</span>get install glpk<span class="op">-</span>utils <span class="op">--</span>quiet  <span class="co"># GLPK</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> sudo apt<span class="op">-</span>get install coinor<span class="op">-</span>cbc <span class="op">--</span>quiet  <span class="co"># CoinOR</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Perform the sensitivity analysis. Which constraint could be relaxed to increase the profit the most? Prove it numerically.</p></li>
+</ol></li>
+<li><p>Prove the optimality of the solution</p>
+<p><span class="math display">
+x = \left(\frac{7}{3} , 0, \frac{1}{3}\right)^T
+</span></p>
+<p>to the following linear programming problem:</p>
+<p><span class="math display">
+\begin{split}
+&amp; 9x_1 + 3x_2 + 7x_3 \to \max\limits_{x \in \mathbb{R}^3 }\\
+\text{s.t. } &amp; 2x_1 + x_2 + 3x_3 \leq 6 \\
+&amp; 5x_1 + 4x_2 + x_3 \leq 12 \\
+&amp; 3x_3 \leq 1,\\
+&amp; x_1, x_2, x_3 \geq 0
+\end{split}
+</span></p>
+<p>but you cannot use any numerical algorithm here.</p></li>
+</ol>
+</section>
+<section id="gradient-descent" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-descent">Gradient Descent</h3>
+<ol type="1">
+<li><p><strong>Convergence of Gradient Descent in non-convex smooth case</strong></p>
+<p>We will assume nothing about the convexity of <span class="math inline">f</span>. We will show that gradient descent reaches an <span class="math inline">\varepsilon</span>-substationary point <span class="math inline">x</span>, such that <span class="math inline">\|\nabla f(x)\|_2 \leq \varepsilon</span>, in <span class="math inline">O(1/\varepsilon^2)</span> iterations. Important note: you may use here Lipschitz parabolic upper bound:</p>
+<p><span id="eq-quad_ub"><span class="math display">
+f(y) \leq f(x) + \nabla f(x)^T (y-x) + \frac{L}{2} \|y-x\|_2^2, \;\;\;
+\text{for all $x,y$}.  
+  \tag{1}</span></span></p>
+<ul>
+<li><p>Plug in <span class="math inline">y = x^{k+1} = x^{k} - \alpha \nabla f(x^k), x = x^k</span> to (<a href="#eq-quad_ub" class="quarto-xref">Equation&nbsp;1</a>) to show that</p>
+<p><span class="math display">
+  f(x^{k+1}) \leq f(x^k) - \Big (1-\frac{L\alpha}{2} \Big) \alpha \|\nabla f(x^k)\|_2^2.
+  </span></p></li>
+<li><p>Use <span class="math inline">\alpha \leq 1/L</span>, and rearrange the previous result, to get</p>
+<p><span class="math display">
+  \|\nabla f(x^k)\|_2^2 \leq \frac{2}{\alpha} \left( f(x^k) - f(x^{k+1}) \right).
+  </span></p></li>
+<li><p>Sum the previous result over all iterations from <span class="math inline">1,\ldots,k+1</span> to establish</p>
+<p><span class="math display">
+  \sum_{i=0}^k \|\nabla f(x^{i})\|_2^2 \leq
+  \frac{2}{\alpha} ( f(x^{0}) - f^*).
+  </span></p></li>
+<li><p>Lower bound the sum in the previous result to get</p>
+<p><span class="math display">
+  \min_{i=0,\ldots,k} \|\nabla f(x^{i}) \|_2
+  \leq \sqrt{\frac{2}{\alpha(k+1)} (f(x^{0}) - f^*)},
+  </span> which establishes the desired <span class="math inline">O(1/\varepsilon^2)</span> rate for achieving <span class="math inline">\varepsilon</span>-substationarity.</p></li>
+</ul></li>
+<li><p><strong>How gradient descent convergence depends on the condition number and dimensionality.</strong> Investigate how the number of iterations required for gradient descent to converge depends on the following two parameters: the condition number <span class="math inline">\kappa \geq 1</span> of the function being optimized, and the dimensionality <span class="math inline">n</span> of the space of variables being optimized.</p>
+<p>To do this, for given parameters <span class="math inline">n</span> and <span class="math inline">\kappa</span>, randomly generate a quadratic problem of size <span class="math inline">n</span> with condition number <span class="math inline">\kappa</span> and run gradient descent on it with some fixed required precision. Measure the number of iterations <span class="math inline">T(n, \kappa)</span> that the method required for convergence (successful termination based on the stopping criterion).</p>
+<p>Recommendation: The simplest way to generate a random quadratic problem of size <span class="math inline">n</span> with a given condition number <span class="math inline">\kappa</span> is as follows. It is convenient to take a diagonal matrix <span class="math inline">A \in S_{n}^{++}</span> as simply the diagonal matrix <span class="math inline">A = \text{Diag}(a)</span>, whose diagonal elements are randomly generated within <span class="math inline">[1, \kappa]</span>, and where <span class="math inline">\min(a) = 1</span>, <span class="math inline">\max(a) = \kappa</span>. As the vector <span class="math inline">b \in \mathbb{R}^n</span>, you can take a vector with random elements. Diagonal matrices are convenient to consider since they can be efficiently processed with even for large values of <span class="math inline">n</span>.</p>
+<p>Fix a certain value of the dimensionality <span class="math inline">n</span>. Iterate over different condition numbers <span class="math inline">\kappa</span> on a grid and plot the dependence of <span class="math inline">T(n,\kappa)</span> against <span class="math inline">\kappa</span>. Since the quadratic problem is generated randomly each time, repeat this experiment several times. As a result, for a fixed value of <span class="math inline">n</span>, you should obtain a whole family of curves showing the dependence of <span class="math inline">T(n, \kappa)</span> on <span class="math inline">\kappa</span>. Draw all these curves in the same color for clarity (for example, red).</p>
+<p>Now increase the value of <span class="math inline">n</span> and repeat the experiment. You should obtain a new family of curves <span class="math inline">T(n',\kappa)</span> against <span class="math inline">\kappa</span>. Draw all these curves in the same color but different from the previous one (for example, blue).</p>
+<p>Repeat this procedure several times for other values of <span class="math inline">n</span>. Eventually, you should have several different families of curves - some red (corresponding to one value of <span class="math inline">n</span>), some blue (corresponding to another value of <span class="math inline">n</span>), some green, etc.</p>
+<p>Note that it makes sense to iterate over the values of the dimensionality <span class="math inline">n</span> on a logarithmic grid (for example, <span class="math inline">n = 10, n = 100, n = 1000</span>, etc.). Use the following stopping criterion: <span class="math inline">\|\nabla f(x_k)\|_2^2 \leq \varepsilon \|\nabla f(x_0)\|_2^2</span> with <span class="math inline">\varepsilon = 10^{-5}</span>. Select the starting point <span class="math inline">x_0 = (1, \ldots, 1)^T</span></p>
+<p>What conclusions can be drawn from the resulting picture?</p></li>
+</ol>
+</section>
+<section id="accelerated-methods" class="level3">
+<h3 class="anchored" data-anchor-id="accelerated-methods">Accelerated methods</h3>
+<ol type="1">
+<li><p><strong>Local Convergence of Heavy Ball Method.</strong> We will work with the heavy ball method in this problem</p>
+<p><span class="math display">
+\tag{HB}
+x_{k+1} = x_k - \alpha \nabla f(x_k) + \beta (x_k - x_{k-1})
+</span></p>
+<p>It is known, that for the quadratics the best choice of hyperparameters is <span class="math inline">\alpha^* = \dfrac{4}{(\sqrt{L} + \sqrt{\mu})^2}, \beta^* = \dfrac{(\sqrt{L} - \sqrt{\mu})^2}{(\sqrt{L} + \sqrt{\mu})^2}</span>, which ensures accelerated linear convergence for a strongly convex quadratic function.</p>
+<p>Consider the following continuously differentiable, strongly convex with parameter <span class="math inline">\mu</span>, and smooth function with parameter <span class="math inline">L</span>:</p>
+<p><span class="math display">
+f(x) =
+\begin{cases}
+\frac{25}{2}x^2, &amp; \text{if } x &lt; 1 \\
+\frac12x^2 + 24x - 12, &amp; \text{if } 1 \leq x &lt; 2 \\
+\frac{25}{2}x^2 - 24x + 36, &amp; \text{if } x \geq 2
+\end{cases}
+\quad
+\nabla f(x) =
+\begin{cases}
+25x, &amp; \text{if } x &lt; 1 \\
+x + 24, &amp; \text{if } 1 \leq x &lt; 2 \\
+25x - 24, &amp; \text{if } x \geq 2
+\end{cases}
+</span></p>
+<ol type="1">
+<li><p>How to prove, that the given function is convex? Strongly convex? Smooth?</p></li>
+<li><p>Find the constants <span class="math inline">\mu</span> and <span class="math inline">L</span> for a given function.</p></li>
+<li><p>Plot the function value for <span class="math inline">x \in [-4, 4]</span>.</p></li>
+<li><p>Run the Heavy Ball method for the function with optimal hyperparameters <span class="math inline">\alpha^* = \dfrac{4}{(\sqrt{L} + \sqrt{\mu})^2}, \beta^* = \dfrac{(\sqrt{L} - \sqrt{\mu})^2}{(\sqrt{L} + \sqrt{\mu})^2}</span> for quadratic function, starting from <span class="math inline">x_0 = 3.5</span>. If you have done everything above correctly, you should receive something like</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="heavy_ball_conv.mp4"></video></div>
+<p>You can use the following code for plotting:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.animation <span class="im">as</span> animation</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Gradient of the function</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_f(x):</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Heavy Ball method implementation</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> heavy_ball_method(alpha, beta, x0, num_iterations):</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.zeros(num_iterations <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    x_prev <span class="op">=</span> x0</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    x_curr <span class="op">=</span> x0  <span class="co"># Initialize x[1] same as x[0] to start the algorithm</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_iterations):</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        x[i] <span class="op">=</span> x_curr</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        x_new <span class="op">=</span> x_curr <span class="op">-</span> alpha <span class="op">*</span> grad_f(x_curr) <span class="op">+</span> beta <span class="op">*</span> (x_curr <span class="op">-</span> x_prev)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        x_prev <span class="op">=</span> x_curr</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        x_curr <span class="op">=</span> x_new</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    x[num_iterations] <span class="op">=</span> x_curr</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> ...</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> ...</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>alpha_star <span class="op">=</span> ...</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>beta_star <span class="op">=</span> ...</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>x0 <span class="op">=</span> ...</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>num_iterations <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the trajectory of the method</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>trajectory <span class="op">=</span> heavy_ball_method(alpha_star, beta_star, x0, num_iterations)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the figure and axes for the animation</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">3.5</span>))</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Heavy ball method with optimal hyperparameters α* β*"</span>)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Function for updating the animation</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(i):</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    ax1.clear()</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    ax2.clear()</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot f(x) and trajectory</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    x_vals <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">100</span>)</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    f_vals <span class="op">=</span> np.piecewise(x_vals, [x_vals <span class="op">&lt;</span> <span class="dv">1</span>, (x_vals <span class="op">&gt;=</span> <span class="dv">1</span>) <span class="op">&amp;</span> (x_vals <span class="op">&lt;</span> <span class="dv">2</span>), x_vals <span class="op">&gt;=</span> <span class="dv">2</span>],</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>                        [<span class="kw">lambda</span> x: <span class="fl">12.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span>, <span class="kw">lambda</span> x: <span class="fl">.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">24</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">12</span>, <span class="kw">lambda</span> x: <span class="fl">12.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">24</span> <span class="op">*</span> x <span class="op">+</span> <span class="dv">36</span>])</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    ax1.plot(x_vals, f_vals, <span class="st">'b-'</span>)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    ax1.plot(trajectory[:i], [<span class="fl">12.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">1</span> <span class="cf">else</span> <span class="fl">.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">24</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">12</span> <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">2</span> <span class="cf">else</span> <span class="fl">12.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">24</span> <span class="op">*</span> x <span class="op">+</span> <span class="dv">36</span> <span class="cf">for</span> x <span class="kw">in</span> trajectory[:i]], <span class="st">'ro-'</span>)</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add vertical dashed lines at x=1 and x=2 on the left subplot</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    ax1.axvline(x<span class="op">=</span><span class="dv">1</span>, color<span class="op">=</span><span class="st">'navy'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    ax1.axvline(x<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'navy'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot function value from iteration</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    f_trajectory <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> x <span class="kw">in</span> trajectory]</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    f_trajectory[:i] <span class="op">=</span> [<span class="fl">12.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">1</span> <span class="cf">else</span> <span class="fl">.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">24</span> <span class="op">*</span> x <span class="op">-</span> <span class="dv">12</span> <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">2</span> <span class="cf">else</span> <span class="fl">12.5</span> <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">24</span> <span class="op">*</span> x <span class="op">+</span> <span class="dv">36</span> <span class="cf">for</span> x <span class="kw">in</span> trajectory[:i]]</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    ax2.plot(<span class="bu">range</span>(<span class="bu">len</span>(trajectory)), f_trajectory, <span class="st">'ro-'</span>)</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    ax2.set_xlim(<span class="dv">0</span>, <span class="bu">len</span>(trajectory))</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylim(<span class="bu">min</span>(f_vals), <span class="bu">max</span>(f_vals))</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add horizontal dashed lines at f(1) and f(2) on the right subplot</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    f_1 <span class="op">=</span> <span class="fl">12.5</span> <span class="op">*</span> <span class="fl">1.0</span><span class="op">**</span><span class="dv">2</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    f_2 <span class="op">=</span> <span class="fl">.5</span> <span class="op">*</span> <span class="fl">2.</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">24</span> <span class="op">*</span> <span class="fl">2.</span> <span class="op">-</span> <span class="dv">12</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    ax2.axhline(y<span class="op">=</span>f_1, color<span class="op">=</span><span class="st">'navy'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>    ax2.axhline(y<span class="op">=</span>f_2, color<span class="op">=</span><span class="st">'navy'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ax1.set_title("Function f(x) and Trajectory")</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    ax1.set_xlabel(<span class="st">"x"</span>)</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    ax1.set_ylabel(<span class="st">"f(x)"</span>)</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    ax1.grid(linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ax2.set_title("Function Value from Iteration")</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    ax2.set_xlabel(<span class="st">"Iteration"</span>)</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(<span class="st">"f(x)"</span>)</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    ax2.grid(linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the animation</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>ani <span class="op">=</span> animation.FuncAnimation(fig, update, frames<span class="op">=</span>num_iterations, repeat<span class="op">=</span><span class="va">False</span>, interval<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>HTML(ani.to_jshtml())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Change the starting point to <span class="math inline">x_0 = 3.4</span>. What do you see? How could you name such a behavior of the method?</p></li>
+<li><p>Change the hyperparameter <span class="math inline">\alpha^{\text{Global}} = \frac2L, \beta^{\text{Global}} = \frac{\mu}{L}</span> and run the method again from <span class="math inline">x_0 = 3.4</span>. Check whether you have accelerated convergence here.</p></li>
+</ol>
+<p>Context: this counterexample was provided in the <a href="https://arxiv.org/pdf/1408.3595.pdf">paper</a>, while the global convergence of the heavy ball method for general smooth strongly convex function was introduced in another <a href="https://arxiv.org/pdf/1412.7457.pdf">paper</a>. Recently, it was <a href="https://arxiv.org/pdf/2307.11291.pdf">suggested</a>, that the heavy-ball (HB) method provably does not reach an accelerated convergence rate on smooth strongly convex problems.</p></li>
+<li><p>In this problem we will work with accelerated methods applied to the logistic regression problem. A good visual introduction to the topic is available <a href="https://mlu-explain.github.io/logistic-regression/">here</a>.</p>
+<p>Logistic regression is a standard model in classification tasks. For simplicity, consider only the case of binary classification. Informally, the problem is formulated as follows: There is a training sample <span class="math inline">\{(a_i, b_i)\}_{i=1}^m</span>, consisting of <span class="math inline">m</span> vectors <span class="math inline">a_i \in \mathbb{R}^n</span> (referred to as features) and corresponding numbers <span class="math inline">b_i \in \{-1, 1\}</span> (referred to as classes or labels). The goal is to construct an algorithm <span class="math inline">b(\cdot)</span>, which for any new feature vector <span class="math inline">a</span> automatically determines its class <span class="math inline">b(a) \in \{-1, 1\}</span>.</p>
+<p>In the logistic regression model, the class determination is performed based on the sign of the linear combination of the components of the vector <span class="math inline">a</span> with some fixed coefficients <span class="math inline">x \in \mathbb{R}^n</span>:</p>
+<p><span class="math display">
+b(a) := \text{sign}(\langle a, x \rangle).
+</span></p>
+<p>The coefficients <span class="math inline">x</span> are the parameters of the model and are adjusted by solving the following optimization problem:</p>
+<p><span class="math display">
+\tag{LogReg}
+\min_{x \in \mathbb{R}^n} \left( \frac{1}{m} \sum_{i=1}^m \ln(1 + \exp(-b_i \langle a_i, x \rangle)) + \frac{\lambda}{2} \|x\|^2 \right),
+</span></p>
+<p>where <span class="math inline">\lambda \geq 0</span> is the regularization coefficient (a model parameter).</p>
+<ol type="1">
+<li><p>Will the LogReg problem be convex for <span class="math inline">\lambda = 0</span>? What is the gradient of the objective function? Will it be strongly convex? What if you will add regularization with <span class="math inline">\lambda &gt; 0</span>?</p></li>
+<li><p>We will work with the real-world data for <span class="math inline">A</span> and <span class="math inline">b</span>: take the mushroom dataset. Be careful, you will need to predict if the mushroom is poisonous or edible. A poor model can cause death in this exercise.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_svmlight_file</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># URL of the file to download</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://hse24.fmin.xyz/files/mushrooms.txt'</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the file and save it locally</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(url)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> <span class="st">'mushrooms.txt'</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure the request was successful</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(dataset, <span class="st">'wb'</span>) <span class="im">as</span> f:</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        f.write(response.content)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Load the dataset from the downloaded file</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> load_svmlight_file(dataset)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    A, b <span class="op">=</span> data[<span class="dv">0</span>].toarray(), data[<span class="dv">1</span>]</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    n, d <span class="op">=</span> A.shape</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Data loaded successfully."</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Number of samples: </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss">, Number of features: </span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Failed to download the file. Status code: </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Divide the data into two parts: training and test. We will train the model on the <span class="math inline">A_{train}</span>, <span class="math inline">b_{train}</span> and measure the accuracy of the model on the <span class="math inline">A_{test}</span>, <span class="math inline">b_{test}</span>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and test sets</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>A_train, A_test, b_train, b_test <span class="op">=</span> train_test_split(A, b, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">214</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>For the training part <span class="math inline">A_{train}</span>, <span class="math inline">b_{train}</span>, estimate the constants <span class="math inline">\mu, L</span> of the training/optimization problem. Use the same small value <span class="math inline">\lambda</span> for all experiments</p></li>
+<li><p>Using gradient descent with the step <span class="math inline">\frac{1}{L}</span>, train a model. Plot: accuracy versus iteration number.</p>
+<p><span class="math display">
+\tag{HB}
+x_{k+1} = x_k - \alpha \nabla f(x_k) + \beta (x_k - x_{k-1})
+</span></p>
+<p>Fix a step <span class="math inline">\alpha = \frac{1}{L}</span> and search for different values of the momentum <span class="math inline">\beta</span> from <span class="math inline">-1</span> to <span class="math inline">1</span>. Choose your own convergence criterion and plot convergence for several values of momentum on the same graph. Is the convergence always monotonic?</p></li>
+<li><p>For the best value of momentum <span class="math inline">\beta</span>, plot the dependence of the model accuracy on the test sample on the running time of the method. Add to the same graph the convergence of gradient descent with step <span class="math inline">\frac{1}{L}</span>. Draw a conclusion. Ensure, that you use the same value of <span class="math inline">\lambda</span> for both methods.</p></li>
+<li><p>Solve the logistic regression problem using the Nesterov method.</p>
+<p><span class="math display">
+\tag{NAG}
+x_{k+1} = x_k - \alpha \nabla f(x_k + \beta (x_k - x_{k-1})) + \beta (x_k - x_{k-1})  
+</span></p>
+<p>Fix a step <span class="math inline">\frac{1}{L}</span> and search for different values of momentum <span class="math inline">\beta</span> from <span class="math inline">-1</span> to <span class="math inline">1</span>. Check also the momentum values equal to <span class="math inline">\frac{k}{k+3}</span>, <span class="math inline">\frac{k}{k+2}</span>, <span class="math inline">\frac{k}{k+1}</span> (<span class="math inline">k</span> is the number of iterations), and if you are solving a strongly convex problem, also <span class="math inline">\frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}</span>. Plot the convergence of the method as a function of the number of iterations (choose the convergence criterion yourself) for different values of the momentum. Is the convergence always monotonic?</p></li>
+<li><p>For the best value of momentum <span class="math inline">\beta</span>, plot the dependence of the model accuracy on the test sample on the running time of the method. Add this graph to the graphs for the heavy ball and gradient descent from the previous steps. Make a conclusion.</p></li>
+<li><p>Now we drop the estimated value of <span class="math inline">L</span> and will try to do it adaptively. Let us make the selection of the constant <span class="math inline">L</span> adaptive.</p>
+<p><span class="math display">
+f(y) \leq f(x^k) + \langle \nabla f(x^k), y - x^k \rangle + \frac{L}{2}\|x^k - y\|_2^2
+</span></p>
+<p>In particular, the procedure might work:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backtracking_L(f, grad, x, h, L0, rho, maxiter<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    L <span class="op">=</span> L0</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    fx <span class="op">=</span> f(x)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    gradx <span class="op">=</span> grad(x)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">iter</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">iter</span> <span class="op">&lt;</span> maxiter :</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span> <span class="op">/</span> L <span class="op">*</span> h</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> f(y) <span class="op">&lt;=</span> fx <span class="op">-</span> <span class="dv">1</span> <span class="op">/</span> L gradx.dot(h) <span class="op">+</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> L) h.dot(h):</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>            L <span class="op">=</span> L <span class="op">*</span> rho</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">iter</span> <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What should <span class="math inline">h</span> be taken as? Should <span class="math inline">\rho</span> be greater or less than <span class="math inline">1</span>? Should <span class="math inline">L_0</span> be taken as large or small? Draw a similar figure as it was in the previous step for L computed adaptively (6 lines - GD, HB, NAG, GD adaptive L, HB adaptive L, NAG adaptive L)</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="subgradient-descent" class="level3">
+<h3 class="anchored" data-anchor-id="subgradient-descent">Subgradient Descent</h3>
+<ol type="1">
+<li><p><strong>Subgradient descent convergence with several stepsize strategies.</strong> In this problem you will have to prove the convergence of subgradient descent (<span class="math inline">x^{k+1} = x^k - \alpha_k g_k</span>) for several stepsize strategies. First prove, that</p>
+<p><span class="math display">
+\|x^{k+1} - x^*\|_2^2 \leq \|x^{k} - x^*\|_2^2 - 2\alpha_k \left(f(x^k) - f^* \right) + \alpha^2_k \|g_k\|_2^2
+</span></p>
+<p>Then, using <span class="math inline">\|g\|_2 \leq G, \|x^0 - x^*\| \leq R</span> prove, that</p>
+<p><span class="math display">
+\|x^{k+1} - x^*\|_2^2 \leq R^2 - 2\sum\limits_{i=1}^k\alpha_i \left(f(x^i) - f^* \right) + G^2\sum\limits_{i=1}^k\alpha^2_i
+</span></p>
+<p>Then, using <span class="math inline">f_k^{\text{best}} = \min\limits_{i=1,\ldots,k} f(x^i)</span> prove, that</p>
+<p><span class="math display">
+f_k^{\text{best}} - f^* \leq \frac{R^2 + G^2\sum\limits_{i=1}^k\alpha^2_i}{2\sum\limits_{i=1}^k\alpha_i}
+</span></p>
+<p>After that, finalize the bound for the following stepsize choosing strategies</p>
+<ul>
+<li><p>constant step size <span class="math inline">\alpha_k = \alpha</span></p></li>
+<li><p>constant step length <span class="math inline">\alpha_k = \frac{\gamma}{\|g_k\|_2}</span> (so <span class="math inline">\|x^{k+1} - x^k\|_2 = \gamma</span>)</p></li>
+<li><p>Inverse square root <span class="math inline">\frac{R}{G\sqrt{k}}</span></p></li>
+<li><p>Inverse <span class="math inline">\frac1k</span></p></li>
+<li><p>Polyak’s step size:</p>
+<p><span class="math display">
+  \alpha_k = \frac{f(x^k) - f^*}{\|g_k\|_2^2}
+  </span></p></li>
+</ul></li>
+<li><p><strong>Finding a point in the intersection of convex sets.</strong> Let <span class="math inline">A \in \mathbb{R}^{n \times n}</span> be a positive definite matrix and let <span class="math inline">\Sigma</span> be an <span class="math inline">n \times n</span> diagonal matrix with diagonal entries <span class="math inline">\sigma_1,...,\sigma_n &gt; 0</span>, and <span class="math inline">y</span> a given vector in <span class="math inline">\mathbb{R}^n</span>. Consider the compact convex sets <span class="math inline">U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}</span> and <span class="math inline">V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}</span>.</p>
+<ul>
+<li><p>Minimize maximum distance from the current point to the convex sets.</p>
+<p><span class="math display">
+  \min_{x\in\mathbb{R}^n} f(x) =  \min_{x\in\mathbb{R}^n} \max\{\mathbf{dist}(x, U), \mathbf{dist}(x, V)\}
+  </span></p>
+<p>propose an algorithm to find a point <span class="math inline">x \in U \cap V</span>. You can assume that <span class="math inline">U \cap V</span> is not empty. Your algorithm must be provably converging (although you do not need to prove it and you can simply refer to the lecture slides).</p></li>
+<li><p>Implement your algorithm with the following data: <span class="math inline">n = 2</span>, <span class="math inline">y = (3, 2)</span>, <span class="math inline">\sigma_1 = 0.5</span>, <span class="math inline">\sigma_2 = 1</span>,</p>
+<p><span class="math display">
+  A = \begin{bmatrix}
+  1 &amp; 0 \\
+  -1 &amp; 1
+  \end{bmatrix},
+  </span></p>
+<p>and <span class="math inline">x = (2, 1)</span>. Plot the objective value of your optimization problem versus the number of iterations.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="convex_intersection.png" class="img-fluid figure-img"></p>
+<figcaption>Illustration of the problem</figcaption>
+</figure>
+</div></li>
+</ol>
+</section>
+<section id="conjugate-gradients" class="level3">
+<h3 class="anchored" data-anchor-id="conjugate-gradients">Conjugate gradients</h3>
+<ol type="1">
+<li><p><strong><a href="https://web.stanford.edu/class/ee364b/364b_exercises.pdf">Randomized Preconditioners for Conjugate Gradient Methods.</a></strong></p>
+<p><em>Linear least squares</em></p>
+<p>In this task, we explore the use of some randomization methods for solving overdetermined least-squares problems, focusing on conjugate gradient methods. Let <span class="math inline">A \in \mathbb{R}^{m \times n}</span> be a matrix (we assume that <span class="math inline">m \gg n</span>) and <span class="math inline">b \in \mathbb{R}^m</span>, we aim to minimize</p>
+<p><span class="math display">
+f(x) = \frac{1}{2} \|Ax - b\|^2_2 = \frac{1}{2} \sum_{i=1}^m (a_i^T x - b_i)^2,
+</span></p>
+<p>where the <span class="math inline">a_i \in \mathbb{R}^n</span> denote the rows of <span class="math inline">A</span>.</p>
+<p><em>Preconditioners</em></p>
+<p>We know, that the convergence bound of the CG applied for the problem depends on the condition number of the matrix. Note, that for the problem above we have the matrix <span class="math inline">A^T A</span> and the condition number is squared after this operation (<span class="math inline">\kappa (X^T X) =  \kappa^2 \left(X \right)</span>). That is the reason, why we typically need to use <em>preconditioners</em> (<a href="https://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf">read 12. for more details</a>) with CG.</p>
+<p>The general idea of using preconditioners implies switchwing from solving <span class="math inline">Ax = b</span> to <span class="math inline">MAx = Mb</span> with hope, that <span class="math inline">\kappa \left( MA\right) \ll \kappa \left( A\right)</span> or eigenvalues of <span class="math inline">MA</span> are better clustered than those of <span class="math inline">A</span> (note, that matrix <span class="math inline">A</span> here is for the general case, here we have <span class="math inline">A^TA</span> instead).</p>
+<p>This idea can also be viewed as coordinate change <span class="math inline">x = T \hat{x}, \; \hat{x} = T^{-1}x</span>, which leads to the problem <span class="math inline">T^T A T \hat{x} = T^Tb</span>. Note, that the spectrum of <span class="math inline">T^TAT</span> is the same as the spectrum of <span class="math inline">MA</span>.</p>
+<p>The best choice of <span class="math inline">M</span> is <span class="math inline">A^{-1}</span>, because <span class="math inline">\kappa (A^{-1} A) = \kappa (I) = 1</span>. However, if we know <span class="math inline">A^{-1}</span>, the original problem is already solved, that is why we need to find some trade-off between enhanced convergence, and extra cost of working with <span class="math inline">M</span>. The goal is to find <span class="math inline">M</span> that is cheap to multiply, and approximate inverse of <span class="math inline">A</span> (or at least has a more clustered spectrum than <span class="math inline">A</span>).</p>
+<p>Below you can find Vanilla CG algorithm (on the left) and preconditioned CG algorithm (on the right):</p>
+<p><span class="math display">
+\begin{aligned}
+&amp; \mathbf{r}_0 := \mathbf{b} - \mathbf{A x}_0 \\
+&amp; \hbox{if } \mathbf{r}_{0} \text{ is sufficiently small, then return } \mathbf{x}_{0} \text{ as the result}\\
+&amp; \mathbf{d}_0 := \mathbf{r}_0 \\
+&amp; k := 0 \\
+&amp; \text{repeat} \\
+&amp; \qquad \alpha_k := \frac{\mathbf{r}_k^\mathsf{T} \mathbf{r}_k}{\mathbf{d}_k^\mathsf{T} \mathbf{A d}_k}  \\
+&amp; \qquad \mathbf{x}_{k+1} := \mathbf{x}_k + \alpha_k \mathbf{d}_k \\
+&amp; \qquad \mathbf{r}_{k+1} := \mathbf{r}_k - \alpha_k \mathbf{A d}_k \\
+&amp; \qquad \hbox{if } \mathbf{r}_{k+1} \text{ is sufficiently small, then exit loop} \\
+&amp; \qquad \beta_k := \frac{\mathbf{r}_{k+1}^\mathsf{T} \mathbf{r}_{k+1}}{\mathbf{r}_k^\mathsf{T} \mathbf{r}_k} \\
+&amp; \qquad \mathbf{d}_{k+1} := \mathbf{r}_{k+1} + \beta_k \mathbf{d}_k \\
+&amp; \qquad k := k + 1 \\
+&amp; \text{end repeat} \\
+&amp; \text{return } \mathbf{x}_{k+1} \text{ as the result}
+\end{aligned} \qquad
+\begin{aligned}
+&amp; \mathbf{r}_0 := \mathbf{b} - \mathbf{A x}_0 \\
+&amp; \text{if } \mathbf{r}_0 \text{ is sufficiently small, then return } \mathbf{x}_0 \text{ as the result} \\
+&amp; \mathbf{z}_0 := \mathbf{M}^{-1} \mathbf{r}_0 \\
+&amp; \mathbf{d}_0 := \mathbf{z}_0 \\
+&amp; k := 0 \\
+&amp; \text{repeat} \\
+&amp; \qquad \alpha_k := \frac{\mathbf{r}_k^\mathsf{T} \mathbf{z}_k}{\mathbf{d}_k^\mathsf{T} \mathbf{A d}_k} \\
+&amp; \qquad \mathbf{x}_{k+1} := \mathbf{x}_k + \alpha_k \mathbf{d}_k \\
+&amp; \qquad \mathbf{r}_{k+1} := \mathbf{r}_k - \alpha_k \mathbf{A d}_k \\
+&amp; \qquad \text{if } \mathbf{r}_{k+1} \text{ is sufficiently small, then exit loop} \\
+&amp; \qquad \mathbf{z}_{k+1} := \mathbf{M}^{-1} \mathbf{r}_{k+1} \\
+&amp; \qquad \beta_k := \frac{\mathbf{r}_{k+1}^\mathsf{T} \mathbf{z}_{k+1}}{\mathbf{r}_k^\mathsf{T} \mathbf{z}_k} \\
+&amp; \qquad \mathbf{d}_{k+1} := \mathbf{z}_{k+1} + \beta_k \mathbf{d}_k \\
+&amp; \qquad k := k + 1 \\
+&amp; \text{end repeat} \\
+&amp; \text{return } \mathbf{x}_{k+1} \text{ as the result}
+\end{aligned}
+</span></p>
+<p><em>Hadamard matrix</em></p>
+<p>Given <span class="math inline">m \in \{2^i, i = 1, 2, \ldots\}</span>, the (unnormalized) Hadamard matrix of order <span class="math inline">m</span> is defined recursively as</p>
+<p><span class="math display">
+H_2 = \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}, \quad \text{and} \quad H_m = \begin{bmatrix} H_{m/2} &amp; H_{m/2} \\ H_{m/2} &amp; -H_{m/2} \end{bmatrix}.
+</span></p>
+<p>The associated normalized Hadamard matrix is given by <span class="math inline">H^{(\text{norm})}_m = \frac{1}{\sqrt{m}} H_m</span>, which evidently satisfies <span class="math inline">H^{(\text{norm})T}_m H^{(\text{norm})}_m = I_{m \times m}</span>. Moreover, via a recursive algorithm, it is possible to compute matvec <span class="math inline">H_m x</span> in time <span class="math inline">O(m \log m)</span>, which is much faster than <span class="math inline">m^2</span> for a general matrix.</p>
+<p>To solve the least squares minimization problem using conjugate gradients, we must solve <span class="math inline">A^T A x = A^T b</span>. Using a preconditioner <span class="math inline">M</span> such that <span class="math inline">M \approx A^{-1}</span> can give substantial speedup in computing solutions to large problems.</p>
+<p>Consider the following scheme to generate a randomized preconditioner, assuming that <span class="math inline">m = 2^i</span> for some <span class="math inline">i</span>:</p>
+<ol type="1">
+<li><p>Let <span class="math inline">S = \text{diag}(S_{11}, \ldots, S_{mm})</span>, where <span class="math inline">S_{jj}</span> are random <span class="math inline">\{-1,+1\}</span> signs</p></li>
+<li><p>Let <span class="math inline">p \in \mathbb{Z}^+</span> be a small positive integer, say <span class="math inline">20</span> for this problem.</p></li>
+<li><p>Let <span class="math inline">R \in \{0, 1\}^{n+p \times m}</span> be a <em>row selection matrix</em>, meaning that each row of <span class="math inline">R</span> has only 1 non-zero entry, chosen uniformly at random. (The location of these non-zero columns is distinct.)</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_row_selection_matrix_jax(m, n, p, key):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># m is the number of columns in the original matrix A</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># n+p is the number of rows in the row selection matrix R</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># key is a PRNGKey needed for randomness in JAX</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    inds <span class="op">=</span> random.permutation(key, m)[:n<span class="op">+</span>p]  <span class="co"># Generate a random permutation and select the first n+p indices</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    R <span class="op">=</span> jnp.zeros((n<span class="op">+</span>p, m), dtype<span class="op">=</span>jnp.int32)  <span class="co"># Create a zero matrix of shape (n+p, m)</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    R <span class="op">=</span> R.at[np.arange(n<span class="op">+</span>p), inds].<span class="bu">set</span>(<span class="dv">1</span>)     <span class="co"># Use JAX's indexed update to set the entries corresponding to inds to 1</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Define <span class="math inline">\Phi = R H^{(\text{norm})}_m S \in \mathbb{R}^{n+p \times m}</span></p></li>
+</ol>
+<p>We then define the matrix ( M ) via its inverse ( M^{-1} = A^T ^T A ^{n n} ).</p>
+<p><em>Questions</em></p>
+<ol type="1">
+<li><p><strong>(1 point)</strong> How many FLOPs (floating point operations, i.e.&nbsp;multiplication and additions) are required to compute the matrices <span class="math inline">M^{-1}</span> and <span class="math inline">M</span>, respectively, assuming that you can compute the matrix-vector product <span class="math inline">H_mv</span> in time <span class="math inline">m \log m</span> for any vector <span class="math inline">v \in \mathbb{R}^m</span>?</p></li>
+<li><p><strong>(1 point)</strong> How many FLOPs are required to naively compute <span class="math inline">A^T A</span>, assuming <span class="math inline">A</span> is dense (using standard matrix algorithms)?</p></li>
+<li><p><strong>(1 point)</strong> How many FLOPs are required to compute <span class="math inline">A^T A v</span> for a vector <span class="math inline">v \in \mathbb{R}^n</span> by first computing <span class="math inline">u = Av</span> and then computing <span class="math inline">A^T u</span>?</p></li>
+<li><p><strong>(2 poins)</strong> Suppose that conjugate gradients runs for <span class="math inline">k</span> iterations. Using the preconditioned conjugate gradient algorithm with <span class="math inline">M = (A^T \Phi^T \Phi A)^{-1}</span>, how many total floating point operations have been performed? How many would be required to directly solve <span class="math inline">A^T A x = A^T b</span>? How large must <span class="math inline">k</span> be to make the conjugate gradient method slower?</p></li>
+<li><p><strong>(5 points)</strong> Implement the conjugate gradient algorithm for solving the positive definite linear system <span class="math inline">A^T A x = A^T b</span> both with and without the preconditioner <span class="math inline">M</span>. To generate data for your problem, set <span class="math inline">m = 2^{12}</span> and <span class="math inline">n = 400</span>, then generate the matrix <span class="math inline">A</span> and the vector <span class="math inline">b</span>. For simplicity in implementation, you may directly pass <span class="math inline">A^T A</span> and <span class="math inline">A^T b</span> into your conjugate gradient solver, as we only wish to explore how the methods work.</p></li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.sparse <span class="im">import</span> diags</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">12</span>  <span class="co"># 4096</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">400</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a linear space of values from 0.001 to 100</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> np.linspace(<span class="fl">0.001</span>, <span class="dv">100</span>, n)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the matrix A</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.randn(m, n) <span class="op">*</span> diags(values).toarray()</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.randn(m, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Plot the norm of the residual <span class="math inline">r_k = A^T b - A^T A x_k</span> (relative to <span class="math inline">\|A^T b\|_2</span>) as a function of iteration <span class="math inline">k</span> for each of your conjugate gradient procedures. Additionally, compute and print the condition numbers <span class="math inline">\kappa(A^T A)</span> and <span class="math inline">\kappa(M^{1/2} A^T A M^{1/2})</span>.</p></li>
+</ol>
 
 
 </section>
@@ -1167,8 +1605,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer><script>videojs(video_shortcode_videojs_video1);</script>
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+</body></html>
