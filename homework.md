@@ -558,3 +558,521 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
     $$
     
     where $\alpha > 0$ is a parameter. This auxiliary function consists of the objective plus the penalty term $\alpha \Vert Ax - b\Vert_2^2$. The idea is that a minimizer of the auxiliary function, $\tilde{x}$, should be an approximate solution to the original problem. Intuition suggests that the larger the penalty weight $\alpha$, the better the approximation $\tilde{x}$ to a solution of the original problem. Suppose $\tilde{x}$ is a minimizer of $\phi(x)$. Show how to find, from $\tilde{x}$, a dual feasible point for the original problem. Find the corresponding lower bound on the optimal value of the original problem.
+
+### Linear programming
+
+1. **📱🎧💻 Covers manufacturing.** Lyzard Corp is producing covers for the following products: 
+    * 📱 phones
+    * 🎧 headphones
+    * 💻 laptops
+
+    The company’s production facilities are such that if we devote the entire production to headphone covers, we can produce 5000 of them in one day. If we devote the entire production to phone covers or laptop covers, we can produce 4000 or 2000 of them in one day. 
+
+    The production schedule is one week (6 working days), and the week’s production must be stored before distribution. Storing 1000 headphone covers (packaging included) takes up 30 cubic feet of space. Storing 1000 phone covers (packaging included) takes up 50 cubic feet of space, and storing 1000 laptop covers (packaging included) takes up 220 cubic feet of space. The total storage space available is 1500 cubic feet. 
+    
+    Due to commercial agreements with Lyzard Corp has to deliver at least 4500 headphone covers and 4000 laptop covers per week to strengthen the product’s diffusion. 
+
+    The marketing department estimates that the weekly demand for headphones covers, phone, and laptop covers does not exceed 10000 14000, and 7000 units, therefore the company does not want to produce more than these amounts for headphones, phone, and laptop covers. 
+
+    Finally, the net profit per headphone cover, phone cover, and laptop cover are \$5, \$7, and \$12, respectively.
+
+    The aim is to determine a weekly production schedule that maximizes the total net profit.
+
+    1. Write a Linear Programming formulation for the problem.  Use the following variables:
+
+        * $y_1$ = number of headphones covers produced over the week,  
+        * $y_2$ = number of phone covers produced over the week,  
+        * $y_3$ = number of laptop covers produced over the week. 
+
+    1. Find the solution to the problem using [PyOMO](http://www.pyomo.org)
+    
+        ```python
+        !pip install pyomo
+        ! sudo apt-get install glpk-utils --quiet  # GLPK
+        ! sudo apt-get install coinor-cbc --quiet  # CoinOR
+        ```
+
+    1. Perform the sensitivity analysis. Which constraint could be relaxed to increase the profit the most? Prove it numerically.
+
+1. Prove the optimality of the solution
+    
+    $$
+    x = \left(\frac{7}{3} , 0, \frac{1}{3}\right)^T
+    $$
+    
+    to the following linear programming problem:
+    
+    $$
+    \begin{split}
+    & 9x_1 + 3x_2 + 7x_3 \to \max\limits_{x \in \mathbb{R}^3 }\\
+    \text{s.t. } & 2x_1 + x_2 + 3x_3 \leq 6 \\
+    & 5x_1 + 4x_2 + x_3 \leq 12 \\
+    & 3x_3 \leq 1,\\
+    & x_1, x_2, x_3 \geq 0
+    \end{split}
+    $$
+
+    but you cannot use any numerical algorithm here.
+
+### Gradient Descent
+
+1. **Convergence of Gradient Descent in non-convex smooth case**
+
+    We will assume nothing about the convexity of $f$.  We will show that gradient descent reaches an $\varepsilon$-substationary point $x$, such that $\|\nabla f(x)\|_2 \leq \varepsilon$, in $O(1/\varepsilon^2)$ iterations. Important note: you may use here Lipschitz parabolic upper bound: 
+    
+    $$
+    f(y) \leq f(x) + \nabla f(x)^T (y-x) + \frac{L}{2} \|y-x\|_2^2, \;\;\;
+    \text{for all $x,y$}.  
+    $$ {#eq-quad_ub}
+
+    * Plug in $y = x^{k+1} = x^{k} - \alpha \nabla f(x^k), x = x^k$ to (@eq-quad_ub) to show that 
+
+        $$
+        f(x^{k+1}) \leq f(x^k) - \Big (1-\frac{L\alpha}{2} \Big) \alpha \|\nabla f(x^k)\|_2^2.
+        $$
+
+    * Use $\alpha \leq 1/L$, and rearrange the previous result, to get 
+
+        $$
+        \|\nabla f(x^k)\|_2^2 \leq \frac{2}{\alpha} \left( f(x^k) - f(x^{k+1}) \right).
+        $$
+
+    * Sum the previous result over all iterations from $1,\ldots,k+1$ to establish
+    
+        $$
+        \sum_{i=0}^k \|\nabla f(x^{i})\|_2^2 \leq 
+        \frac{2}{\alpha} ( f(x^{0}) - f^*).
+        $$
+
+    * Lower bound the sum in the previous result to get 
+
+        $$
+        \min_{i=0,\ldots,k} \|\nabla f(x^{i}) \|_2 
+        \leq \sqrt{\frac{2}{\alpha(k+1)} (f(x^{0}) - f^*)}, 
+        $$
+        which establishes the desired $O(1/\varepsilon^2)$ rate for achieving $\varepsilon$-substationarity.  
+
+1. **How gradient descent convergence depends on the condition number and dimensionality.** Investigate how the number of iterations required for gradient descent to converge depends on the following two parameters: the condition number $\kappa \geq 1$ of the function being optimized, and the dimensionality $n$ of the space of variables being optimized.
+    
+    To do this, for given parameters $n$ and $\kappa$, randomly generate a quadratic problem of size $n$ with condition number $\kappa$ and run gradient descent on it with some fixed required precision. Measure the number of iterations $T(n, \kappa)$ that the method required for convergence (successful termination based on the stopping criterion).
+
+    Recommendation: The simplest way to generate a random quadratic problem of size $n$ with a given condition number $\kappa$ is as follows. It is convenient to take a diagonal matrix $A \in S_{n}^{++}$ as simply the diagonal matrix $A = \text{Diag}(a)$, whose diagonal elements are randomly generated within $[1, \kappa]$, and where $\min(a) = 1$, $\max(a) = \kappa$. As the vector $b \in \mathbb{R}^n$, you can take a vector with random elements. Diagonal matrices are convenient to consider since they can be efficiently processed with even for large values of $n$.
+
+    Fix a certain value of the dimensionality $n$. Iterate over different condition numbers $\kappa$ on a grid and plot the dependence of $T(n,\kappa)$ against $\kappa$. Since the quadratic problem is generated randomly each time, repeat this experiment several times. As a result, for a fixed value of $n$, you should obtain a whole family of curves showing the dependence of $T(n, \kappa)$ on $\kappa$. Draw all these curves in the same color for clarity (for example, red).
+
+    Now increase the value of $n$ and repeat the experiment. You should obtain a new family of curves $T(n',\kappa)$ against $\kappa$. Draw all these curves in the same color but different from the previous one (for example, blue).
+
+    Repeat this procedure several times for other values of $n$. Eventually, you should have several different families of curves - some red (corresponding to one value of $n$), some blue (corresponding to another value of $n$), some green, etc.
+
+    Note that it makes sense to iterate over the values of the dimensionality $n$ on a logarithmic grid (for example, $n = 10, n = 100, n = 1000$, etc.). Use the following stopping criterion: $\|\nabla f(x_k)\|_2^2 \leq \varepsilon \|\nabla f(x_0)\|_2^2$ with $\varepsilon = 10^{-5}$. Select the starting point $x_0 = (1, \ldots, 1)^T$
+
+    What conclusions can be drawn from the resulting picture?
+
+### Accelerated methods
+
+1. **Local Convergence of Heavy Ball Method.** We will work with the heavy ball method in this problem
+
+    $$
+    \tag{HB}
+    x_{k+1} = x_k - \alpha \nabla f(x_k) + \beta (x_k - x_{k-1})
+    $$
+
+    It is known, that for the quadratics the best choice of hyperparameters is $\alpha^* = \dfrac{4}{(\sqrt{L} + \sqrt{\mu})^2}, \beta^* = \dfrac{(\sqrt{L} - \sqrt{\mu})^2}{(\sqrt{L} + \sqrt{\mu})^2}$, which ensures accelerated linear convergence for a strongly convex quadratic function.
+
+    Consider the following continuously differentiable, strongly convex with parameter $\mu$, and smooth function with parameter $L$:
+
+    $$
+    f(x) = 
+    \begin{cases} 
+    \frac{25}{2}x^2, & \text{if } x < 1 \\
+    \frac12x^2 + 24x - 12, & \text{if } 1 \leq x < 2 \\
+    \frac{25}{2}x^2 - 24x + 36, & \text{if } x \geq 2
+    \end{cases}
+    \quad
+    \nabla f(x) = 
+    \begin{cases} 
+    25x, & \text{if } x < 1 \\
+    x + 24, & \text{if } 1 \leq x < 2 \\
+    25x - 24, & \text{if } x \geq 2
+    \end{cases}
+    $$
+
+    1. How to prove, that the given function is convex? Strongly convex? Smooth?
+    1. Find the constants $\mu$ and $L$ for a given function.
+    1. Plot the function value for $x \in [-4, 4]$. 
+    1. Run the Heavy Ball method for the function with optimal hyperparameters $\alpha^* = \dfrac{4}{(\sqrt{L} + \sqrt{\mu})^2}, \beta^* = \dfrac{(\sqrt{L} - \sqrt{\mu})^2}{(\sqrt{L} + \sqrt{\mu})^2}$ for quadratic function, starting from $x_0 = 3.5$. If you have done everything above correctly, you should receive something like 
+    
+        {{< video heavy_ball_conv.mp4 >}}
+
+        You can use the following code for plotting:
+
+        ```python
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import matplotlib.animation as animation
+        from IPython.display import HTML
+
+        # Gradient of the function
+        def grad_f(x):
+            ...
+
+        # Heavy Ball method implementation
+        def heavy_ball_method(alpha, beta, x0, num_iterations):
+            x = np.zeros(num_iterations + 1)
+            x_prev = x0
+            x_curr = x0  # Initialize x[1] same as x[0] to start the algorithm
+            for i in range(num_iterations):
+                x[i] = x_curr
+                x_new = x_curr - alpha * grad_f(x_curr) + beta * (x_curr - x_prev)
+                x_prev = x_curr
+                x_curr = x_new
+            x[num_iterations] = x_curr
+            return x
+
+        # Parameters
+        L = ...
+        mu = ...
+        alpha_star = ...
+        beta_star = ...
+        x0 = ...
+        num_iterations = 30
+
+        # Generate the trajectory of the method
+        trajectory = heavy_ball_method(alpha_star, beta_star, x0, num_iterations)
+
+        # Setup the figure and axes for the animation
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(7, 3.5))
+        fig.suptitle("Heavy ball method with optimal hyperparameters α* β*")
+
+        # Function for updating the animation
+        def update(i):
+            ax1.clear()
+            ax2.clear()
+
+            # Plot f(x) and trajectory
+            x_vals = np.linspace(-4, 4, 100)
+            f_vals = np.piecewise(x_vals, [x_vals < 1, (x_vals >= 1) & (x_vals < 2), x_vals >= 2],
+                                [lambda x: 12.5 * x**2, lambda x: .5 * x**2 + 24 * x - 12, lambda x: 12.5 * x**2 - 24 * x + 36])
+            ax1.plot(x_vals, f_vals, 'b-')
+            ax1.plot(trajectory[:i], [12.5 * x**2 if x < 1 else .5 * x**2 + 24 * x - 12 if x < 2 else 12.5 * x**2 - 24 * x + 36 for x in trajectory[:i]], 'ro-')
+            # Add vertical dashed lines at x=1 and x=2 on the left subplot
+            ax1.axvline(x=1, color='navy', linestyle='--')
+            ax1.axvline(x=2, color='navy', linestyle='--')
+
+            # Plot function value from iteration
+            f_trajectory = [None for x in trajectory]
+            f_trajectory[:i] = [12.5 * x**2 if x < 1 else .5 * x**2 + 24 * x - 12 if x < 2 else 12.5 * x**2 - 24 * x + 36 for x in trajectory[:i]]
+            ax2.plot(range(len(trajectory)), f_trajectory, 'ro-')
+            ax2.set_xlim(0, len(trajectory))
+            ax2.set_ylim(min(f_vals), max(f_vals))
+            # Add horizontal dashed lines at f(1) and f(2) on the right subplot
+            f_1 = 12.5 * 1.0**2
+            f_2 = .5 * 2.**2 + 24 * 2. - 12
+            ax2.axhline(y=f_1, color='navy', linestyle='--')
+            ax2.axhline(y=f_2, color='navy', linestyle='--')
+
+            # ax1.set_title("Function f(x) and Trajectory")
+            ax1.set_xlabel("x")
+            ax1.set_ylabel("f(x)")
+            ax1.grid(linestyle=":")
+
+            # ax2.set_title("Function Value from Iteration")
+            ax2.set_xlabel("Iteration")
+            ax2.set_ylabel("f(x)")
+            ax2.grid(linestyle=":")
+
+            plt.tight_layout()
+
+        # Create the animation
+        ani = animation.FuncAnimation(fig, update, frames=num_iterations, repeat=False, interval=100)
+        HTML(ani.to_jshtml())
+        ```
+    
+    1. Change the starting point to $x_0 = 3.4$. What do you see? How could you name such a behavior of the method? 
+    1. Change the hyperparameter $\alpha^{\text{Global}} = \frac2L, \beta^{\text{Global}} = \frac{\mu}{L}$ and run the method again from $x_0 = 3.4$. Check whether you have accelerated convergence here.
+
+    Context: this counterexample was provided in the [paper](https://arxiv.org/pdf/1408.3595.pdf), while the global convergence of the heavy ball method for general smooth strongly convex function was introduced in another [paper](https://arxiv.org/pdf/1412.7457.pdf). Recently, it was [suggested](https://arxiv.org/pdf/2307.11291.pdf), that the heavy-ball (HB) method provably does not reach an accelerated convergence rate on smooth strongly convex problems. 
+
+1. In this problem we will work with accelerated methods applied to the logistic regression problem. A good visual introduction to the topic is available [here](https://mlu-explain.github.io/logistic-regression/). 
+    
+    Logistic regression is a standard model in classification tasks. For simplicity, consider only the case of binary classification. Informally, the problem is formulated as follows: There is a training sample $\{(a_i, b_i)\}_{i=1}^m$, consisting of $m$ vectors $a_i \in \mathbb{R}^n$ (referred to as features) and corresponding numbers $b_i \in \{-1, 1\}$ (referred to as classes or labels). The goal is to construct an algorithm $b(\cdot)$, which for any new feature vector $a$ automatically determines its class $b(a) \in \{-1, 1\}$. 
+
+    In the logistic regression model, the class determination is performed based on the sign of the linear combination of the components of the vector $a$ with some fixed coefficients $x \in \mathbb{R}^n$:
+    
+    $$
+    b(a) := \text{sign}(\langle a, x \rangle).
+    $$
+
+    The coefficients $x$ are the parameters of the model and are adjusted by solving the following optimization problem:
+    
+    $$
+    \tag{LogReg}
+    \min_{x \in \mathbb{R}^n} \left( \frac{1}{m} \sum_{i=1}^m \ln(1 + \exp(-b_i \langle a_i, x \rangle)) + \frac{\lambda}{2} \|x\|^2 \right),
+    $$
+
+    where $\lambda \geq 0$ is the regularization coefficient (a model parameter). 
+
+    1. Will the LogReg problem be convex for $\lambda = 0$? What is the gradient of the objective function? Will it be strongly convex? What if you will add regularization with $\lambda > 0$?
+    1. We will work with the real-world data for $A$ and $b$: take the mushroom dataset. Be careful, you will need to predict if the mushroom is poisonous or edible. A poor model can cause death in this exercise. 
+
+        ```python
+        import requests
+        from sklearn.datasets import load_svmlight_file
+
+        # URL of the file to download
+        url = 'https://hse24.fmin.xyz/files/mushrooms.txt'
+
+        # Download the file and save it locally
+        response = requests.get(url)
+        dataset = 'mushrooms.txt'
+
+        # Ensure the request was successful
+        if response.status_code == 200:
+            with open(dataset, 'wb') as f:
+                f.write(response.content)
+
+            # Load the dataset from the downloaded file
+            data = load_svmlight_file(dataset)
+            A, b = data[0].toarray(), data[1]
+            n, d = A.shape
+
+            print("Data loaded successfully.")
+            print(f"Number of samples: {n}, Number of features: {d}")
+        else:
+            print(f"Failed to download the file. Status code: {response.status_code}")
+
+        ```
+    1. Divide the data into two parts: training and test. We will train the model on the $A_{train}$, $b_{train}$ and measure the accuracy of the model on the $A_{test}$, $b_{test}$.
+
+        ```python
+        from sklearn.model_selection import train_test_split
+        # Split the data into training and test sets
+        A_train, A_test, b_train, b_test = train_test_split(A, b, test_size=0.2, random_state=214)
+        ```
+    1. For the training part $A_{train}$, $b_{train}$, estimate the constants $\mu, L$ of the training/optimization problem. Use the same small value $\lambda$ for all experiments
+    1. Using gradient descent with the step $\frac{1}{L}$, train a model. Plot: accuracy versus iteration number. 
+
+        $$
+        \tag{HB}
+        x_{k+1} = x_k - \alpha \nabla f(x_k) + \beta (x_k - x_{k-1})
+        $$
+
+        Fix a step $\alpha = \frac{1}{L}$ and search for different values of the momentum $\beta$ from $-1$ to $1$. Choose your own convergence criterion and plot convergence for several values of momentum on the same graph. Is the convergence always monotonic?
+    
+    1. For the best value of momentum $\beta$, plot the dependence of the model accuracy on the test sample on the running time of the method. Add to the same graph the convergence of gradient descent with step $\frac{1}{L}$. Draw a conclusion. Ensure, that you use the same value of $\lambda$ for both methods.
+    1. Solve the logistic regression problem using the Nesterov method. 
+
+        $$
+        \tag{NAG}
+        x_{k+1} = x_k - \alpha \nabla f(x_k + \beta (x_k - x_{k-1})) + \beta (x_k - x_{k-1})  
+        $$
+
+        Fix a step $\frac{1}{L}$ and search for different values of momentum $\beta$ from $-1$ to $1$. Check also the momentum values equal to $\frac{k}{k+3}$, $\frac{k}{k+2}$, $\frac{k}{k+1}$ ($k$ is the number of iterations), and if you are solving a strongly convex problem, also $\frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}$. Plot the convergence of the method as a function of the number of iterations (choose the convergence criterion yourself) for different values of the momentum. Is the convergence always monotonic?
+    1. For the best value of momentum $\beta$, plot the dependence of the model accuracy on the test sample on the running time of the method. Add this graph to the graphs for the heavy ball and gradient descent from the previous steps. Make a conclusion.
+    1. Now we drop the estimated value of $L$ and will try to do it adaptively. Let us make the selection of the constant $L$ adaptive. 
+    
+        $$
+        f(y) \leq f(x^k) + \langle \nabla f(x^k), y - x^k \rangle + \frac{L}{2}\|x^k - y\|_2^2
+        $$
+        
+        In particular, the procedure might work:
+
+        ```python
+        def backtracking_L(f, grad, x, h, L0, rho, maxiter=100):
+            L = L0
+            fx = f(x)
+            gradx = grad(x)
+            iter = 0
+            while iter < maxiter :
+                y = x - 1 / L * h
+                if f(y) <= fx - 1 / L gradx.dot(h) + 1 / (2 * L) h.dot(h):
+                    break
+                else:
+                    L = L * rho
+                
+                iter += 1
+            return L
+        ```
+
+        What should $h$ be taken as? Should $\rho$ be greater or less than $1$? Should $L_0$ be taken as large or small? Draw a similar figure as it was in the previous step for L computed adaptively (6 lines - GD, HB, NAG, GD adaptive L, HB adaptive L, NAG adaptive L)
+
+### Subgradient Descent
+
+1. **Subgradient descent convergence with several stepsize strategies.** In this problem you will have to prove the convergence of subgradient descent ($x^{k+1} = x^k - \alpha_k g_k$) for several stepsize strategies. First prove, that 
+
+    $$
+    \|x^{k+1} - x^*\|_2^2 \leq \|x^{k} - x^*\|_2^2 - 2\alpha_k \left(f(x^k) - f^* \right) + \alpha^2_k \|g_k\|_2^2
+    $$
+
+    Then, using $\|g\|_2 \leq G, \|x^0 - x^*\| \leq R$ prove, that 
+
+    $$
+    \|x^{k+1} - x^*\|_2^2 \leq R^2 - 2\sum\limits_{i=1}^k\alpha_i \left(f(x^i) - f^* \right) + G^2\sum\limits_{i=1}^k\alpha^2_i
+    $$
+
+    Then, using $f_k^{\text{best}} = \min\limits_{i=1,\ldots,k} f(x^i)$ prove, that 
+
+    $$
+    f_k^{\text{best}} - f^* \leq \frac{R^2 + G^2\sum\limits_{i=1}^k\alpha^2_i}{2\sum\limits_{i=1}^k\alpha_i}
+    $$
+
+    After that, finalize the bound for the following stepsize choosing strategies
+
+    * constant step size $\alpha_k = \alpha$
+    * constant step length $\alpha_k = \frac{\gamma}{\|g_k\|_2}$ (so $\|x^{k+1} - x^k\|_2 = \gamma$)
+    * Inverse square root $\frac{R}{G\sqrt{k}}$
+    * Inverse $\frac1k$
+    * Polyak’s step size:
+
+        $$
+        \alpha_k = \frac{f(x^k) - f^*}{\|g_k\|_2^2}
+        $$
+
+1. **Finding a point in the intersection of convex sets.** Let $A \in \mathbb{R}^{n \times n}$ be a positive definite matrix and let $\Sigma$ be an $n \times n$ diagonal matrix with diagonal entries $\sigma_1,...,\sigma_n > 0$, and $y$ a given vector in $\mathbb{R}^n$. Consider the compact convex sets $U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}$ and $V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}$.
+
+    * Minimize maximum distance from the current point to the convex sets. 
+
+        $$
+        \min_{x\in\mathbb{R}^n} f(x) =  \min_{x\in\mathbb{R}^n} \max\{\mathbf{dist}(x, U), \mathbf{dist}(x, V)\}
+        $$
+
+        propose an algorithm to find a point $x \in U \cap V$. You can assume that $U \cap V$ is not empty. Your algorithm must be provably converging (although you do not need to prove it and you can simply refer to the lecture slides).
+
+    * Implement your algorithm with the following data: $n = 2$, $y = (3, 2)$, $\sigma_1 = 0.5$, $\sigma_2 = 1$, 
+
+        $$
+        A = \begin{bmatrix} 
+        1 & 0 \\
+        -1 & 1 
+        \end{bmatrix},
+        $$
+
+        and $x = (2, 1)$. Plot the objective value of your optimization problem versus the number of iterations.
+
+    ![Illustration of the problem](convex_intersection.png)
+
+### Conjugate gradients
+
+1. **[Randomized Preconditioners for Conjugate Gradient Methods.](https://web.stanford.edu/class/ee364b/364b_exercises.pdf)** 
+
+    *Linear least squares*
+
+    In this task, we explore the use of some randomization methods for solving overdetermined least-squares problems, focusing on conjugate gradient methods. Let $A \in \mathbb{R}^{m \times n}$ be a matrix (we assume that $m \gg n$) and $b \in \mathbb{R}^m$, we aim to minimize
+
+    $$
+    f(x) = \frac{1}{2} \|Ax - b\|^2_2 = \frac{1}{2} \sum_{i=1}^m (a_i^T x - b_i)^2,
+    $$
+
+    where the $a_i \in \mathbb{R}^n$ denote the rows of $A$.
+
+    *Preconditioners*
+
+    We know, that the convergence bound of the CG applied for the problem depends on the condition number of the matrix. Note, that for the problem above we have the matrix $A^T A$ and the condition number is squared after this operation ($\kappa (X^T X) =  \kappa^2 \left(X \right)$). That is the reason, why we typically need to use *preconditioners* ([read 12. for more details](https://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf)) with CG.
+
+    The general idea of using preconditioners implies switchwing from solving $Ax = b$ to $MAx = Mb$ with hope, that $\kappa \left( MA\right) \ll \kappa \left( A\right)$ or eigenvalues of $MA$ are better clustered than those of $A$ (note, that matrix $A$ here is for the general case, here we have $A^TA$ instead). 
+
+    This idea can also be viewed as coordinate change $x = T \hat{x}, \; \hat{x} = T^{-1}x$, which leads to the problem $T^T A T \hat{x} = T^Tb$. Note, that the spectrum of $T^TAT$ is the same as the spectrum of $MA$. 
+    
+    The best choice of $M$ is $A^{-1}$, because $\kappa (A^{-1} A) = \kappa (I) = 1$. However, if we know $A^{-1}$, the original problem is already solved, that is why we need to find some trade-off between enhanced convergence, and extra cost of working with $M$. The goal is to find $M$ that is cheap to multiply, and approximate inverse of $A$ (or at least has a more clustered spectrum than $A$). 
+
+    Below you can find Vanilla CG algorithm (on the left) and preconditioned CG algorithm (on the right):
+
+    $$
+    \begin{aligned}
+    & \mathbf{r}_0 := \mathbf{b} - \mathbf{A x}_0 \\
+    & \hbox{if } \mathbf{r}_{0} \text{ is sufficiently small, then return } \mathbf{x}_{0} \text{ as the result}\\
+    & \mathbf{d}_0 := \mathbf{r}_0 \\
+    & k := 0 \\
+    & \text{repeat} \\
+    & \qquad \alpha_k := \frac{\mathbf{r}_k^\mathsf{T} \mathbf{r}_k}{\mathbf{d}_k^\mathsf{T} \mathbf{A d}_k}  \\
+    & \qquad \mathbf{x}_{k+1} := \mathbf{x}_k + \alpha_k \mathbf{d}_k \\
+    & \qquad \mathbf{r}_{k+1} := \mathbf{r}_k - \alpha_k \mathbf{A d}_k \\
+    & \qquad \hbox{if } \mathbf{r}_{k+1} \text{ is sufficiently small, then exit loop} \\
+    & \qquad \beta_k := \frac{\mathbf{r}_{k+1}^\mathsf{T} \mathbf{r}_{k+1}}{\mathbf{r}_k^\mathsf{T} \mathbf{r}_k} \\
+    & \qquad \mathbf{d}_{k+1} := \mathbf{r}_{k+1} + \beta_k \mathbf{d}_k \\
+    & \qquad k := k + 1 \\
+    & \text{end repeat} \\
+    & \text{return } \mathbf{x}_{k+1} \text{ as the result}
+    \end{aligned} \qquad 
+    \begin{aligned}
+    & \mathbf{r}_0 := \mathbf{b} - \mathbf{A x}_0 \\
+    & \text{if } \mathbf{r}_0 \text{ is sufficiently small, then return } \mathbf{x}_0 \text{ as the result} \\
+    & \mathbf{z}_0 := \mathbf{M}^{-1} \mathbf{r}_0 \\
+    & \mathbf{d}_0 := \mathbf{z}_0 \\
+    & k := 0 \\
+    & \text{repeat} \\
+    & \qquad \alpha_k := \frac{\mathbf{r}_k^\mathsf{T} \mathbf{z}_k}{\mathbf{d}_k^\mathsf{T} \mathbf{A d}_k} \\
+    & \qquad \mathbf{x}_{k+1} := \mathbf{x}_k + \alpha_k \mathbf{d}_k \\
+    & \qquad \mathbf{r}_{k+1} := \mathbf{r}_k - \alpha_k \mathbf{A d}_k \\
+    & \qquad \text{if } \mathbf{r}_{k+1} \text{ is sufficiently small, then exit loop} \\
+    & \qquad \mathbf{z}_{k+1} := \mathbf{M}^{-1} \mathbf{r}_{k+1} \\
+    & \qquad \beta_k := \frac{\mathbf{r}_{k+1}^\mathsf{T} \mathbf{z}_{k+1}}{\mathbf{r}_k^\mathsf{T} \mathbf{z}_k} \\
+    & \qquad \mathbf{d}_{k+1} := \mathbf{z}_{k+1} + \beta_k \mathbf{d}_k \\
+    & \qquad k := k + 1 \\
+    & \text{end repeat} \\
+    & \text{return } \mathbf{x}_{k+1} \text{ as the result}
+    \end{aligned}
+    $$
+
+    *Hadamard matrix*
+
+    Given $m \in \{2^i, i = 1, 2, \ldots\}$, the (unnormalized) Hadamard matrix of order $m$ is defined recursively as
+
+    $$
+    H_2 = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}, \quad \text{and} \quad H_m = \begin{bmatrix} H_{m/2} & H_{m/2} \\ H_{m/2} & -H_{m/2} \end{bmatrix}.
+    $$
+
+    The associated normalized Hadamard matrix is given by $H^{(\text{norm})}_m = \frac{1}{\sqrt{m}} H_m$, which evidently satisfies $H^{(\text{norm})T}_m H^{(\text{norm})}_m = I_{m \times m}$. Moreover, via a recursive algorithm, it is possible to compute matvec $H_m x$ in time $O(m \log m)$, which is much faster than $m^2$ for a general matrix.
+
+    To solve the least squares minimization problem using conjugate gradients, we must solve $A^T A x = A^T b$. Using a preconditioner $M$ such that $M \approx A^{-1}$ can give substantial speedup in computing solutions to large problems.
+
+    Consider the following scheme to generate a randomized preconditioner, assuming that $m = 2^i$ for some $i$:
+
+    1. Let $S = \text{diag}(S_{11}, \ldots, S_{mm})$, where $S_{jj}$ are random $\{-1,+1\}$ signs
+    2. Let $p \in \mathbb{Z}^+$ be a small positive integer, say $20$ for this problem.
+    3. Let $R \in \{0, 1\}^{n+p \times m}$ be a *row selection matrix*, meaning that each row of $R$ has only 1 non-zero entry, chosen uniformly at random. (The location of these non-zero columns is distinct.)
+
+        ```python
+        import jax.numpy as jnp
+        from jax import random
+
+        def create_row_selection_matrix_jax(m, n, p, key):
+            # m is the number of columns in the original matrix A
+            # n+p is the number of rows in the row selection matrix R
+            # key is a PRNGKey needed for randomness in JAX
+            inds = random.permutation(key, m)[:n+p]  # Generate a random permutation and select the first n+p indices
+            R = jnp.zeros((n+p, m), dtype=jnp.int32)  # Create a zero matrix of shape (n+p, m)
+            R = R.at[np.arange(n+p), inds].set(1)     # Use JAX's indexed update to set the entries corresponding to inds to 1
+            return R
+        ```
+
+    4. Define $\Phi = R H^{(\text{norm})}_m S \in \mathbb{R}^{n+p \times m}$
+
+    We then define the matrix \( M \) via its inverse \( M^{-1} = A^T \Phi^T \Phi A \in \mathbb{R}^{n \times n} \).
+
+    *Questions*
+
+    1. **(1 point)** How many FLOPs (floating point operations, i.e. multiplication and additions) are required to compute the matrices $M^{-1}$ and $M$, respectively, assuming that you can compute the matrix-vector product $H_mv$ in time $m \log m$ for any vector $v \in \mathbb{R}^m$?
+
+    1. **(1 point)** How many FLOPs are required to naively compute $A^T A$, assuming $A$ is dense (using standard matrix algorithms)?
+    
+    1. **(1 point)** How many FLOPs are required to compute $A^T A v$ for a vector $v \in \mathbb{R}^n$ by first computing $u = Av$ and then computing $A^T u$?
+    
+    1. **(2 poins)** Suppose that conjugate gradients runs for $k$ iterations. Using the preconditioned conjugate gradient algorithm with $M = (A^T \Phi^T \Phi A)^{-1}$, how many total floating point operations have been performed? How many would be required to directly solve $A^T A x = A^T b$? How large must $k$ be to make the conjugate gradient method slower?
+    
+    1. **(5 points)** Implement the conjugate gradient algorithm for solving the positive definite linear system $A^T A x = A^T b$ both with and without the preconditioner $M$. To generate data for your problem, set $m = 2^{12}$ and $n = 400$, then generate the matrix $A$ and the vector $b$. For simplicity in implementation, you may directly pass $A^T A$ and $A^T b$ into your conjugate gradient solver, as we only wish to explore how the methods work.
+
+    ```python
+    import numpy as np
+    from scipy.sparse import diags
+
+    m = 2**12  # 4096
+    n = 400
+    # Create a linear space of values from 0.001 to 100
+    values = np.linspace(0.001, 100, n)
+    # Generate the matrix A
+    A = np.random.randn(m, n) * diags(values).toarray()
+    b = np.random.randn(m, 1)
+    ```
+
+    Plot the norm of the residual $r_k = A^T b - A^T A x_k$ (relative to $\|A^T b\|_2$) as a function of iteration $k$ for each of your conjugate gradient procedures. Additionally, compute and print the condition numbers $\kappa(A^T A)$ and $\kappa(M^{1/2} A^T A M^{1/2})$.

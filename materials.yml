@@ -91,20 +91,22 @@
   materials: /lectures/lec_12/lec_12.pdf
   notes: /notes/12.pdf
   seminar: /seminars/sem_12/sem_12.pdf
-  # youtube: https://youtu.be/HzaEACIVcrU
+  youtube: https://youtu.be/s7kfCDlZRPA
   # download: https://disk.yandex.com/i/s6rAEBb5gWbdiw
 
 - title: Градиентные методы в условных задачах оптимизации - метод проекции градиента. Метод Франк - Вульфа. Идея метода зеркального спуска.
   number: 13
-  #materials: /presentations/11.pdf
-  # notes: /notes/11.pdf
-  youtube: 
+  materials: /lectures/lec_13/lec_13.pdf
+  notes: /notes/13.pdf
+  seminar: /seminars/sem_13/sem_13.pdf
+  youtube: https://youtu.be/PEqNy3r0aRs
   download: 
 
 - title: Проксимальный градиентный метод.
   number: 14
-  #materials: /presentations/11.pdf
-  # notes: /notes/11.pdf
+  materials: /lectures/lec_14/lec_14.pdf
+  notes: /notes/14.pdf
+  seminar: /seminars/sem_14/sem_14.pdf
   youtube: 
   download: 
 
