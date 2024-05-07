@@ -18,7 +18,7 @@ format:
 
 ## Non-smooth problems
 
-[![](l1_regularization.jpeg)](https://fmin.xyz/assests/Notebooks/Regularization_horizontal.mp4)
+[![](l1_regularization.jpeg)](https://fmin.xyz/assets/Notebooks/Regularization_horizontal.mp4)
 
 ## Subgradient method
 
@@ -110,12 +110,16 @@ $$
 
 :::{.callout-important}
 
-## Proximal operator
+### Proximal operator
 
 $$
 \text{prox}_{f, \alpha}(x_k) = \text{arg}\min_{x\in \mathbb{R}^n} \left[ f(x) +  \frac{1}{2\alpha} \|x - x_k\|^2_2 \right]
 $$
 :::
+
+## Proximal operator visualization
+
+![[Source](https://twitter.com/gabrielpeyre/status/1273842947704999936)](prox_vis.jpeg){width=63%}
 
 ## Proximal mapping intuition
 

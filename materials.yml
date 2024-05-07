@@ -92,7 +92,7 @@
   notes: /notes/12.pdf
   seminar: /seminars/sem_12/sem_12.pdf
   youtube: https://youtu.be/s7kfCDlZRPA
-  # download: https://disk.yandex.com/i/s6rAEBb5gWbdiw
+  download: https://disk.yandex.com/i/DqXjIIMgYx_jUQ
 
 - title: Градиентные методы в условных задачах оптимизации - метод проекции градиента. Метод Франк - Вульфа. Идея метода зеркального спуска.
   number: 13
@@ -100,7 +100,7 @@
   notes: /notes/13.pdf
   seminar: /seminars/sem_13/sem_13.pdf
   youtube: https://youtu.be/PEqNy3r0aRs
-  download: 
+  download: https://disk.yandex.com/i/HByfIxndDR-rnQ
 
 - title: Проксимальный градиентный метод.
   number: 14
@@ -108,38 +108,31 @@
   notes: /notes/14.pdf
   seminar: /seminars/sem_14/sem_14.pdf
   youtube: 
-  download: 
+  download: https://disk.yandex.com/i/btnUr7i7X28owA
 
-- title: Метод натурального градиента. Метод зеркального спуска. K-FAC.
+- title: Метод Ньютона. Квазиньютоновские методы.
   number: 15
   #materials: /presentations/12.pdf
   # notes: /notes/12.pdf
-  youtube: 
+  youtube: https://youtu.be/cEP-Ge8yDQQ
   download: 
 
-- title: Метод Ньютона. Квазиньютоновские методы.
+- title: "Стохастический градиентный спуск."
   number: 16
-  #materials: /presentations/13.pdf
-  # notes: /notes/13.pdf
-  youtube: 
-  download: 
-
-- title: "Стохастический градиентный спуск. Адаптивные стохастические градиентные алгоритмы: AdaDelta, RMSProp, Adam, Nadam."
-  number: 17
   #materials: /presentations/15.pdf
   # notes: /notes/15.pdf
   youtube: 
   download: 
 
 - title: "Методы редукции дисперсии: SAG, SVRG, SAGA."
-  number: 18
+  number: 17
   #materials: /presentations/16.pdf
   # notes: /notes/16.pdf
   youtube: 
   download: 
 
 - title: Градиентный поток и диффузия. Методы оптимизации в непрерывном времени.
-  number: 19
+  number: 18
   #materials: /presentations/17.pdf
   # notes: /notes/17.pdf
   youtube: 

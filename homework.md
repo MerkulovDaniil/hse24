@@ -6,15 +6,15 @@ toc: true
 
 ### Linear algebra basics
 
-1. Prove that the matrix $xy^T$ has rank equals to one.
+1. [10 points] Prove that the matrix $xy^T$ has rank equals to one.
 
-1. Find SVD of the following matrices:
+1. [20 points] Find SVD of the following matrices:
 
     * $A = \begin{bmatrix} 1\\2\\3 \end{bmatrix}$ 
     * $A = \begin{bmatrix} 1 & 4\\4 & 8\\3 & 8 \end{bmatrix}$ 
     * $A = \begin{bmatrix} 0 & 0\\x & 0\\0 & 0 \end{bmatrix}$, where $x$ is the sum of your birthdate numbers (day + month)
 
-1. Assume we have a set of data points $x^{(i)}\in\mathbb{R}^{n},\,i=1,\dots,m$, and decide to represent this data as a matrix
+1. [10 points] Assume we have a set of data points $x^{(i)}\in\mathbb{R}^{n},\,i=1,\dots,m$, and decide to represent this data as a matrix
 
     $$
     X =
@@ -57,7 +57,7 @@ toc: true
     
     What is the rank of $Y$ if $\text{rank} \; X = r$?
 
-1. **Image Compression with Truncated SVD** Explore image compression using Truncated Singular Value Decomposition (SVD). Understand how varying the number of singular values affects the quality of the compressed image.
+1. **Image Compression with Truncated SVD** [10 points] Explore image compression using Truncated Singular Value Decomposition (SVD). Understand how varying the number of singular values affects the quality of the compressed image.
     Implement a Python script to compress a grayscale image using Truncated SVD and visualize the compression quality.
     
     * **Truncated SVD**: Decomposes an image $A$ into $U, S,$ and $V$ matrices. The compressed image is reconstructed using a subset of singular values.
@@ -156,40 +156,37 @@ toc: true
 
 ### Convergence rates
 
-1. Determine the convergence or divergence of the given sequences
+1. [10 points] Determine the convergence or divergence of the given sequences
 
     * $r_{k} = k^{\frac{1}{2}}$.
     * $r_{k} = \frac{1}{\sqrt{k}}$.
     * $r_{k} = 0.808^k$.
     * $r_{k} = 0.808^{2^k}$.
 
-1. Determine the following sequence $\{r_k\}$ by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally, find out whether there is quadratic convergence.
+1. [10 points] Determine the following sequence $\{r_k\}$ by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally, find out whether there is quadratic convergence.
 
     $$
     r_k = \dfrac{1}{k!}
     $$
 
-1. Determine the convergence or divergence of a given sequence $r_k =\begin{cases} \frac{1}{k}, & \text{if } k\text{ is even} \\ e^{-k}, & \text{if } k\text{ is odd} \end{cases}$.
+1. [10 points] Determine the convergence or divergence of a given sequence $r_k =\begin{cases} \frac{1}{k}, & \text{if } k\text{ is even} \\ e^{-k}, & \text{if } k\text{ is odd} \end{cases}$.
 
-1. Determine the convergence or divergence of a given sequence $r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, & \text{if } k\text{ is even} \\ \frac{r_{k-1}}{k}, & \text{if } k\text{ is odd} \end{cases}$.
+1. [10 points] Determine the convergence or divergence of a given sequence $r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, & \text{if } k\text{ is even} \\ \frac{r_{k-1}}{k}, & \text{if } k\text{ is odd} \end{cases}$.
 
-
-
-
-1. Let $\{r_k\}$ be a sequence of non-negative numbers given as $r_{k+1} = Mr_k^2$, where $M > 0$, $r_0 \geq 0$. Establish a necessary and sufficient condition on $M$ and $r_0$ under which the sequence $r_k$ will converge to zero. What is the rate of convergence?
+1. [10 points] Let $\{r_k\}$ be a sequence of non-negative numbers given as $r_{k+1} = Mr_k^2$, where $M > 0$, $r_0 \geq 0$. Establish a necessary and sufficient condition on $M$ and $r_0$ under which the sequence $r_k$ will converge to zero. What is the rate of convergence?
 
 
-1. Let $\left\{ r_k \right\}_{k=m}^\infty$ be a sequence of non-negative numbers and let $s > 0$ be some integer. Prove that sequence $\left\{ r_k \right\}_{k=m+s}^\infty$ is linearly convergent with constant $q$ if and only if a the sequence $\left\{ r_k \right\}_{k=m}^\infty$ converged linearly with constant $q$.
+1. [10 points] Let $\left\{ r_k \right\}_{k=m}^\infty$ be a sequence of non-negative numbers and let $s > 0$ be some integer. Prove that sequence $\left\{ r_k \right\}_{k=m+s}^\infty$ is linearly convergent with constant $q$ if and only if a the sequence $\left\{ r_k \right\}_{k=m}^\infty$ converged linearly with constant $q$.
 
 ### Line search
 
-1. Consider a quadratic function $f: \mathbb{R}^n \rightarrow \mathbb{R}$, and let us start from a point $x_k \in \mathbb{R}^n$ moving in the direction of the antigradient $-\nabla f(x_k)$. Show that the minimum of $f$ along this direction as a function of the step size $\alpha$, for a decreasing function at $x_k$, satisfies Armijo's condition for any $c_1$ in the range $0 \leq c_1 \leq \frac{1}{2}$. Specifically, demonstrate that the following inequality holds at the optimal $\alpha^*$:
+1. [10 points] Consider a quadratic function $f: \mathbb{R}^n \rightarrow \mathbb{R}$, and let us start from a point $x_k \in \mathbb{R}^n$ moving in the direction of the antigradient $-\nabla f(x_k)$. Show that the minimum of $f$ along this direction as a function of the step size $\alpha$, for a decreasing function at $x_k$, satisfies Armijo's condition for any $c_1$ in the range $0 \leq c_1 \leq \frac{1}{2}$. Specifically, demonstrate that the following inequality holds at the optimal $\alpha^*$:
 
    $$
    \varphi(\alpha) = f(x_{k+1}) = f(x_k - \alpha \nabla f(x_k)) \leq f(x_k) - c_1 \alpha \|\nabla f(x_k)\|_2^2
    $$
 
-1. **Implementing and Testing Line Search Conditions in Gradient Descent**
+1. **Implementing and Testing Line Search Conditions in Gradient Descent** [30 points] 
 
     $$
     x_{k+1} = x_k - \alpha \nabla f(x_k)
@@ -308,14 +305,14 @@ toc: true
 
 ### Matrix calculus
 
-1. Given a matrix $A$ of size $m \times n$ and a vector $x$ of size $n \times 1$, compute the gradient of the function $f(x) = \text{tr}(A^T A x x^T)$ with respect to $x$.
-1. Find the gradient $\nabla f(x)$ and hessian $f''(x)$, if $f(x) = \dfrac{1}{2} \Vert Ax - b\Vert^2_2$.
-1. Find the gradient $\nabla f(x)$ and hessian $f''(x)$, if 
+1. [10 points] Given a matrix $A$ of size $m \times n$ and a vector $x$ of size $n \times 1$, compute the gradient of the function $f(x) = \text{tr}(A^T A x x^T)$ with respect to $x$.
+1. [10 points] Find the gradient $\nabla f(x)$ and hessian $f''(x)$, if $f(x) = \dfrac{1}{2} \Vert Ax - b\Vert^2_2$.
+1. [10 points] Find the gradient $\nabla f(x)$ and hessian $f''(x)$, if 
     $$
     f(x) = \frac1m \sum\limits_{i=1}^m \log \left( 1 + \exp(a_i^{T}x) \right) + \frac{\mu}{2}\Vert x\Vert _2^2, \; a_i, x \in \mathbb R^n, \; \mu>0
     $$
-1. Compute the gradient $\nabla_A f(A)$ of the trace of the matrix exponential function $f(A) = \text{tr}(e^A)$ with respect to $A$. Hint: hint: Use the definition of the matrix exponential. Use the definition of the differential $df = f(A + dA) - f(A) + o(\Vert dA \Vert)$ with the limit $\Vert dA \Vert \to 0$.
-1. Calculate the first and the second derivative of the following function $f : S \to \mathbb{R}$
+1. [10 points] Compute the gradient $\nabla_A f(A)$ of the trace of the matrix exponential function $f(A) = \text{tr}(e^A)$ with respect to $A$. Hint: hint: Use the definition of the matrix exponential. Use the definition of the differential $df = f(A + dA) - f(A) + o(\Vert dA \Vert)$ with the limit $\Vert dA \Vert \to 0$.
+1. [10 points] Calculate the first and the second derivative of the following function $f : S \to \mathbb{R}$
 
     $$
     f(t) = \text{det}(A − tI_n),
@@ -323,22 +320,22 @@ toc: true
 
 
     where $A \in \mathbb{R}^{n \times n}, S := \{t \in \mathbb{R} : \text{det}(A − tI_n) \neq 0\}$.
-1. Find the gradient $\nabla f(X)$, if $f(X) = \text{tr}\left( AX^2BX^{-\top} \right)$.
+1. [10 points] Find the gradient $\nabla f(X)$, if $f(X) = \text{tr}\left( AX^2BX^{-\top} \right)$.
 
 ### Automatic differentiation and jax (2 more problems coming)
 You can use any automatic differentiation framework in this section (Jax, PyTorch, Autograd etc.)
 
-1. You will work with the following function for this exercise,
+1. [10 points] You will work with the following function for this exercise,
     $$
     f(x,y)=e^{−\left(sin(x)−cos(y)\right)^2}
     $$  
     Draw the computational graph for the function. Note, that it should contain only primitive operations - you need to do it automatically -  [jax example](https://bnikolic.co.uk/blog/python/jax/2022/02/22/jax-outputgraph-rev.html), [PyTorch example](https://github.com/waleedka/hiddenlayer) - you can google/find your way to visualize it.
 
-1. Compare analytic and autograd (with any framework) approach for the calculation of the gradient of:      
+1. [10 points] Compare analytic and autograd (with any framework) approach for the calculation of the gradient of:      
     $$
     f(A) = \text{tr}(e^A)
     $$
-1. We can use automatic differentiation not only to calculate necessary gradients but also for tuning hyperparameters of the algorithm like learning rate in gradient descent (with gradient descent 🤯). Suppose, we have the following function $f(x) = \frac{1}{2}\Vert x\Vert^2$, select a random point $x_0 \in \mathbb{B}^{1000} = \{0 \leq x_i \leq 1 \mid \forall i\}$. Consider $10$ steps of the gradient descent starting from the point $x_0$:
+1. [10 points] We can use automatic differentiation not only to calculate necessary gradients but also for tuning hyperparameters of the algorithm like learning rate in gradient descent (with gradient descent 🤯). Suppose, we have the following function $f(x) = \frac{1}{2}\Vert x\Vert^2$, select a random point $x_0 \in \mathbb{B}^{1000} = \{0 \leq x_i \leq 1 \mid \forall i\}$. Consider $10$ steps of the gradient descent starting from the point $x_0$:
     $$
     x_{k+1} = x_k - \alpha_k \nabla f(x_k)
     $$
@@ -347,7 +344,7 @@ You can use any automatic differentiation framework in this section (Jax, PyTorc
     \alpha_{k+1} = \alpha_k - \beta \frac{\partial L}{\partial \alpha}
     $$
     Choose any constant $\beta$ and the number of steps you need. Describe the obtained results. How would you understand, that the obtained schedule ($\alpha \in \mathbb{R}^{10}$) becomes better than it was at the start? How do you check numerically local optimality in this problem? 
-1. Compare analytic and autograd (with any framework) approach for the gradient of:     
+1. [10 points] Compare analytic and autograd (with any framework) approach for the gradient of:     
     $$
     f(X) = - \log \det X
     $$
@@ -355,10 +352,10 @@ You can use any automatic differentiation framework in this section (Jax, PyTorc
 
 ### Convexity
 
-1. Show, that $\mathbf{conv}\{xx^\top: x \in \mathbb{R}^n, \Vert x\Vert  = 1\} = \{A \in \mathbb{S}^n_+: \text{tr}(A) = 1\}$.
-1. Prove that the set of $\{x \in \mathbb{R}^2 \mid e^{x_1}\le x_2\}$ is convex.
-1. Show that the set of directions of the non-strict local descending of the differentiable function in a point is a convex cone.
-1. Is the following set convex
+1. [10 points] Show, that $\mathbf{conv}\{xx^\top: x \in \mathbb{R}^n, \Vert x\Vert  = 1\} = \{A \in \mathbb{S}^n_+: \text{tr}(A) = 1\}$.
+1. [5 points] Prove that the set of $\{x \in \mathbb{R}^2 \mid e^{x_1}\le x_2\}$ is convex.
+1. [5 points] Show that the set of directions of the non-strict local descending of the differentiable function in a point is a convex cone.
+1. [10 points] Is the following set convex
     $$
     S = \left\{ a \in \mathbb{R}^k \mid p(0) = 1, \vert p(t) \vert\leq 1 \text{ for } \alpha\leq t \leq \beta\right\},
     $$
@@ -367,7 +364,7 @@ You can use any automatic differentiation framework in this section (Jax, PyTorc
     p(t) = a_1 + a_2 t + \ldots + a_k t^{k-1} \;?
     $$
 
-1. Consider the function $f(x) = x^d$, where $x \in \mathbb{R}_{+}$. Fill the following table with ✅ or ❎. Explain your answers
+1. [10 points] Consider the function $f(x) = x^d$, where $x \in \mathbb{R}_{+}$. Fill the following table with ✅ or ❎. Explain your answers
 
     | $d$ | Convex | Concave | Strictly Convex | $\mu$-strongly convex |
     |:-:|:-:|:-:|:-:|:-:|
@@ -382,7 +379,7 @@ You can use any automatic differentiation framework in this section (Jax, PyTorc
 
     : {.responsive}
 
-1. Prove that the entropy function, defined as
+1. [10 points] Prove that the entropy function, defined as
 
     $$
     f(x) = -\sum_{i=1}^n x_i \log(x_i),
@@ -390,9 +387,9 @@ You can use any automatic differentiation framework in this section (Jax, PyTorc
 
     with $\text{dom}(f) = \{x \in \R^n_{++} : \sum_{i=1}^n x_i = 1\}$, is strictly concave.  
 
-1. Show, that the function $f: \mathbb{R}^n_{++} \to \mathbb{R}$ is convex if $f(x) = - \prod\limits_{i=1}^n x_i^{\alpha_i}$ if $\mathbf{1}^T \alpha = 1, \alpha \succeq 0$.
+1. [10 points] Show, that the function $f: \mathbb{R}^n_{++} \to \mathbb{R}$ is convex if $f(x) = - \prod\limits_{i=1}^n x_i^{\alpha_i}$ if $\mathbf{1}^T \alpha = 1, \alpha \succeq 0$.
 
-1. Show that the maximum of a convex function $f$ over the polyhedron $P = \text{conv}\{v_1, \ldots, v_k\}$ is achieved at one of its vertices, i.e.,
+1. [10 points] Show that the maximum of a convex function $f$ over the polyhedron $P = \text{conv}\{v_1, \ldots, v_k\}$ is achieved at one of its vertices, i.e.,
 
     $$
     \sup_{x \in P} f(x) = \max_{i=1, \ldots, k} f(v_i).
@@ -400,7 +397,7 @@ You can use any automatic differentiation framework in this section (Jax, PyTorc
 
     A stronger statement is: the maximum of a convex function over a closed bounded convex set is achieved at an extreme point, i.e., a point in the set that is not a convex combination of any other points in the set. (you do not have to prove it). *Hint:* Assume the statement is false, and use Jensen’s inequality.
 
-1. Show, that the two definitions of $\mu$-strongly convex functions are equivalent:
+1. [10 points] Show, that the two definitions of $\mu$-strongly convex functions are equivalent:
     1. $f(x)$ is $\mu$-strongly convex $\iff$ for any $x_1, x_2 \in S$ and $0 \le \lambda \le 1$ for some $\mu > 0$:
         
         $$
@@ -413,7 +410,7 @@ You can use any automatic differentiation framework in this section (Jax, PyTorc
 
 In this section, you can consider either the arbitrary norm or the Euclidian norm if nothing else is specified.
 
-1. **Toy example**
+1. **Toy example** [10 points] 
     $$
     \begin{split}
     & x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
@@ -435,7 +432,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     as a function of the parameter $u$. Plot $p^*(u)$. Verify that $\dfrac{dp^*(0)}{du} = -\mu^*$ 
 
-1. Derive the dual problem for the Ridge regression problem with $A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m, \lambda > 0$:
+1. [10 points] Derive the dual problem for the Ridge regression problem with $A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m, \lambda > 0$:
 
     $$
     \begin{split}
@@ -444,7 +441,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
     \end{split}
     $$
 
-1. Derive the dual problem for the support vector machine problem with $A \in \mathbb{R}^{m \times n}, \mathbf{1} \in \mathbb{R}^m \in \mathbb{R}^m, \lambda > 0$:
+1. [20 points] Derive the dual problem for the support vector machine problem with $A \in \mathbb{R}^{m \times n}, \mathbf{1} \in \mathbb{R}^m \in \mathbb{R}^m, \lambda > 0$:
 
     $$
     \begin{split}
@@ -454,7 +451,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
     \end{split}
     $$
 
-1. Give an explicit solution to the following LP.
+1. [10 points] Give an explicit solution to the following LP.
     
     $$
     \begin{split}
@@ -466,7 +463,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     This problem can be considered the simplest portfolio optimization problem.
 
-1. Show, that the following problem has a unique solution and find it:
+1. [20 points] Show, that the following problem has a unique solution and find it:
 
     $$
     \begin{split}
@@ -477,7 +474,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     where $C \in \mathbb{S}^n_{++}, a \in \mathbb{R}^n \neq 0$. The answer should not involve inversion of the matrix $C$.
 
-1. Give an explicit solution to the following QP.
+1. [20 points] Give an explicit solution to the following QP.
     
     $$
     \begin{split}
@@ -488,7 +485,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     where $A \in \mathbb{S}^n_{++}, c \neq 0, x_c \in \mathbb{R}^n$.
 
-1.  Consider the equality-constrained least-squares problem
+1. [10 points] Consider the equality-constrained least-squares problem
     
     $$
     \begin{split}
@@ -499,7 +496,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     where $A \in \mathbb{R}^{m \times n}$ with $\mathbf{rank }A = n$, and $C \in \mathbb{R}^{k \times n}$ with $\mathbf{rank }C = k$. Give the KKT conditions, and derive expressions for the primal solution $x^*$ and the dual solution $\lambda^*$.
 
-1. Derive the KKT conditions for the problem
+1. [20 points] Derive the KKT conditions for the problem
     
     $$
     \begin{split}
@@ -514,7 +511,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
     X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
     $$
 
-1.  **Supporting hyperplane interpretation of KKT conditions**. Consider a **convex** problem with no equality constraints
+1. **Supporting hyperplane interpretation of KKT conditions**. [10 points]  Consider a **convex** problem with no equality constraints
     
     $$
     \begin{split}
@@ -542,7 +539,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     for all feasible $x$. In other words, the KKT conditions imply the simple optimality criterion or $\nabla f_0(x^*)$ defines a supporting hyperplane to the feasible set at $x^*$.
     
-1. **A penalty method for equality constraints.** We consider the problem of minimization
+1. **A penalty method for equality constraints.** [10 points] We consider the problem of minimization
 
     $$
     \begin{split}
@@ -561,7 +558,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
 ### Linear programming
 
-1. **📱🎧💻 Covers manufacturing.** Lyzard Corp is producing covers for the following products: 
+1. **📱🎧💻 Covers manufacturing.** [20 points] Lyzard Corp is producing covers for the following products: 
     * 📱 phones
     * 🎧 headphones
     * 💻 laptops
@@ -594,7 +591,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     1. Perform the sensitivity analysis. Which constraint could be relaxed to increase the profit the most? Prove it numerically.
 
-1. Prove the optimality of the solution
+1. Prove the optimality of the solution [10 points] 
     
     $$
     x = \left(\frac{7}{3} , 0, \frac{1}{3}\right)^T
@@ -616,7 +613,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
 ### Gradient Descent
 
-1. **Convergence of Gradient Descent in non-convex smooth case**
+1. **Convergence of Gradient Descent in non-convex smooth case** [10 points]
 
     We will assume nothing about the convexity of $f$.  We will show that gradient descent reaches an $\varepsilon$-substationary point $x$, such that $\|\nabla f(x)\|_2 \leq \varepsilon$, in $O(1/\varepsilon^2)$ iterations. Important note: you may use here Lipschitz parabolic upper bound: 
     
@@ -652,7 +649,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
         $$
         which establishes the desired $O(1/\varepsilon^2)$ rate for achieving $\varepsilon$-substationarity.  
 
-1. **How gradient descent convergence depends on the condition number and dimensionality.** Investigate how the number of iterations required for gradient descent to converge depends on the following two parameters: the condition number $\kappa \geq 1$ of the function being optimized, and the dimensionality $n$ of the space of variables being optimized.
+1. **How gradient descent convergence depends on the condition number and dimensionality.** [20 points] Investigate how the number of iterations required for gradient descent to converge depends on the following two parameters: the condition number $\kappa \geq 1$ of the function being optimized, and the dimensionality $n$ of the space of variables being optimized.
     
     To do this, for given parameters $n$ and $\kappa$, randomly generate a quadratic problem of size $n$ with condition number $\kappa$ and run gradient descent on it with some fixed required precision. Measure the number of iterations $T(n, \kappa)$ that the method required for convergence (successful termination based on the stopping criterion).
 
@@ -670,7 +667,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
 ### Accelerated methods
 
-1. **Local Convergence of Heavy Ball Method.** We will work with the heavy ball method in this problem
+1. **Local Convergence of Heavy Ball Method.** [20 points] We will work with the heavy ball method in this problem
 
     $$
     \tag{HB}
@@ -793,7 +790,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     Context: this counterexample was provided in the [paper](https://arxiv.org/pdf/1408.3595.pdf), while the global convergence of the heavy ball method for general smooth strongly convex function was introduced in another [paper](https://arxiv.org/pdf/1412.7457.pdf). Recently, it was [suggested](https://arxiv.org/pdf/2307.11291.pdf), that the heavy-ball (HB) method provably does not reach an accelerated convergence rate on smooth strongly convex problems. 
 
-1. In this problem we will work with accelerated methods applied to the logistic regression problem. A good visual introduction to the topic is available [here](https://mlu-explain.github.io/logistic-regression/). 
+1. [40 points] In this problem we will work with accelerated methods applied to the logistic regression problem. A good visual introduction to the topic is available [here](https://mlu-explain.github.io/logistic-regression/). 
     
     Logistic regression is a standard model in classification tasks. For simplicity, consider only the case of binary classification. Informally, the problem is formulated as follows: There is a training sample $\{(a_i, b_i)\}_{i=1}^m$, consisting of $m$ vectors $a_i \in \mathbb{R}^n$ (referred to as features) and corresponding numbers $b_i \in \{-1, 1\}$ (referred to as classes or labels). The goal is to construct an algorithm $b(\cdot)$, which for any new feature vector $a$ automatically determines its class $b(a) \in \{-1, 1\}$. 
 
@@ -898,7 +895,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
 ### Subgradient Descent
 
-1. **Subgradient descent convergence with several stepsize strategies.** In this problem you will have to prove the convergence of subgradient descent ($x^{k+1} = x^k - \alpha_k g_k$) for several stepsize strategies. First prove, that 
+1. **Subgradient descent convergence with several stepsize strategies.** [20 points] In this problem you will have to prove the convergence of subgradient descent ($x^{k+1} = x^k - \alpha_k g_k$) for several stepsize strategies. First prove, that 
 
     $$
     \|x^{k+1} - x^*\|_2^2 \leq \|x^{k} - x^*\|_2^2 - 2\alpha_k \left(f(x^k) - f^* \right) + \alpha^2_k \|g_k\|_2^2
@@ -928,7 +925,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
         \alpha_k = \frac{f(x^k) - f^*}{\|g_k\|_2^2}
         $$
 
-1. **Finding a point in the intersection of convex sets.** Let $A \in \mathbb{R}^{n \times n}$ be a positive definite matrix and let $\Sigma$ be an $n \times n$ diagonal matrix with diagonal entries $\sigma_1,...,\sigma_n > 0$, and $y$ a given vector in $\mathbb{R}^n$. Consider the compact convex sets $U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}$ and $V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}$.
+1. **Finding a point in the intersection of convex sets.** [30 points] Let $A \in \mathbb{R}^{n \times n}$ be a positive definite matrix and let $\Sigma$ be an $n \times n$ diagonal matrix with diagonal entries $\sigma_1,...,\sigma_n > 0$, and $y$ a given vector in $\mathbb{R}^n$. Consider the compact convex sets $U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}$ and $V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}$.
 
     * Minimize maximum distance from the current point to the convex sets. 
 
@@ -953,7 +950,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
 ### Conjugate gradients
 
-1. **[Randomized Preconditioners for Conjugate Gradient Methods.](https://web.stanford.edu/class/ee364b/364b_exercises.pdf)** 
+1. **[Randomized Preconditioners for Conjugate Gradient Methods.](https://web.stanford.edu/class/ee364b/364b_exercises.pdf)** [20 points] 
 
     *Linear least squares*
 
@@ -1052,15 +1049,15 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     *Questions*
 
-    1. **(1 point)** How many FLOPs (floating point operations, i.e. multiplication and additions) are required to compute the matrices $M^{-1}$ and $M$, respectively, assuming that you can compute the matrix-vector product $H_mv$ in time $m \log m$ for any vector $v \in \mathbb{R}^m$?
+    1. **(2 points)** How many FLOPs (floating point operations, i.e. multiplication and additions) are required to compute the matrices $M^{-1}$ and $M$, respectively, assuming that you can compute the matrix-vector product $H_mv$ in time $m \log m$ for any vector $v \in \mathbb{R}^m$?
 
-    1. **(1 point)** How many FLOPs are required to naively compute $A^T A$, assuming $A$ is dense (using standard matrix algorithms)?
+    1. **(2 points)** How many FLOPs are required to naively compute $A^T A$, assuming $A$ is dense (using standard matrix algorithms)?
     
-    1. **(1 point)** How many FLOPs are required to compute $A^T A v$ for a vector $v \in \mathbb{R}^n$ by first computing $u = Av$ and then computing $A^T u$?
+    1. **(2 points)** How many FLOPs are required to compute $A^T A v$ for a vector $v \in \mathbb{R}^n$ by first computing $u = Av$ and then computing $A^T u$?
     
-    1. **(2 poins)** Suppose that conjugate gradients runs for $k$ iterations. Using the preconditioned conjugate gradient algorithm with $M = (A^T \Phi^T \Phi A)^{-1}$, how many total floating point operations have been performed? How many would be required to directly solve $A^T A x = A^T b$? How large must $k$ be to make the conjugate gradient method slower?
+    1. **(4 points)** Suppose that conjugate gradients runs for $k$ iterations. Using the preconditioned conjugate gradient algorithm with $M = (A^T \Phi^T \Phi A)^{-1}$, how many total floating point operations have been performed? How many would be required to directly solve $A^T A x = A^T b$? How large must $k$ be to make the conjugate gradient method slower?
     
-    1. **(5 points)** Implement the conjugate gradient algorithm for solving the positive definite linear system $A^T A x = A^T b$ both with and without the preconditioner $M$. To generate data for your problem, set $m = 2^{12}$ and $n = 400$, then generate the matrix $A$ and the vector $b$. For simplicity in implementation, you may directly pass $A^T A$ and $A^T b$ into your conjugate gradient solver, as we only wish to explore how the methods work.
+    1. **(10 points)** Implement the conjugate gradient algorithm for solving the positive definite linear system $A^T A x = A^T b$ both with and without the preconditioner $M$. To generate data for your problem, set $m = 2^{12}$ and $n = 400$, then generate the matrix $A$ and the vector $b$. For simplicity in implementation, you may directly pass $A^T A$ and $A^T b$ into your conjugate gradient solver, as we only wish to explore how the methods work.
 
     ```python
     import numpy as np
@@ -1076,3 +1073,77 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
     ```
 
     Plot the norm of the residual $r_k = A^T b - A^T A x_k$ (relative to $\|A^T b\|_2$) as a function of iteration $k$ for each of your conjugate gradient procedures. Additionally, compute and print the condition numbers $\kappa(A^T A)$ and $\kappa(M^{1/2} A^T A M^{1/2})$.
+
+### Gradient methods for conditional problems
+
+1. **🐺 Frank - Wolfe vs Projected gradient descent** [20 points] 
+
+    Consider the following simple quadratic optimization problem
+
+    $$
+    f(w) = \frac12 \langle Ax, x \rangle - \langle b, x \rangle \to \min\limits_{x \in \mathbb{R}^n; \; 1^\top x = 1, \; x \succeq 0}
+    $$
+
+    1. Generate and solve this problem numerically with *CVXPY*. Calculate optimal solution `x_optimal`
+
+        ```python
+        import jax
+        from jax import numpy as jnp
+        from jax import random
+        from jax import grad
+
+        def generate_problem(n, mu=0, L = 10):
+            RNG = random.PRNGKey(0)
+
+            U = random.normal(RNG, (n, n))
+            Q, _ = jnp.linalg.qr(U)
+            Lambda = jnp.diag(jnp.linspace(mu, L, n, endpoint=True))
+            A = Q @ Lambda @ Q.T
+
+            RNG, _ = random.split(RNG)
+            b = random.normal(RNG, (n, 1))
+
+            def f(x, A=A, b=b):
+                return 1/2 * x.T @ A @ x - b.T @ x
+
+            grad_f = grad(f)
+
+            RNG, _ = random.split(RNG)
+            x_0 = jnp.zeros(n)
+            idx = random.randint(RNG, (1,), 0, n)
+            x_0 = x_0.at[idx].set(1.0)
+            
+            return f, grad_f, A, b, x_0
+
+        def compute optimal(A, b):
+            ### ======
+            ### YOUR CODE HERE
+            ### ======
+            return x_optimal
+        ```
+         
+    1. In this problem you will consider 2 algorithms for solving this problem (Frank - Wolfe and Projected Gradient Descent). Let's start with PGD. Write down the function, that calculates Euclidian projection on the simplex:
+
+        ```python
+        def projection(y):
+            ### ======
+            ### YOUR CODE HERE
+            ### ======
+            return x
+        ```
+
+    1. Then, write the PGD method, that returns a `trajectory` list of `iterations+1` points $x_0, x_1, \ldots x_k$ and `time_trajectory` list for a cumulative time spent after each iteration :
+
+        ```python
+        def PGD(A, b, x_0, iterations):
+            return trajectory, time_trajectory
+        ```
+    1. Write down the FW method, that returns a `trajectory` list of `iterations+1` points $x_0, x_1, \ldots x_k$ and `time_trajectory` list for a cumulative time spent after each iteration :
+
+        ```python
+        def FW(A, b, x_0, iterations):
+            return trajectory, time_trajectory
+        ```
+    1. Generate a convex problem ($\mu=0, L=10$) and compare the methods starting from the same $x_0$. For this reason plot 2 graphs - $f(x_k) - f^*$ from iteration counter and time spent for it.
+
+    1. Generate a strongly convex problem ($\mu=1, L=10$) and compare the methods starting from the same $x_0$. For this reason plot 2 graphs - $f(x_k) - f^*$ from iteration counter and time spent for it.
