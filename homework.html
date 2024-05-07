@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -212,6 +212,7 @@ window.Quarto = {
   <li><a href="#accelerated-methods" id="toc-accelerated-methods" class="nav-link" data-scroll-target="#accelerated-methods">Accelerated methods</a></li>
   <li><a href="#subgradient-descent" id="toc-subgradient-descent" class="nav-link" data-scroll-target="#subgradient-descent">Subgradient Descent</a></li>
   <li><a href="#conjugate-gradients" id="toc-conjugate-gradients" class="nav-link" data-scroll-target="#conjugate-gradients">Conjugate gradients</a></li>
+  <li><a href="#gradient-methods-for-conditional-problems" id="toc-gradient-methods-for-conditional-problems" class="nav-link" data-scroll-target="#gradient-methods-for-conditional-problems">Gradient methods for conditional problems</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -225,14 +226,14 @@ window.Quarto = {
 <section id="linear-algebra-basics" class="level3">
 <h3 class="anchored" data-anchor-id="linear-algebra-basics">Linear algebra basics</h3>
 <ol type="1">
-<li><p>Prove that the matrix <span class="math inline">xy^T</span> has rank equals to one.</p></li>
-<li><p>Find SVD of the following matrices:</p>
+<li><p>[10 points] Prove that the matrix <span class="math inline">xy^T</span> has rank equals to one.</p></li>
+<li><p>[20 points] Find SVD of the following matrices:</p>
 <ul>
 <li><span class="math inline">A = \begin{bmatrix} 1\\2\\3 \end{bmatrix}</span></li>
 <li><span class="math inline">A = \begin{bmatrix} 1 &amp; 4\\4 &amp; 8\\3 &amp; 8 \end{bmatrix}</span></li>
 <li><span class="math inline">A = \begin{bmatrix} 0 &amp; 0\\x &amp; 0\\0 &amp; 0 \end{bmatrix}</span>, where <span class="math inline">x</span> is the sum of your birthdate numbers (day + month)</li>
 </ul></li>
-<li><p>Assume we have a set of data points <span class="math inline">x^{(i)}\in\mathbb{R}^{n},\,i=1,\dots,m</span>, and decide to represent this data as a matrix</p>
+<li><p>[10 points] Assume we have a set of data points <span class="math inline">x^{(i)}\in\mathbb{R}^{n},\,i=1,\dots,m</span>, and decide to represent this data as a matrix</p>
 <p><span class="math display">
 X =
      \begin{pmatrix}
@@ -261,7 +262,7 @@ x \rightarrow (x - \mu) \big / \sigma.
      \end{split}
 </span></p>
 <p>What is the rank of <span class="math inline">Y</span> if <span class="math inline">\text{rank} \; X = r</span>?</p></li>
-<li><p><strong>Image Compression with Truncated SVD</strong> Explore image compression using Truncated Singular Value Decomposition (SVD). Understand how varying the number of singular values affects the quality of the compressed image. Implement a Python script to compress a grayscale image using Truncated SVD and visualize the compression quality.</p>
+<li><p><strong>Image Compression with Truncated SVD</strong> [10 points] Explore image compression using Truncated Singular Value Decomposition (SVD). Understand how varying the number of singular values affects the quality of the compressed image. Implement a Python script to compress a grayscale image using Truncated SVD and visualize the compression quality.</p>
 <ul>
 <li><strong>Truncated SVD</strong>: Decomposes an image <span class="math inline">A</span> into <span class="math inline">U, S,</span> and <span class="math inline">V</span> matrices. The compressed image is reconstructed using a subset of singular values.</li>
 <li><strong>Mathematical Representation</strong>: <span class="math display">
@@ -359,31 +360,31 @@ A \approx U_k \Sigma_k V_k^T
 <section id="convergence-rates" class="level3">
 <h3 class="anchored" data-anchor-id="convergence-rates">Convergence rates</h3>
 <ol type="1">
-<li><p>Determine the convergence or divergence of the given sequences</p>
+<li><p>[10 points] Determine the convergence or divergence of the given sequences</p>
 <ul>
 <li><span class="math inline">r_{k} = k^{\frac{1}{2}}</span>.</li>
 <li><span class="math inline">r_{k} = \frac{1}{\sqrt{k}}</span>.</li>
 <li><span class="math inline">r_{k} = 0.808^k</span>.</li>
 <li><span class="math inline">r_{k} = 0.808^{2^k}</span>.</li>
 </ul></li>
-<li><p>Determine the following sequence <span class="math inline">\{r_k\}</span> by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally, find out whether there is quadratic convergence.</p>
+<li><p>[10 points] Determine the following sequence <span class="math inline">\{r_k\}</span> by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally, find out whether there is quadratic convergence.</p>
 <p><span class="math display">
 r_k = \dfrac{1}{k!}
 </span></p></li>
-<li><p>Determine the convergence or divergence of a given sequence <span class="math inline">r_k =\begin{cases} \frac{1}{k}, &amp; \text{if } k\text{ is even} \\ e^{-k}, &amp; \text{if } k\text{ is odd} \end{cases}</span>.</p></li>
-<li><p>Determine the convergence or divergence of a given sequence <span class="math inline">r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, &amp; \text{if } k\text{ is even} \\ \frac{r_{k-1}}{k}, &amp; \text{if } k\text{ is odd} \end{cases}</span>.</p></li>
-<li><p>Let <span class="math inline">\{r_k\}</span> be a sequence of non-negative numbers given as <span class="math inline">r_{k+1} = Mr_k^2</span>, where <span class="math inline">M &gt; 0</span>, <span class="math inline">r_0 \geq 0</span>. Establish a necessary and sufficient condition on <span class="math inline">M</span> and <span class="math inline">r_0</span> under which the sequence <span class="math inline">r_k</span> will converge to zero. What is the rate of convergence?</p></li>
-<li><p>Let <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> be a sequence of non-negative numbers and let <span class="math inline">s &gt; 0</span> be some integer. Prove that sequence <span class="math inline">\left\{ r_k \right\}_{k=m+s}^\infty</span> is linearly convergent with constant <span class="math inline">q</span> if and only if a the sequence <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> converged linearly with constant <span class="math inline">q</span>.</p></li>
+<li><p>[10 points] Determine the convergence or divergence of a given sequence <span class="math inline">r_k =\begin{cases} \frac{1}{k}, &amp; \text{if } k\text{ is even} \\ e^{-k}, &amp; \text{if } k\text{ is odd} \end{cases}</span>.</p></li>
+<li><p>[10 points] Determine the convergence or divergence of a given sequence <span class="math inline">r_k =\begin{cases} \left(\frac{1}{4}\right)^{2^k}, &amp; \text{if } k\text{ is even} \\ \frac{r_{k-1}}{k}, &amp; \text{if } k\text{ is odd} \end{cases}</span>.</p></li>
+<li><p>[10 points] Let <span class="math inline">\{r_k\}</span> be a sequence of non-negative numbers given as <span class="math inline">r_{k+1} = Mr_k^2</span>, where <span class="math inline">M &gt; 0</span>, <span class="math inline">r_0 \geq 0</span>. Establish a necessary and sufficient condition on <span class="math inline">M</span> and <span class="math inline">r_0</span> under which the sequence <span class="math inline">r_k</span> will converge to zero. What is the rate of convergence?</p></li>
+<li><p>[10 points] Let <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> be a sequence of non-negative numbers and let <span class="math inline">s &gt; 0</span> be some integer. Prove that sequence <span class="math inline">\left\{ r_k \right\}_{k=m+s}^\infty</span> is linearly convergent with constant <span class="math inline">q</span> if and only if a the sequence <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> converged linearly with constant <span class="math inline">q</span>.</p></li>
 </ol>
 </section>
 <section id="line-search" class="level3">
 <h3 class="anchored" data-anchor-id="line-search">Line search</h3>
 <ol type="1">
-<li><p>Consider a quadratic function <span class="math inline">f: \mathbb{R}^n \rightarrow \mathbb{R}</span>, and let us start from a point <span class="math inline">x_k \in \mathbb{R}^n</span> moving in the direction of the antigradient <span class="math inline">-\nabla f(x_k)</span>. Show that the minimum of <span class="math inline">f</span> along this direction as a function of the step size <span class="math inline">\alpha</span>, for a decreasing function at <span class="math inline">x_k</span>, satisfies Armijo’s condition for any <span class="math inline">c_1</span> in the range <span class="math inline">0 \leq c_1 \leq \frac{1}{2}</span>. Specifically, demonstrate that the following inequality holds at the optimal <span class="math inline">\alpha^*</span>:</p>
+<li><p>[10 points] Consider a quadratic function <span class="math inline">f: \mathbb{R}^n \rightarrow \mathbb{R}</span>, and let us start from a point <span class="math inline">x_k \in \mathbb{R}^n</span> moving in the direction of the antigradient <span class="math inline">-\nabla f(x_k)</span>. Show that the minimum of <span class="math inline">f</span> along this direction as a function of the step size <span class="math inline">\alpha</span>, for a decreasing function at <span class="math inline">x_k</span>, satisfies Armijo’s condition for any <span class="math inline">c_1</span> in the range <span class="math inline">0 \leq c_1 \leq \frac{1}{2}</span>. Specifically, demonstrate that the following inequality holds at the optimal <span class="math inline">\alpha^*</span>:</p>
 <p><span class="math display">
 \varphi(\alpha) = f(x_{k+1}) = f(x_k - \alpha \nabla f(x_k)) \leq f(x_k) - c_1 \alpha \|\nabla f(x_k)\|_2^2
 </span></p></li>
-<li><p><strong>Implementing and Testing Line Search Conditions in Gradient Descent</strong></p>
+<li><p><strong>Implementing and Testing Line Search Conditions in Gradient Descent</strong> [30 points]</p>
 <p><span class="math display">
 x_{k+1} = x_k - \alpha \nabla f(x_k)
 </span></p>
@@ -497,38 +498,38 @@ f(x_1, x_2) =  10(x_2 − x_1^2)^2 + (x_1 − 1)^2
 <section id="matrix-calculus" class="level3">
 <h3 class="anchored" data-anchor-id="matrix-calculus">Matrix calculus</h3>
 <ol type="1">
-<li><p>Given a matrix <span class="math inline">A</span> of size <span class="math inline">m \times n</span> and a vector <span class="math inline">x</span> of size <span class="math inline">n \times 1</span>, compute the gradient of the function <span class="math inline">f(x) = \text{tr}(A^T A x x^T)</span> with respect to <span class="math inline">x</span>.</p></li>
-<li><p>Find the gradient <span class="math inline">\nabla f(x)</span> and hessian <span class="math inline">f''(x)</span>, if <span class="math inline">f(x) = \dfrac{1}{2} \Vert Ax - b\Vert^2_2</span>.</p></li>
-<li><p>Find the gradient <span class="math inline">\nabla f(x)</span> and hessian <span class="math inline">f''(x)</span>, if <span class="math display">
+<li><p>[10 points] Given a matrix <span class="math inline">A</span> of size <span class="math inline">m \times n</span> and a vector <span class="math inline">x</span> of size <span class="math inline">n \times 1</span>, compute the gradient of the function <span class="math inline">f(x) = \text{tr}(A^T A x x^T)</span> with respect to <span class="math inline">x</span>.</p></li>
+<li><p>[10 points] Find the gradient <span class="math inline">\nabla f(x)</span> and hessian <span class="math inline">f''(x)</span>, if <span class="math inline">f(x) = \dfrac{1}{2} \Vert Ax - b\Vert^2_2</span>.</p></li>
+<li><p>[10 points] Find the gradient <span class="math inline">\nabla f(x)</span> and hessian <span class="math inline">f''(x)</span>, if <span class="math display">
 f(x) = \frac1m \sum\limits_{i=1}^m \log \left( 1 + \exp(a_i^{T}x) \right) + \frac{\mu}{2}\Vert x\Vert _2^2, \; a_i, x \in \mathbb R^n, \; \mu&gt;0
 </span></p></li>
-<li><p>Compute the gradient <span class="math inline">\nabla_A f(A)</span> of the trace of the matrix exponential function <span class="math inline">f(A) = \text{tr}(e^A)</span> with respect to <span class="math inline">A</span>. Hint: hint: Use the definition of the matrix exponential. Use the definition of the differential <span class="math inline">df = f(A + dA) - f(A) + o(\Vert dA \Vert)</span> with the limit <span class="math inline">\Vert dA \Vert \to 0</span>.</p></li>
-<li><p>Calculate the first and the second derivative of the following function <span class="math inline">f : S \to \mathbb{R}</span></p>
+<li><p>[10 points] Compute the gradient <span class="math inline">\nabla_A f(A)</span> of the trace of the matrix exponential function <span class="math inline">f(A) = \text{tr}(e^A)</span> with respect to <span class="math inline">A</span>. Hint: hint: Use the definition of the matrix exponential. Use the definition of the differential <span class="math inline">df = f(A + dA) - f(A) + o(\Vert dA \Vert)</span> with the limit <span class="math inline">\Vert dA \Vert \to 0</span>.</p></li>
+<li><p>[10 points] Calculate the first and the second derivative of the following function <span class="math inline">f : S \to \mathbb{R}</span></p>
 <p><span class="math display">
 f(t) = \text{det}(A − tI_n),
 </span></p>
 <p>where <span class="math inline">A \in \mathbb{R}^{n \times n}, S := \{t \in \mathbb{R} : \text{det}(A − tI_n) \neq 0\}</span>.</p></li>
-<li><p>Find the gradient <span class="math inline">\nabla f(X)</span>, if <span class="math inline">f(X) = \text{tr}\left( AX^2BX^{-\top} \right)</span>.</p></li>
+<li><p>[10 points] Find the gradient <span class="math inline">\nabla f(X)</span>, if <span class="math inline">f(X) = \text{tr}\left( AX^2BX^{-\top} \right)</span>.</p></li>
 </ol>
 </section>
 <section id="automatic-differentiation-and-jax-2-more-problems-coming" class="level3">
 <h3 class="anchored" data-anchor-id="automatic-differentiation-and-jax-2-more-problems-coming">Automatic differentiation and jax (2 more problems coming)</h3>
 <p>You can use any automatic differentiation framework in this section (Jax, PyTorch, Autograd etc.)</p>
 <ol type="1">
-<li><p>You will work with the following function for this exercise, <span class="math display">
+<li><p>[10 points] You will work with the following function for this exercise, <span class="math display">
 f(x,y)=e^{−\left(sin(x)−cos(y)\right)^2}
 </span><br>
 Draw the computational graph for the function. Note, that it should contain only primitive operations - you need to do it automatically - <a href="https://bnikolic.co.uk/blog/python/jax/2022/02/22/jax-outputgraph-rev.html">jax example</a>, <a href="https://github.com/waleedka/hiddenlayer">PyTorch example</a> - you can google/find your way to visualize it.</p></li>
-<li><p>Compare analytic and autograd (with any framework) approach for the calculation of the gradient of:<br>
+<li><p>[10 points] Compare analytic and autograd (with any framework) approach for the calculation of the gradient of:<br>
 <span class="math display">
 f(A) = \text{tr}(e^A)
 </span></p></li>
-<li><p>We can use automatic differentiation not only to calculate necessary gradients but also for tuning hyperparameters of the algorithm like learning rate in gradient descent (with gradient descent 🤯). Suppose, we have the following function <span class="math inline">f(x) = \frac{1}{2}\Vert x\Vert^2</span>, select a random point <span class="math inline">x_0 \in \mathbb{B}^{1000} = \{0 \leq x_i \leq 1 \mid \forall i\}</span>. Consider <span class="math inline">10</span> steps of the gradient descent starting from the point <span class="math inline">x_0</span>: <span class="math display">
+<li><p>[10 points] We can use automatic differentiation not only to calculate necessary gradients but also for tuning hyperparameters of the algorithm like learning rate in gradient descent (with gradient descent 🤯). Suppose, we have the following function <span class="math inline">f(x) = \frac{1}{2}\Vert x\Vert^2</span>, select a random point <span class="math inline">x_0 \in \mathbb{B}^{1000} = \{0 \leq x_i \leq 1 \mid \forall i\}</span>. Consider <span class="math inline">10</span> steps of the gradient descent starting from the point <span class="math inline">x_0</span>: <span class="math display">
 x_{k+1} = x_k - \alpha_k \nabla f(x_k)
 </span> Your goal in this problem is to write the function, that takes <span class="math inline">10</span> scalar values <span class="math inline">\alpha_i</span> and return the result of the gradient descent on function <span class="math inline">L = f(x_{10})</span>. And optimize this function using gradient descent on <span class="math inline">\alpha \in \mathbb{R}^{10}</span>. Suppose that each of <span class="math inline">10</span> components of <span class="math inline">\alpha</span> is uniformly distributed on <span class="math inline">[0; 0.1]</span>. <span class="math display">
 \alpha_{k+1} = \alpha_k - \beta \frac{\partial L}{\partial \alpha}
 </span> Choose any constant <span class="math inline">\beta</span> and the number of steps you need. Describe the obtained results. How would you understand, that the obtained schedule (<span class="math inline">\alpha \in \mathbb{R}^{10}</span>) becomes better than it was at the start? How do you check numerically local optimality in this problem?</p></li>
-<li><p>Compare analytic and autograd (with any framework) approach for the gradient of:<br>
+<li><p>[10 points] Compare analytic and autograd (with any framework) approach for the gradient of:<br>
 <span class="math display">
 f(X) = - \log \det X
 </span></p></li>
@@ -537,15 +538,15 @@ f(X) = - \log \det X
 <section id="convexity" class="level3">
 <h3 class="anchored" data-anchor-id="convexity">Convexity</h3>
 <ol type="1">
-<li><p>Show, that <span class="math inline">\mathbf{conv}\{xx^\top: x \in \mathbb{R}^n, \Vert x\Vert  = 1\} = \{A \in \mathbb{S}^n_+: \text{tr}(A) = 1\}</span>.</p></li>
-<li><p>Prove that the set of <span class="math inline">\{x \in \mathbb{R}^2 \mid e^{x_1}\le x_2\}</span> is convex.</p></li>
-<li><p>Show that the set of directions of the non-strict local descending of the differentiable function in a point is a convex cone.</p></li>
-<li><p>Is the following set convex <span class="math display">
+<li><p>[10 points] Show, that <span class="math inline">\mathbf{conv}\{xx^\top: x \in \mathbb{R}^n, \Vert x\Vert  = 1\} = \{A \in \mathbb{S}^n_+: \text{tr}(A) = 1\}</span>.</p></li>
+<li><p>[5 points] Prove that the set of <span class="math inline">\{x \in \mathbb{R}^2 \mid e^{x_1}\le x_2\}</span> is convex.</p></li>
+<li><p>[5 points] Show that the set of directions of the non-strict local descending of the differentiable function in a point is a convex cone.</p></li>
+<li><p>[10 points] Is the following set convex <span class="math display">
 S = \left\{ a \in \mathbb{R}^k \mid p(0) = 1, \vert p(t) \vert\leq 1 \text{ for } \alpha\leq t \leq \beta\right\},
 </span> where <span class="math display">
 p(t) = a_1 + a_2 t + \ldots + a_k t^{k-1} \;?
 </span></p></li>
-<li><p>Consider the function <span class="math inline">f(x) = x^d</span>, where <span class="math inline">x \in \mathbb{R}_{+}</span>. Fill the following table with ✅ or ❎. Explain your answers</p>
+<li><p>[10 points] Consider the function <span class="math inline">f(x) = x^d</span>, where <span class="math inline">x \in \mathbb{R}_{+}</span>. Fill the following table with ✅ or ❎. Explain your answers</p>
 <div class="table-responsive">
 <table class="table">
 <thead>
@@ -617,18 +618,18 @@ p(t) = a_1 + a_2 t + \ldots + a_k t^{k-1} \;?
 </tbody>
 </table>
 </div></li>
-<li><p>Prove that the entropy function, defined as</p>
+<li><p>[10 points] Prove that the entropy function, defined as</p>
 <p><span class="math display">
 f(x) = -\sum_{i=1}^n x_i \log(x_i),
 </span></p>
 <p>with <span class="math inline">\text{dom}(f) = \{x \in \R^n_{++} : \sum_{i=1}^n x_i = 1\}</span>, is strictly concave.</p></li>
-<li><p>Show, that the function <span class="math inline">f: \mathbb{R}^n_{++} \to \mathbb{R}</span> is convex if <span class="math inline">f(x) = - \prod\limits_{i=1}^n x_i^{\alpha_i}</span> if <span class="math inline">\mathbf{1}^T \alpha = 1, \alpha \succeq 0</span>.</p></li>
-<li><p>Show that the maximum of a convex function <span class="math inline">f</span> over the polyhedron <span class="math inline">P = \text{conv}\{v_1, \ldots, v_k\}</span> is achieved at one of its vertices, i.e.,</p>
+<li><p>[10 points] Show, that the function <span class="math inline">f: \mathbb{R}^n_{++} \to \mathbb{R}</span> is convex if <span class="math inline">f(x) = - \prod\limits_{i=1}^n x_i^{\alpha_i}</span> if <span class="math inline">\mathbf{1}^T \alpha = 1, \alpha \succeq 0</span>.</p></li>
+<li><p>[10 points] Show that the maximum of a convex function <span class="math inline">f</span> over the polyhedron <span class="math inline">P = \text{conv}\{v_1, \ldots, v_k\}</span> is achieved at one of its vertices, i.e.,</p>
 <p><span class="math display">
 \sup_{x \in P} f(x) = \max_{i=1, \ldots, k} f(v_i).
 </span></p>
 <p>A stronger statement is: the maximum of a convex function over a closed bounded convex set is achieved at an extreme point, i.e., a point in the set that is not a convex combination of any other points in the set. (you do not have to prove it). <em>Hint:</em> Assume the statement is false, and use Jensen’s inequality.</p></li>
-<li><p>Show, that the two definitions of <span class="math inline">\mu</span>-strongly convex functions are equivalent:</p>
+<li><p>[10 points] Show, that the two definitions of <span class="math inline">\mu</span>-strongly convex functions are equivalent:</p>
 <ol type="1">
 <li><p><span class="math inline">f(x)</span> is <span class="math inline">\mu</span>-strongly convex <span class="math inline">\iff</span> for any <span class="math inline">x_1, x_2 \in S</span> and <span class="math inline">0 \le \lambda \le 1</span> for some <span class="math inline">\mu &gt; 0</span>:</p>
 <p><span class="math display">
@@ -642,7 +643,7 @@ f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \fr
 <h3 class="anchored" data-anchor-id="optimality-conditions">Optimality conditions</h3>
 <p>In this section, you can consider either the arbitrary norm or the Euclidian norm if nothing else is specified.</p>
 <ol type="1">
-<li><p><strong>Toy example</strong> <span class="math display">
+<li><p><strong>Toy example</strong> [10 points] <span class="math display">
 \begin{split}
 &amp; x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
 \text{s.t. } &amp; (x-2)(x-4) \leq 0
@@ -661,14 +662,14 @@ f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \fr
 \end{split}
 </span></p>
 <p>as a function of the parameter <span class="math inline">u</span>. Plot <span class="math inline">p^*(u)</span>. Verify that <span class="math inline">\dfrac{dp^*(0)}{du} = -\mu^*</span></p></li>
-<li><p>Derive the dual problem for the Ridge regression problem with <span class="math inline">A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m, \lambda &gt; 0</span>:</p>
+<li><p>[10 points] Derive the dual problem for the Ridge regression problem with <span class="math inline">A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m, \lambda &gt; 0</span>:</p>
 <p><span class="math display">
 \begin{split}
 \dfrac{1}{2}\|y-b\|^2 + \dfrac{\lambda}{2}\|x\|^2 &amp;\to \min\limits_{x \in \mathbb{R}^n, y \in \mathbb{R}^m }\\
 \text{s.t. } &amp; y = Ax
 \end{split}
 </span></p></li>
-<li><p>Derive the dual problem for the support vector machine problem with <span class="math inline">A \in \mathbb{R}^{m \times n}, \mathbf{1} \in \mathbb{R}^m \in \mathbb{R}^m, \lambda &gt; 0</span>:</p>
+<li><p>[20 points] Derive the dual problem for the support vector machine problem with <span class="math inline">A \in \mathbb{R}^{m \times n}, \mathbf{1} \in \mathbb{R}^m \in \mathbb{R}^m, \lambda &gt; 0</span>:</p>
 <p><span class="math display">
 \begin{split}
 \langle \mathbf{1}, t\rangle + \dfrac{\lambda}{2}\|x\|^2 &amp;\to \min\limits_{x \in \mathbb{R}^n, t \in \mathbb{R}^m }\\
@@ -676,7 +677,7 @@ f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \fr
 &amp; t \succeq 0
 \end{split}
 </span></p></li>
-<li><p>Give an explicit solution to the following LP.</p>
+<li><p>[10 points] Give an explicit solution to the following LP.</p>
 <p><span class="math display">
 \begin{split}
 &amp; c^\top x \to \min\limits_{x \in \mathbb{R}^n }\\
@@ -685,7 +686,7 @@ f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \fr
 \end{split}
 </span></p>
 <p>This problem can be considered the simplest portfolio optimization problem.</p></li>
-<li><p>Show, that the following problem has a unique solution and find it:</p>
+<li><p>[20 points] Show, that the following problem has a unique solution and find it:</p>
 <p><span class="math display">
 \begin{split}
 &amp; \langle C^{-1}, X\rangle - \log \det X \to \min\limits_{x \in \mathbb{R}^{n \times n} }\\
@@ -693,7 +694,7 @@ f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \fr
 \end{split}
 </span></p>
 <p>where <span class="math inline">C \in \mathbb{S}^n_{++}, a \in \mathbb{R}^n \neq 0</span>. The answer should not involve inversion of the matrix <span class="math inline">C</span>.</p></li>
-<li><p>Give an explicit solution to the following QP.</p>
+<li><p>[20 points] Give an explicit solution to the following QP.</p>
 <p><span class="math display">
 \begin{split}
 &amp; c^\top x \to \min\limits_{x \in \mathbb{R}^n }\\
@@ -701,7 +702,7 @@ f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \fr
 \end{split}
 </span></p>
 <p>where <span class="math inline">A \in \mathbb{S}^n_{++}, c \neq 0, x_c \in \mathbb{R}^n</span>.</p></li>
-<li><p>Consider the equality-constrained least-squares problem</p>
+<li><p>[10 points] Consider the equality-constrained least-squares problem</p>
 <p><span class="math display">
 \begin{split}
 &amp; \|Ax - b\|_2^2 \to \min\limits_{x \in \mathbb{R}^n }\\
@@ -709,7 +710,7 @@ f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \fr
 \end{split}
 </span></p>
 <p>where <span class="math inline">A \in \mathbb{R}^{m \times n}</span> with <span class="math inline">\mathbf{rank }A = n</span>, and <span class="math inline">C \in \mathbb{R}^{k \times n}</span> with <span class="math inline">\mathbf{rank }C = k</span>. Give the KKT conditions, and derive expressions for the primal solution <span class="math inline">x^*</span> and the dual solution <span class="math inline">\lambda^*</span>.</p></li>
-<li><p>Derive the KKT conditions for the problem</p>
+<li><p>[20 points] Derive the KKT conditions for the problem</p>
 <p><span class="math display">
 \begin{split}
 &amp; \mathbf{tr \;}X - \log\text{det }X \to \min\limits_{X \in \mathbb{S}^n_{++} }\\
@@ -720,7 +721,7 @@ f(\lambda x_1 + (1 - \lambda)x_2) \le \lambda f(x_1) + (1 - \lambda)f(x_2) - \fr
 <p><span class="math display">
 X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
 </span></p></li>
-<li><p><strong>Supporting hyperplane interpretation of KKT conditions</strong>. Consider a <strong>convex</strong> problem with no equality constraints</p>
+<li><p><strong>Supporting hyperplane interpretation of KKT conditions</strong>. [10 points] Consider a <strong>convex</strong> problem with no equality constraints</p>
 <p><span class="math display">
 \begin{split}
 &amp; f_0(x) \to \min\limits_{x \in \mathbb{R}^n }\\
@@ -741,7 +742,7 @@ X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
 \nabla f_0(x^*)^\top (x - x^*) \geq 0
 </span></p>
 <p>for all feasible <span class="math inline">x</span>. In other words, the KKT conditions imply the simple optimality criterion or <span class="math inline">\nabla f_0(x^*)</span> defines a supporting hyperplane to the feasible set at <span class="math inline">x^*</span>.</p></li>
-<li><p><strong>A penalty method for equality constraints.</strong> We consider the problem of minimization</p>
+<li><p><strong>A penalty method for equality constraints.</strong> [10 points] We consider the problem of minimization</p>
 <p><span class="math display">
 \begin{split}
 &amp; f_0(x) \to \min\limits_{x \in \mathbb{R}^{n} }\\
@@ -758,7 +759,7 @@ X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
 <section id="linear-programming" class="level3">
 <h3 class="anchored" data-anchor-id="linear-programming">Linear programming</h3>
 <ol type="1">
-<li><p><strong>📱🎧💻 Covers manufacturing.</strong> Lyzard Corp is producing covers for the following products:</p>
+<li><p><strong>📱🎧💻 Covers manufacturing.</strong> [20 points] Lyzard Corp is producing covers for the following products:</p>
 <ul>
 <li>📱 phones</li>
 <li>🎧 headphones</li>
@@ -785,7 +786,7 @@ X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> sudo apt<span class="op">-</span>get install coinor<span class="op">-</span>cbc <span class="op">--</span>quiet  <span class="co"># CoinOR</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Perform the sensitivity analysis. Which constraint could be relaxed to increase the profit the most? Prove it numerically.</p></li>
 </ol></li>
-<li><p>Prove the optimality of the solution</p>
+<li><p>Prove the optimality of the solution [10 points]</p>
 <p><span class="math display">
 x = \left(\frac{7}{3} , 0, \frac{1}{3}\right)^T
 </span></p>
@@ -805,7 +806,7 @@ x = \left(\frac{7}{3} , 0, \frac{1}{3}\right)^T
 <section id="gradient-descent" class="level3">
 <h3 class="anchored" data-anchor-id="gradient-descent">Gradient Descent</h3>
 <ol type="1">
-<li><p><strong>Convergence of Gradient Descent in non-convex smooth case</strong></p>
+<li><p><strong>Convergence of Gradient Descent in non-convex smooth case</strong> [10 points]</p>
 <p>We will assume nothing about the convexity of <span class="math inline">f</span>. We will show that gradient descent reaches an <span class="math inline">\varepsilon</span>-substationary point <span class="math inline">x</span>, such that <span class="math inline">\|\nabla f(x)\|_2 \leq \varepsilon</span>, in <span class="math inline">O(1/\varepsilon^2)</span> iterations. Important note: you may use here Lipschitz parabolic upper bound:</p>
 <p><span id="eq-quad_ub"><span class="math display">
 f(y) \leq f(x) + \nabla f(x)^T (y-x) + \frac{L}{2} \|y-x\|_2^2, \;\;\;
@@ -831,7 +832,7 @@ f(y) \leq f(x) + \nabla f(x)^T (y-x) + \frac{L}{2} \|y-x\|_2^2, \;\;\;
   \leq \sqrt{\frac{2}{\alpha(k+1)} (f(x^{0}) - f^*)},
   </span> which establishes the desired <span class="math inline">O(1/\varepsilon^2)</span> rate for achieving <span class="math inline">\varepsilon</span>-substationarity.</p></li>
 </ul></li>
-<li><p><strong>How gradient descent convergence depends on the condition number and dimensionality.</strong> Investigate how the number of iterations required for gradient descent to converge depends on the following two parameters: the condition number <span class="math inline">\kappa \geq 1</span> of the function being optimized, and the dimensionality <span class="math inline">n</span> of the space of variables being optimized.</p>
+<li><p><strong>How gradient descent convergence depends on the condition number and dimensionality.</strong> [20 points] Investigate how the number of iterations required for gradient descent to converge depends on the following two parameters: the condition number <span class="math inline">\kappa \geq 1</span> of the function being optimized, and the dimensionality <span class="math inline">n</span> of the space of variables being optimized.</p>
 <p>To do this, for given parameters <span class="math inline">n</span> and <span class="math inline">\kappa</span>, randomly generate a quadratic problem of size <span class="math inline">n</span> with condition number <span class="math inline">\kappa</span> and run gradient descent on it with some fixed required precision. Measure the number of iterations <span class="math inline">T(n, \kappa)</span> that the method required for convergence (successful termination based on the stopping criterion).</p>
 <p>Recommendation: The simplest way to generate a random quadratic problem of size <span class="math inline">n</span> with a given condition number <span class="math inline">\kappa</span> is as follows. It is convenient to take a diagonal matrix <span class="math inline">A \in S_{n}^{++}</span> as simply the diagonal matrix <span class="math inline">A = \text{Diag}(a)</span>, whose diagonal elements are randomly generated within <span class="math inline">[1, \kappa]</span>, and where <span class="math inline">\min(a) = 1</span>, <span class="math inline">\max(a) = \kappa</span>. As the vector <span class="math inline">b \in \mathbb{R}^n</span>, you can take a vector with random elements. Diagonal matrices are convenient to consider since they can be efficiently processed with even for large values of <span class="math inline">n</span>.</p>
 <p>Fix a certain value of the dimensionality <span class="math inline">n</span>. Iterate over different condition numbers <span class="math inline">\kappa</span> on a grid and plot the dependence of <span class="math inline">T(n,\kappa)</span> against <span class="math inline">\kappa</span>. Since the quadratic problem is generated randomly each time, repeat this experiment several times. As a result, for a fixed value of <span class="math inline">n</span>, you should obtain a whole family of curves showing the dependence of <span class="math inline">T(n, \kappa)</span> on <span class="math inline">\kappa</span>. Draw all these curves in the same color for clarity (for example, red).</p>
@@ -844,7 +845,7 @@ f(y) \leq f(x) + \nabla f(x)^T (y-x) + \frac{L}{2} \|y-x\|_2^2, \;\;\;
 <section id="accelerated-methods" class="level3">
 <h3 class="anchored" data-anchor-id="accelerated-methods">Accelerated methods</h3>
 <ol type="1">
-<li><p><strong>Local Convergence of Heavy Ball Method.</strong> We will work with the heavy ball method in this problem</p>
+<li><p><strong>Local Convergence of Heavy Ball Method.</strong> [20 points] We will work with the heavy ball method in this problem</p>
 <p><span class="math display">
 \tag{HB}
 x_{k+1} = x_k - \alpha \nabla f(x_k) + \beta (x_k - x_{k-1})
@@ -956,7 +957,7 @@ x + 24, &amp; \text{if } 1 \leq x &lt; 2 \\
 <li><p>Change the hyperparameter <span class="math inline">\alpha^{\text{Global}} = \frac2L, \beta^{\text{Global}} = \frac{\mu}{L}</span> and run the method again from <span class="math inline">x_0 = 3.4</span>. Check whether you have accelerated convergence here.</p></li>
 </ol>
 <p>Context: this counterexample was provided in the <a href="https://arxiv.org/pdf/1408.3595.pdf">paper</a>, while the global convergence of the heavy ball method for general smooth strongly convex function was introduced in another <a href="https://arxiv.org/pdf/1412.7457.pdf">paper</a>. Recently, it was <a href="https://arxiv.org/pdf/2307.11291.pdf">suggested</a>, that the heavy-ball (HB) method provably does not reach an accelerated convergence rate on smooth strongly convex problems.</p></li>
-<li><p>In this problem we will work with accelerated methods applied to the logistic regression problem. A good visual introduction to the topic is available <a href="https://mlu-explain.github.io/logistic-regression/">here</a>.</p>
+<li><p>[40 points] In this problem we will work with accelerated methods applied to the logistic regression problem. A good visual introduction to the topic is available <a href="https://mlu-explain.github.io/logistic-regression/">here</a>.</p>
 <p>Logistic regression is a standard model in classification tasks. For simplicity, consider only the case of binary classification. Informally, the problem is formulated as follows: There is a training sample <span class="math inline">\{(a_i, b_i)\}_{i=1}^m</span>, consisting of <span class="math inline">m</span> vectors <span class="math inline">a_i \in \mathbb{R}^n</span> (referred to as features) and corresponding numbers <span class="math inline">b_i \in \{-1, 1\}</span> (referred to as classes or labels). The goal is to construct an algorithm <span class="math inline">b(\cdot)</span>, which for any new feature vector <span class="math inline">a</span> automatically determines its class <span class="math inline">b(a) \in \{-1, 1\}</span>.</p>
 <p>In the logistic regression model, the class determination is performed based on the sign of the linear combination of the components of the vector <span class="math inline">a</span> with some fixed coefficients <span class="math inline">x \in \mathbb{R}^n</span>:</p>
 <p><span class="math display">
@@ -1040,7 +1041,7 @@ f(y) \leq f(x^k) + \langle \nabla f(x^k), y - x^k \rangle + \frac{L}{2}\|x^k - y
 <section id="subgradient-descent" class="level3">
 <h3 class="anchored" data-anchor-id="subgradient-descent">Subgradient Descent</h3>
 <ol type="1">
-<li><p><strong>Subgradient descent convergence with several stepsize strategies.</strong> In this problem you will have to prove the convergence of subgradient descent (<span class="math inline">x^{k+1} = x^k - \alpha_k g_k</span>) for several stepsize strategies. First prove, that</p>
+<li><p><strong>Subgradient descent convergence with several stepsize strategies.</strong> [20 points] In this problem you will have to prove the convergence of subgradient descent (<span class="math inline">x^{k+1} = x^k - \alpha_k g_k</span>) for several stepsize strategies. First prove, that</p>
 <p><span class="math display">
 \|x^{k+1} - x^*\|_2^2 \leq \|x^{k} - x^*\|_2^2 - 2\alpha_k \left(f(x^k) - f^* \right) + \alpha^2_k \|g_k\|_2^2
 </span></p>
@@ -1063,7 +1064,7 @@ f_k^{\text{best}} - f^* \leq \frac{R^2 + G^2\sum\limits_{i=1}^k\alpha^2_i}{2\sum
   \alpha_k = \frac{f(x^k) - f^*}{\|g_k\|_2^2}
   </span></p></li>
 </ul></li>
-<li><p><strong>Finding a point in the intersection of convex sets.</strong> Let <span class="math inline">A \in \mathbb{R}^{n \times n}</span> be a positive definite matrix and let <span class="math inline">\Sigma</span> be an <span class="math inline">n \times n</span> diagonal matrix with diagonal entries <span class="math inline">\sigma_1,...,\sigma_n &gt; 0</span>, and <span class="math inline">y</span> a given vector in <span class="math inline">\mathbb{R}^n</span>. Consider the compact convex sets <span class="math inline">U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}</span> and <span class="math inline">V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}</span>.</p>
+<li><p><strong>Finding a point in the intersection of convex sets.</strong> [30 points] Let <span class="math inline">A \in \mathbb{R}^{n \times n}</span> be a positive definite matrix and let <span class="math inline">\Sigma</span> be an <span class="math inline">n \times n</span> diagonal matrix with diagonal entries <span class="math inline">\sigma_1,...,\sigma_n &gt; 0</span>, and <span class="math inline">y</span> a given vector in <span class="math inline">\mathbb{R}^n</span>. Consider the compact convex sets <span class="math inline">U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}</span> and <span class="math inline">V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}</span>.</p>
 <ul>
 <li><p>Minimize maximum distance from the current point to the convex sets.</p>
 <p><span class="math display">
@@ -1090,7 +1091,7 @@ f_k^{\text{best}} - f^* \leq \frac{R^2 + G^2\sum\limits_{i=1}^k\alpha^2_i}{2\sum
 <section id="conjugate-gradients" class="level3">
 <h3 class="anchored" data-anchor-id="conjugate-gradients">Conjugate gradients</h3>
 <ol type="1">
-<li><p><strong><a href="https://web.stanford.edu/class/ee364b/364b_exercises.pdf">Randomized Preconditioners for Conjugate Gradient Methods.</a></strong></p>
+<li><p><strong><a href="https://web.stanford.edu/class/ee364b/364b_exercises.pdf">Randomized Preconditioners for Conjugate Gradient Methods.</a></strong> [20 points]</p>
 <p><em>Linear least squares</em></p>
 <p>In this task, we explore the use of some randomization methods for solving overdetermined least-squares problems, focusing on conjugate gradient methods. Let <span class="math inline">A \in \mathbb{R}^{m \times n}</span> be a matrix (we assume that <span class="math inline">m \gg n</span>) and <span class="math inline">b \in \mathbb{R}^m</span>, we aim to minimize</p>
 <p><span class="math display">
@@ -1167,11 +1168,11 @@ H_2 = \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}, \quad \text{and} \q
 <p>We then define the matrix ( M ) via its inverse ( M^{-1} = A^T ^T A ^{n n} ).</p>
 <p><em>Questions</em></p>
 <ol type="1">
-<li><p><strong>(1 point)</strong> How many FLOPs (floating point operations, i.e.&nbsp;multiplication and additions) are required to compute the matrices <span class="math inline">M^{-1}</span> and <span class="math inline">M</span>, respectively, assuming that you can compute the matrix-vector product <span class="math inline">H_mv</span> in time <span class="math inline">m \log m</span> for any vector <span class="math inline">v \in \mathbb{R}^m</span>?</p></li>
-<li><p><strong>(1 point)</strong> How many FLOPs are required to naively compute <span class="math inline">A^T A</span>, assuming <span class="math inline">A</span> is dense (using standard matrix algorithms)?</p></li>
-<li><p><strong>(1 point)</strong> How many FLOPs are required to compute <span class="math inline">A^T A v</span> for a vector <span class="math inline">v \in \mathbb{R}^n</span> by first computing <span class="math inline">u = Av</span> and then computing <span class="math inline">A^T u</span>?</p></li>
-<li><p><strong>(2 poins)</strong> Suppose that conjugate gradients runs for <span class="math inline">k</span> iterations. Using the preconditioned conjugate gradient algorithm with <span class="math inline">M = (A^T \Phi^T \Phi A)^{-1}</span>, how many total floating point operations have been performed? How many would be required to directly solve <span class="math inline">A^T A x = A^T b</span>? How large must <span class="math inline">k</span> be to make the conjugate gradient method slower?</p></li>
-<li><p><strong>(5 points)</strong> Implement the conjugate gradient algorithm for solving the positive definite linear system <span class="math inline">A^T A x = A^T b</span> both with and without the preconditioner <span class="math inline">M</span>. To generate data for your problem, set <span class="math inline">m = 2^{12}</span> and <span class="math inline">n = 400</span>, then generate the matrix <span class="math inline">A</span> and the vector <span class="math inline">b</span>. For simplicity in implementation, you may directly pass <span class="math inline">A^T A</span> and <span class="math inline">A^T b</span> into your conjugate gradient solver, as we only wish to explore how the methods work.</p></li>
+<li><p><strong>(2 points)</strong> How many FLOPs (floating point operations, i.e.&nbsp;multiplication and additions) are required to compute the matrices <span class="math inline">M^{-1}</span> and <span class="math inline">M</span>, respectively, assuming that you can compute the matrix-vector product <span class="math inline">H_mv</span> in time <span class="math inline">m \log m</span> for any vector <span class="math inline">v \in \mathbb{R}^m</span>?</p></li>
+<li><p><strong>(2 points)</strong> How many FLOPs are required to naively compute <span class="math inline">A^T A</span>, assuming <span class="math inline">A</span> is dense (using standard matrix algorithms)?</p></li>
+<li><p><strong>(2 points)</strong> How many FLOPs are required to compute <span class="math inline">A^T A v</span> for a vector <span class="math inline">v \in \mathbb{R}^n</span> by first computing <span class="math inline">u = Av</span> and then computing <span class="math inline">A^T u</span>?</p></li>
+<li><p><strong>(4 points)</strong> Suppose that conjugate gradients runs for <span class="math inline">k</span> iterations. Using the preconditioned conjugate gradient algorithm with <span class="math inline">M = (A^T \Phi^T \Phi A)^{-1}</span>, how many total floating point operations have been performed? How many would be required to directly solve <span class="math inline">A^T A x = A^T b</span>? How large must <span class="math inline">k</span> be to make the conjugate gradient method slower?</p></li>
+<li><p><strong>(10 points)</strong> Implement the conjugate gradient algorithm for solving the positive definite linear system <span class="math inline">A^T A x = A^T b</span> both with and without the preconditioner <span class="math inline">M</span>. To generate data for your problem, set <span class="math inline">m = 2^{12}</span> and <span class="math inline">n = 400</span>, then generate the matrix <span class="math inline">A</span> and the vector <span class="math inline">b</span>. For simplicity in implementation, you may directly pass <span class="math inline">A^T A</span> and <span class="math inline">A^T b</span> into your conjugate gradient solver, as we only wish to explore how the methods work.</p></li>
 </ol>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.sparse <span class="im">import</span> diags</span>
@@ -1184,6 +1185,66 @@ H_2 = \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}, \quad \text{and} \q
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.randn(m, n) <span class="op">*</span> diags(values).toarray()</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.randn(m, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Plot the norm of the residual <span class="math inline">r_k = A^T b - A^T A x_k</span> (relative to <span class="math inline">\|A^T b\|_2</span>) as a function of iteration <span class="math inline">k</span> for each of your conjugate gradient procedures. Additionally, compute and print the condition numbers <span class="math inline">\kappa(A^T A)</span> and <span class="math inline">\kappa(M^{1/2} A^T A M^{1/2})</span>.</p></li>
+</ol>
+</section>
+<section id="gradient-methods-for-conditional-problems" class="level3">
+<h3 class="anchored" data-anchor-id="gradient-methods-for-conditional-problems">Gradient methods for conditional problems</h3>
+<ol type="1">
+<li><p><strong>🐺 Frank - Wolfe vs Projected gradient descent</strong> [20 points]</p>
+<p>Consider the following simple quadratic optimization problem</p>
+<p><span class="math display">
+f(w) = \frac12 \langle Ax, x \rangle - \langle b, x \rangle \to \min\limits_{x \in \mathbb{R}^n; \; 1^\top x = 1, \; x \succeq 0}
+</span></p>
+<ol type="1">
+<li><p>Generate and solve this problem numerically with <em>CVXPY</em>. Calculate optimal solution <code>x_optimal</code></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> numpy <span class="im">as</span> jnp</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> grad</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_problem(n, mu<span class="op">=</span><span class="dv">0</span>, L <span class="op">=</span> <span class="dv">10</span>):</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    RNG <span class="op">=</span> random.PRNGKey(<span class="dv">0</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    U <span class="op">=</span> random.normal(RNG, (n, n))</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    Q, _ <span class="op">=</span> jnp.linalg.qr(U)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    Lambda <span class="op">=</span> jnp.diag(jnp.linspace(mu, L, n, endpoint<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> Q <span class="op">@</span> Lambda <span class="op">@</span> Q.T</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    RNG, _ <span class="op">=</span> random.split(RNG)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> random.normal(RNG, (n, <span class="dv">1</span>))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> f(x, A<span class="op">=</span>A, b<span class="op">=</span>b):</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span> <span class="op">*</span> x.T <span class="op">@</span> A <span class="op">@</span> x <span class="op">-</span> b.T <span class="op">@</span> x</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    grad_f <span class="op">=</span> grad(f)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    RNG, _ <span class="op">=</span> random.split(RNG)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    x_0 <span class="op">=</span> jnp.zeros(n)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> random.randint(RNG, (<span class="dv">1</span>,), <span class="dv">0</span>, n)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    x_0 <span class="op">=</span> x_0.at[idx].<span class="bu">set</span>(<span class="fl">1.0</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> f, grad_f, A, b, x_0</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute optimal(A, b):</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">### ======</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">### YOUR CODE HERE</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">### ======</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x_optimal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>In this problem you will consider 2 algorithms for solving this problem (Frank - Wolfe and Projected Gradient Descent). Let’s start with PGD. Write down the function, that calculates Euclidian projection on the simplex:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> projection(y):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">### ======</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">### YOUR CODE HERE</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">### ======</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Then, write the PGD method, that returns a <code>trajectory</code> list of <code>iterations+1</code> points <span class="math inline">x_0, x_1, \ldots x_k</span> and <code>time_trajectory</code> list for a cumulative time spent after each iteration :</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> PGD(A, b, x_0, iterations):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> trajectory, time_trajectory</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Write down the FW method, that returns a <code>trajectory</code> list of <code>iterations+1</code> points <span class="math inline">x_0, x_1, \ldots x_k</span> and <code>time_trajectory</code> list for a cumulative time spent after each iteration :</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> FW(A, b, x_0, iterations):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> trajectory, time_trajectory</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Generate a convex problem (<span class="math inline">\mu=0, L=10</span>) and compare the methods starting from the same <span class="math inline">x_0</span>. For this reason plot 2 graphs - <span class="math inline">f(x_k) - f^*</span> from iteration counter and time spent for it.</p></li>
+<li><p>Generate a strongly convex problem (<span class="math inline">\mu=1, L=10</span>) and compare the methods starting from the same <span class="math inline">x_0</span>. For this reason plot 2 graphs - <span class="math inline">f(x_k) - f^*</span> from iteration counter and time spent for it.</p></li>
+</ol></li>
 </ol>
 
 
