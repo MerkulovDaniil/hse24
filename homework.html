@@ -1165,7 +1165,7 @@ H_2 = \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}, \quad \text{and} \q
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Define <span class="math inline">\Phi = R H^{(\text{norm})}_m S \in \mathbb{R}^{n+p \times m}</span></p></li>
 </ol>
-<p>We then define the matrix ( M ) via its inverse ( M^{-1} = A^T ^T A ^{n n} ).</p>
+<p>We then define the matrix ( M ) via its inverse <span class="math inline">( M^{-1} = A^T \Phi^T \Phi A \in \mathbb{R}^{n \times n} )</span>.</p>
 <p><em>Questions</em></p>
 <ol type="1">
 <li><p><strong>(2 points)</strong> How many FLOPs (floating point operations, i.e.&nbsp;multiplication and additions) are required to compute the matrices <span class="math inline">M^{-1}</span> and <span class="math inline">M</span>, respectively, assuming that you can compute the matrix-vector product <span class="math inline">H_mv</span> in time <span class="math inline">m \log m</span> for any vector <span class="math inline">v \in \mathbb{R}^m</span>?</p></li>
