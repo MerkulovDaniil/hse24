@@ -1045,7 +1045,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     4. Define $\Phi = R H^{(\text{norm})}_m S \in \mathbb{R}^{n+p \times m}$
 
-    We then define the matrix \( M \) via its inverse \( M^{-1} = A^T \Phi^T \Phi A \in \mathbb{R}^{n \times n} \).
+    We then define the matrix \( M \) via its inverse $( M^{-1} = A^T \Phi^T \Phi A \in \mathbb{R}^{n \times n} )$.
 
     *Questions*
 
