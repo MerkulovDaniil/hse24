@@ -19,3 +19,4 @@ contributes:
 
   filters:
     - custom_callout.lua
+    - inline_plotly.lua
