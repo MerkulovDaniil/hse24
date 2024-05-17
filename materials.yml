@@ -107,54 +107,53 @@
   materials: /lectures/lec_14/lec_14.pdf
   notes: /notes/14.pdf
   seminar: /seminars/sem_14/sem_14.pdf
-  youtube: 
+  youtube: https://youtu.be/RUML7WjNqYk?si=_B1bhO_UmnydbTiP
   download: https://disk.yandex.com/i/btnUr7i7X28owA
 
 - title: Метод Ньютона. Квазиньютоновские методы.
   number: 15
-  #materials: /presentations/12.pdf
-  # notes: /notes/12.pdf
+  materials: /lectures/lec_15/lec_15.pdf
+  notes: /notes/15.pdf
+  seminar: /seminars/sem_15/sem_15.pdf
   youtube: https://youtu.be/cEP-Ge8yDQQ
-  download: 
+  download: https://disk.yandex.com/i/RmLEIVoq5jlcXA
 
 - title: "Стохастический градиентный спуск."
   number: 16
-  #materials: /presentations/15.pdf
-  # notes: /notes/15.pdf
-  youtube: 
-  download: 
+  materials: /lectures/lec_16/lec_16.pdf
+  notes: /notes/16.pdf
+  seminar: /seminars/sem_16/sem_16.pdf
+  youtube: https://youtu.be/_8KV7HUW7nQ
+  download: https://disk.yandex.com/i/r6pgyEDEcU8lpQ
 
-- title: "Методы редукции дисперсии: SAG, SVRG, SAGA."
+- title: "Методы редукции дисперсии: SAG, SVRG, SAGA. Адаптивные стохастические градиентные методы."
   number: 17
-  #materials: /presentations/16.pdf
-  # notes: /notes/16.pdf
+  materials: /lectures/lec_17/lec_17.pdf
+  notes: /notes/17.pdf
+  seminar: /seminars/sem_17/sem_17.pdf
   youtube: 
   download: 
 
-- title: Градиентный поток и диффузия. Методы оптимизации в непрерывном времени.
+- title: "Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity."
   number: 18
-  #materials: /presentations/17.pdf
-  # notes: /notes/17.pdf
+  materials: /lectures/lec_18/lec_18.pdf
+  notes: /notes/18.pdf
+  seminar: /seminars/sem_18/sem_18.pdf
   youtube: 
   download: 
 
-- title: Обобщающая способность моделей машинного обучения. Neural Tangent Kernel. Mode connectivity.
+- title: "Вопросы обучения больших моделей. Lars, Lamb. Learning rate schedulers. Warm-up. Клиппинг."
+  number: 19
+  materials: /lectures/lec_19/lec_19.pdf
+  notes: /notes/19.pdf
+  seminar: /seminars/sem_19/sem_19.pdf
+  youtube: 
+  download: 
+
+- title: Введение в двойственные методы оптимизации. Метод двойственного градиентного подъёма. Метод модифицированной функции Лагранжа. ADMM.
   number: 20
-  #materials: /presentations/19.pdf
-  # notes: /notes/19.pdf
-  youtube: 
-  download: 
-
-- title: Седловые задачи. Минимакс. Обучение GAN.
-  number: 21
-  #materials: /presentations/18.pdf
-  # notes: /notes/18.pdf
-  youtube: 
-  download: 
-
-- title: Вопросы обучения больших моделей. Lars, Lamb. Расписания learning rate. Warm-up. Клиппинг.
-  number: 22
-  #materials: /presentations/20.pdf
-  # notes: /notes/20.pdf
+  materials: /lectures/lec_20/lec_20.pdf
+  notes: /notes/20.pdf
+  seminar: /seminars/sem_20/sem_20.pdf
   youtube: 
   download: 
