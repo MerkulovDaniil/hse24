@@ -131,8 +131,8 @@
   materials: /lectures/lec_17/lec_17.pdf
   notes: /notes/17.pdf
   seminar: /seminars/sem_17/sem_17.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/KCTIEmpi0Vk
+  download: https://disk.yandex.com/i/U_-fSMpDRfMJOA
 
 - title: "Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity."
   number: 18
