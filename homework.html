@@ -213,6 +213,10 @@ window.Quarto = {
   <li><a href="#subgradient-descent" id="toc-subgradient-descent" class="nav-link" data-scroll-target="#subgradient-descent">Subgradient Descent</a></li>
   <li><a href="#conjugate-gradients" id="toc-conjugate-gradients" class="nav-link" data-scroll-target="#conjugate-gradients">Conjugate gradients</a></li>
   <li><a href="#gradient-methods-for-conditional-problems" id="toc-gradient-methods-for-conditional-problems" class="nav-link" data-scroll-target="#gradient-methods-for-conditional-problems">Gradient methods for conditional problems</a></li>
+  <li><a href="#proximal-gradient-method" id="toc-proximal-gradient-method" class="nav-link" data-scroll-target="#proximal-gradient-method">Proximal Gradient Method</a></li>
+  <li><a href="#newton-and-quasinewton-methods" id="toc-newton-and-quasinewton-methods" class="nav-link" data-scroll-target="#newton-and-quasinewton-methods">Newton and quasinewton methods</a></li>
+  <li><a href="#stochastic-gradient-methods" id="toc-stochastic-gradient-methods" class="nav-link" data-scroll-target="#stochastic-gradient-methods">Stochastic gradient methods</a></li>
+  <li><a href="#big-models" id="toc-big-models" class="nav-link" data-scroll-target="#big-models">Big models</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1091,19 +1095,19 @@ f_k^{\text{best}} - f^* \leq \frac{R^2 + G^2\sum\limits_{i=1}^k\alpha^2_i}{2\sum
 <section id="conjugate-gradients" class="level3">
 <h3 class="anchored" data-anchor-id="conjugate-gradients">Conjugate gradients</h3>
 <ol type="1">
-<li><p><strong><a href="https://web.stanford.edu/class/ee364b/364b_exercises.pdf">Randomized Preconditioners for Conjugate Gradient Methods.</a></strong> [20 points]</p>
+<li><p><strong><a href="https://web.stanford.edu/class/ee364b/364b_exercises.pdf">Randomized Preconditioners for Conjugate Gradient Methods.</a></strong> (20 points)</p>
 <p><em>Linear least squares</em></p>
-<p>In this task, we explore the use of some randomization methods for solving overdetermined least-squares problems, focusing on conjugate gradient methods. Let <span class="math inline">A \in \mathbb{R}^{m \times n}</span> be a matrix (we assume that <span class="math inline">m \gg n</span>) and <span class="math inline">b \in \mathbb{R}^m</span>, we aim to minimize</p>
+<p>In this task, we explore the use of some randomization methods for solving overdetermined least-squares problems, focusing on conjugate gradient methods. Let <span class="math inline">\hat{A} \in \mathbb{R}^{m \times n}</span> be a matrix (we assume that <span class="math inline">m \gg n</span>) and <span class="math inline">b \in \mathbb{R}^m</span>, we aim to minimize</p>
 <p><span class="math display">
-f(x) = \frac{1}{2} \|Ax - b\|^2_2 = \frac{1}{2} \sum_{i=1}^m (a_i^T x - b_i)^2,
+f(x) = \frac{1}{2} \|\hat{A}x - b\|^2_2 = \frac{1}{2} \sum_{i=1}^m (\hat{a}_i^T x - b_i)^2,
 </span></p>
-<p>where the <span class="math inline">a_i \in \mathbb{R}^n</span> denote the rows of <span class="math inline">A</span>.</p>
+<p>where the <span class="math inline">\hat{a}_i \in \mathbb{R}^n</span> denote the rows of <span class="math inline">\hat{A}</span>.</p>
 <p><em>Preconditioners</em></p>
-<p>We know, that the convergence bound of the CG applied for the problem depends on the condition number of the matrix. Note, that for the problem above we have the matrix <span class="math inline">A^T A</span> and the condition number is squared after this operation (<span class="math inline">\kappa (X^T X) =  \kappa^2 \left(X \right)</span>). That is the reason, why we typically need to use <em>preconditioners</em> (<a href="https://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf">read 12. for more details</a>) with CG.</p>
-<p>The general idea of using preconditioners implies switchwing from solving <span class="math inline">Ax = b</span> to <span class="math inline">MAx = Mb</span> with hope, that <span class="math inline">\kappa \left( MA\right) \ll \kappa \left( A\right)</span> or eigenvalues of <span class="math inline">MA</span> are better clustered than those of <span class="math inline">A</span> (note, that matrix <span class="math inline">A</span> here is for the general case, here we have <span class="math inline">A^TA</span> instead).</p>
+<p>We know, that the convergence bound of the CG applied for the problem depends on the condition number of the matrix. Note, that for the problem above we have the matrix <span class="math inline">\hat{A}^T \hat{A}</span> and the condition number is squared after this operation (<span class="math inline">\kappa (X^T X) =  \kappa^2 \left(X \right)</span>). That is the reason, why we typically need to use <em>preconditioners</em> (<a href="https://www.cs.cmu.edu/~quake-papers/painless-conjugate-gradient.pdf">read 12. for more details</a>) with CG.</p>
+<p>The general idea of using preconditioners implies switchwing from solving <span class="math inline">Ax = b</span> to <span class="math inline">MAx = Mb</span> with hope, that <span class="math inline">\kappa \left( MA\right) \ll \kappa \left( A\right)</span> or eigenvalues of <span class="math inline">MA</span> are better clustered than those of <span class="math inline">A</span> (note, that matrix <span class="math inline">A</span> here is for the general case, here we have <span class="math inline">\hat{A}^T\hat{A}</span> instead).</p>
 <p>This idea can also be viewed as coordinate change <span class="math inline">x = T \hat{x}, \; \hat{x} = T^{-1}x</span>, which leads to the problem <span class="math inline">T^T A T \hat{x} = T^Tb</span>. Note, that the spectrum of <span class="math inline">T^TAT</span> is the same as the spectrum of <span class="math inline">MA</span>.</p>
 <p>The best choice of <span class="math inline">M</span> is <span class="math inline">A^{-1}</span>, because <span class="math inline">\kappa (A^{-1} A) = \kappa (I) = 1</span>. However, if we know <span class="math inline">A^{-1}</span>, the original problem is already solved, that is why we need to find some trade-off between enhanced convergence, and extra cost of working with <span class="math inline">M</span>. The goal is to find <span class="math inline">M</span> that is cheap to multiply, and approximate inverse of <span class="math inline">A</span> (or at least has a more clustered spectrum than <span class="math inline">A</span>).</p>
-<p>Below you can find Vanilla CG algorithm (on the left) and preconditioned CG algorithm (on the right):</p>
+<p>Note, that for the linear least squares problem the matrix of quadratic form is <span class="math inline">A = \hat{A}^T\hat{A}</span>. Below you can find Vanilla CG algorithm (on the left) and preconditioned CG algorithm (on the right):</p>
 <p><span class="math display">
 \begin{aligned}
 &amp; \mathbf{r}_0 := \mathbf{b} - \mathbf{A x}_0 \\
@@ -1146,7 +1150,7 @@ f(x) = \frac{1}{2} \|Ax - b\|^2_2 = \frac{1}{2} \sum_{i=1}^m (a_i^T x - b_i)^2,
 H_2 = \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}, \quad \text{and} \quad H_m = \begin{bmatrix} H_{m/2} &amp; H_{m/2} \\ H_{m/2} &amp; -H_{m/2} \end{bmatrix}.
 </span></p>
 <p>The associated normalized Hadamard matrix is given by <span class="math inline">H^{(\text{norm})}_m = \frac{1}{\sqrt{m}} H_m</span>, which evidently satisfies <span class="math inline">H^{(\text{norm})T}_m H^{(\text{norm})}_m = I_{m \times m}</span>. Moreover, via a recursive algorithm, it is possible to compute matvec <span class="math inline">H_m x</span> in time <span class="math inline">O(m \log m)</span>, which is much faster than <span class="math inline">m^2</span> for a general matrix.</p>
-<p>To solve the least squares minimization problem using conjugate gradients, we must solve <span class="math inline">A^T A x = A^T b</span>. Using a preconditioner <span class="math inline">M</span> such that <span class="math inline">M \approx A^{-1}</span> can give substantial speedup in computing solutions to large problems.</p>
+<p>To solve the least squares minimization problem using conjugate gradients, we must solve <span class="math inline">\hat{A}^T \hat{A} x = \hat{A}^T b</span>. Using a preconditioner <span class="math inline">M</span> such that <span class="math inline">M \approx A^{-1}</span> can give substantial speedup in computing solutions to large problems.</p>
 <p>Consider the following scheme to generate a randomized preconditioner, assuming that <span class="math inline">m = 2^i</span> for some <span class="math inline">i</span>:</p>
 <ol type="1">
 <li><p>Let <span class="math inline">S = \text{diag}(S_{11}, \ldots, S_{mm})</span>, where <span class="math inline">S_{jj}</span> are random <span class="math inline">\{-1,+1\}</span> signs</p></li>
@@ -1165,14 +1169,14 @@ H_2 = \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}, \quad \text{and} \q
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Define <span class="math inline">\Phi = R H^{(\text{norm})}_m S \in \mathbb{R}^{n+p \times m}</span></p></li>
 </ol>
-<p>We then define the matrix ( M ) via its inverse <span class="math inline">( M^{-1} = A^T \Phi^T \Phi A \in \mathbb{R}^{n \times n} )</span>.</p>
+<p>We then define the matrix <span class="math inline">M</span> via its inverse <span class="math inline">M^{-1} = \hat{A}^T \Phi^T \Phi \hat{A} \in \mathbb{R}^{n \times n}</span>.</p>
 <p><em>Questions</em></p>
 <ol type="1">
-<li><p><strong>(2 points)</strong> How many FLOPs (floating point operations, i.e.&nbsp;multiplication and additions) are required to compute the matrices <span class="math inline">M^{-1}</span> and <span class="math inline">M</span>, respectively, assuming that you can compute the matrix-vector product <span class="math inline">H_mv</span> in time <span class="math inline">m \log m</span> for any vector <span class="math inline">v \in \mathbb{R}^m</span>?</p></li>
-<li><p><strong>(2 points)</strong> How many FLOPs are required to naively compute <span class="math inline">A^T A</span>, assuming <span class="math inline">A</span> is dense (using standard matrix algorithms)?</p></li>
-<li><p><strong>(2 points)</strong> How many FLOPs are required to compute <span class="math inline">A^T A v</span> for a vector <span class="math inline">v \in \mathbb{R}^n</span> by first computing <span class="math inline">u = Av</span> and then computing <span class="math inline">A^T u</span>?</p></li>
-<li><p><strong>(4 points)</strong> Suppose that conjugate gradients runs for <span class="math inline">k</span> iterations. Using the preconditioned conjugate gradient algorithm with <span class="math inline">M = (A^T \Phi^T \Phi A)^{-1}</span>, how many total floating point operations have been performed? How many would be required to directly solve <span class="math inline">A^T A x = A^T b</span>? How large must <span class="math inline">k</span> be to make the conjugate gradient method slower?</p></li>
-<li><p><strong>(10 points)</strong> Implement the conjugate gradient algorithm for solving the positive definite linear system <span class="math inline">A^T A x = A^T b</span> both with and without the preconditioner <span class="math inline">M</span>. To generate data for your problem, set <span class="math inline">m = 2^{12}</span> and <span class="math inline">n = 400</span>, then generate the matrix <span class="math inline">A</span> and the vector <span class="math inline">b</span>. For simplicity in implementation, you may directly pass <span class="math inline">A^T A</span> and <span class="math inline">A^T b</span> into your conjugate gradient solver, as we only wish to explore how the methods work.</p></li>
+<li><p><strong>(2 point)</strong> How many FLOPs (floating point operations, i.e.&nbsp;multiplication and additions) are required to compute the matrices <span class="math inline">M^{-1}</span> and <span class="math inline">M</span>, respectively, assuming that you can compute the matrix-vector product <span class="math inline">H_mv</span> in time <span class="math inline">m \log m</span> for any vector <span class="math inline">v \in \mathbb{R}^m</span>?</p></li>
+<li><p><strong>(2 point)</strong> How many FLOPs are required to naively compute <span class="math inline">\hat{A}^T \hat{A}</span>, assuming <span class="math inline">\hat{A}</span> is dense (using standard matrix algorithms)?</p></li>
+<li><p><strong>(2 point)</strong> How many FLOPs are required to compute <span class="math inline">\hat{A}^T \hat{A} v</span> for a vector <span class="math inline">v \in \mathbb{R}^n</span> by first computing <span class="math inline">u = \hat{A}v</span> and then computing <span class="math inline">\hat{A}^T u</span>?</p></li>
+<li><p><strong>(4 poins)</strong> Suppose that conjugate gradients runs for <span class="math inline">k</span> iterations. Using the preconditioned conjugate gradient algorithm with <span class="math inline">M = (\hat{A}^T \Phi^T \Phi \hat{A})^{-1}</span>, how many total floating point operations have been performed? How many would be required to directly solve <span class="math inline">\hat{A}^T \hat{A} x = \hat{A}^T b</span>? How large must <span class="math inline">k</span> be to make the conjugate gradient method slower?</p></li>
+<li><p><strong>(10 points)</strong> Implement the conjugate gradient algorithm for solving the positive definite linear system <span class="math inline">\hat{A}^T \hat{A} x = \hat{A}^T b</span> both with and without the preconditioner <span class="math inline">M</span>. To generate data for your problem, set <span class="math inline">m = 2^{12}</span> and <span class="math inline">n = 400</span>, then generate the matrix <span class="math inline">A</span> and the vector <span class="math inline">b</span>. For simplicity in implementation, you may directly pass <span class="math inline">\hat{A}^T \hat{A}</span> and <span class="math inline">\hat{A}^T b</span> into your conjugate gradient solver, as we only wish to explore how the methods work.</p></li>
 </ol>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.sparse <span class="im">import</span> diags</span>
@@ -1184,7 +1188,7 @@ H_2 = \begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{bmatrix}, \quad \text{and} \q
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the matrix A</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.random.randn(m, n) <span class="op">*</span> diags(values).toarray()</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.random.randn(m, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Plot the norm of the residual <span class="math inline">r_k = A^T b - A^T A x_k</span> (relative to <span class="math inline">\|A^T b\|_2</span>) as a function of iteration <span class="math inline">k</span> for each of your conjugate gradient procedures. Additionally, compute and print the condition numbers <span class="math inline">\kappa(A^T A)</span> and <span class="math inline">\kappa(M^{1/2} A^T A M^{1/2})</span>.</p></li>
+<p>Plot the norm of the residual <span class="math inline">r_k = \hat{A}^T b - \hat{A}^T \hat{A} x_k</span> (relative to <span class="math inline">\|\hat{A}^T b\|_2</span>) as a function of iteration <span class="math inline">k</span> for each of your conjugate gradient procedures. Additionally, compute and print the condition numbers <span class="math inline">\kappa(\hat{A}^T \hat{A})</span> and <span class="math inline">\kappa(M^{1/2} \hat{A}^T \hat{A} M^{1/2})</span>.</p></li>
 </ol>
 </section>
 <section id="gradient-methods-for-conditional-problems" class="level3">
@@ -1245,6 +1249,581 @@ f(w) = \frac12 \langle Ax, x \rangle - \langle b, x \rangle \to \min\limits_{x \
 <li><p>Generate a convex problem (<span class="math inline">\mu=0, L=10</span>) and compare the methods starting from the same <span class="math inline">x_0</span>. For this reason plot 2 graphs - <span class="math inline">f(x_k) - f^*</span> from iteration counter and time spent for it.</p></li>
 <li><p>Generate a strongly convex problem (<span class="math inline">\mu=1, L=10</span>) and compare the methods starting from the same <span class="math inline">x_0</span>. For this reason plot 2 graphs - <span class="math inline">f(x_k) - f^*</span> from iteration counter and time spent for it.</p></li>
 </ol></li>
+</ol>
+</section>
+<section id="proximal-gradient-method" class="level3">
+<h3 class="anchored" data-anchor-id="proximal-gradient-method">Proximal Gradient Method</h3>
+<ol type="1">
+<li><p>[20 points] <strong>Proximal Method for Sparse Softmax Regression</strong> Softmax regression, also known as multinomial logistic regression, is a generalization of logistic regression to multiple classes. It is used to model categorical outcome variables where each category is mutually exclusive. The softmax function transforms any input vector to the probability-like vector as follows:</p>
+<p><span class="math display">
+P(y = j | x; W) = \frac{e^{W_j^T x}}{\sum\limits_{i=1}^{c} e^{W_i^T x}}
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Softmax.svg" class="img-fluid figure-img"></p>
+<figcaption>Scheme of softmax regression</figcaption>
+</figure>
+</div>
+<p>where <span class="math inline">x</span> is the input vector, <span class="math inline">W</span> is the weight matrix, <span class="math inline">c</span> is the number of classes, and <span class="math inline">P(y = j | x; W)</span> is the probability that the input <span class="math inline">x</span> belongs to class <span class="math inline">j</span>.</p>
+<p>The optimization problem for softmax regression is to minimize the negative log-likelihood:</p>
+<p><span class="math display">
+\min_{W \in \mathbb{R}^{c \times d}} -\sum_{i=1}^{N} \log P(y_i | x_i; W) + \lambda \| W \|_1
+</span></p>
+<p>where <span class="math inline">N</span> is the number of training examples, <span class="math inline">\lambda</span> is the regularization parameter, and <span class="math inline">\| W \|_1</span> is the L1 norm of the weight matrix, which promotes sparsity in the solution. I suggest you to vectorize matrix and add <span class="math inline">1</span>-vector norm.</p>
+<p>We will solve the sparse softmax regression problem using the subgradient method and the proximal gradient method, both incorporating L1 regularization. The proximal gradient method is particularly useful for optimization problems involving non-smooth regularizers like the L1 norm. We will use 3 class classification problem of <a href="https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success">Predicting Students’ Dropout and Academic Success</a>. In this problem you should start with this <a href="https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/Proximal_softmax_regression.ipynb">colab notebook</a></p>
+<ol type="1">
+<li>[4 points] Write down exact formulation of subgradient method and proximal gradient method here (you can not use any optimization problems in this formulation).</li>
+<li>[6 points] Choose <span class="math inline">\lambda = 0</span>. Solve the softmax regression problem using subgradient descent and proximal gradient descent. Find the highest learning (individually), acceptable for both methods to converge. Note, that if method assumes monotonic convergence - you have to choose appropriate learning rate to fullfill it. Report convergence curves and report final sparsity of both methods. Draw you conclusions.</li>
+<li>[10 points] Solve non-smooth problem and fill the following table. For each value of <span class="math inline">\lambda</span> provide convergence curves.</li>
+</ol>
+<p>Report the number of iterations needed to reach specified primal gaps for each method. Present the results in the following markdown table:</p>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 5%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Method</th>
+<th style="text-align: center;">Learning Rate (<span class="math inline">\eta</span>)</th>
+<th style="text-align: right;">Tolerance (<span class="math inline">\epsilon</span>)</th>
+<th style="text-align: center;">Number of Iterations</th>
+<th style="text-align: center;">Comment(if any)</th>
+<th style="text-align: center;">Final Sparsity of the solution</th>
+<th style="text-align: left;"><span class="math inline">\lambda</span></th>
+<th style="text-align: center;">Final test accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-1}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-3}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-4}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-5}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-1}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-3}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-4}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-5}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-3</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-3</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-1</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-1</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+</section>
+<section id="newton-and-quasinewton-methods" class="level3">
+<h3 class="anchored" data-anchor-id="newton-and-quasinewton-methods">Newton and quasinewton methods</h3>
+<ol type="1">
+<li><p><strong>😱 Newton convergence issue</strong> (10 points)</p>
+<p>Consider the following function:</p>
+<p><span class="math display">
+f(x,y) = \dfrac{x^4}{4} - x^2 + 2x + (y-1)^2
+</span></p>
+<p>And the starting point is <span class="math inline">x_0 = (0,2)^\top</span>. How does Newton’s method behave when started from this point? How can this be explained? How does the gradient descent with fixed step <span class="math inline">\alpha = 0.01</span> and the steepest descent method behave under the same conditions? (It is not necessary to show numerical simulations in this problem).</p></li>
+<li><p><strong>Hessian-Free Newton method</strong> (20 points) In this exercise, we’ll explore the optimization of a binary logistic regression problem using various methods. Don’t worry about the size of the problem description, first 5 bullets out of 7 could be done pretty quickly. In this problem you should start with this <a href="https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/Hessian_free_Newton.ipynb">colab notebook</a></p>
+<p>Given a dataset with <span class="math inline">n</span> observations, where each observation consists of a feature vector <span class="math inline">x_i</span> and an associated binary target variable <span class="math inline">y_i \in \{0,1\}</span>, the logistic regression model predicts the probability that <span class="math inline">y_i = 1</span> given <span class="math inline">x_i</span> using the logistic function. The loss function to be minimized is the negative log-likelihood of the observed outcomes under this model, summed across all observations. It has a high value when the model outputs differ significantly from the data <span class="math inline">y</span>.</p>
+<p>The binary cross-entropy loss function for a single observation <span class="math inline">(x_i, y_i)</span> is given by: <span class="math display">
+\text{Loss}(w; x_i, y_i) = -\left[ y_i \log(p(y_i=1 | x_i; w)) + (1-y_i) \log(1-p(y_i=1 | x_i; w)) \right]
+</span></p>
+<p>Here, <span class="math inline">p(y=1 | x;w)</span> is defined as: <span class="math display">
+p(y=1 | x;w) = \frac{1}{1 + e^{-w^T x}}
+</span></p>
+<p>To define the total loss over the dataset, we sum up the individual losses: <span class="math display">
+f(w) = -\sum_{i=1}^n \left[ y_i \log(p(y_i=1 | x_i; w)) + (1-y_i) \log(1-p(y_i=1 | x_i; w)) \right]
+</span></p>
+<p>Therefore, the optimization problem in logistic regression is: <span class="math display">
+\min_w f(w) = \min_w -\sum_{i=1}^n \left[ y_i \log\left(p\left(y_i=1 | x_i; w\right)\right) + \left(1-y_i\right) \log\left(1-p(y_i=1 | x_i; w)\right) \right]
+</span></p>
+<p>This is a convex optimization problem and can be solved using gradient-based methods such as gradient descent, Newton’s method, or more sophisticated optimization algorithms often available in machine learning libraries. However, it is the problem is often together with <span class="math inline">l_2</span> regularization:</p>
+<p><span class="math display">
+\min_w f(w) = \min_w -\sum_{i=1}^n \left[ y_i \log\left(p\left(y_i=1 | x_i; w\right)\right) + \left(1-y_i\right) \log\left(1-p(y_i=1 | x_i; w)\right) \right] + \frac{\mu}{2} \|w\|_2^2
+</span></p>
+<ol type="1">
+<li><p>(2 points) Firstly, we address the optimization with Gradient Descent (GD) in a strongly convex setting, with <span class="math inline">\mu = 1</span>. Use a constant learning rate <span class="math inline">\alpha</span>. Run the gradient descent algorithm. Report the highest learning rate that ensures convergence of the algorithm. Plot the convergence graph in terms of both domain (parameter values) and function value (loss). Describe the type of convergence observed.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span>: <span class="dv">1</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"m"</span>: <span class="dv">1000</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>: <span class="dv">100</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"methods"</span>: [</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"GD"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">3e-2</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">550</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>results, params <span class="op">=</span> run_experiments(params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>(2 points) Run Newton’s method under the same conditions, using the second derivatives to guide the optimization. Describe and analyze the convergence properties observed.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span>: <span class="dv">1</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"m"</span>: <span class="dv">1000</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>: <span class="dv">100</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"methods"</span>: [</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"GD"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">3e-2</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">550</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"Newton"</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">20</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>results, params <span class="op">=</span> run_experiments(params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>(2 points) In cases where Newton’s method may converge too rapidly or overshoot, a damped version can be more stable. Run the damped Newton method. Adjust the damping factor as a learning rate. Report the highest learning rate ensuring stability and convergence. Plot the convergence graph.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span>: <span class="dv">1</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"m"</span>: <span class="dv">1000</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>: <span class="dv">100</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"methods"</span>: [</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"GD"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">3e-2</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">550</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"Newton"</span>,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">20</span>,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"Newton"</span>,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">5e-1</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">50</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>results, params <span class="op">=</span> run_experiments(params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>(2 points) Now turn off the regularization by setting <span class="math inline">\mu=0</span>. Try to find the largest learning rate, which ensures convergence of the Gradient Descent. Use a constant learning rate <span class="math inline">\alpha</span>. Run the gradient descent algorithm. Report the highest learning rate that ensures convergence of the algorithm. Plot the convergence graph in terms of both domain (parameter values) and function value (loss). Describe the type of convergence observed. How can you describe an idea to run this method for the problem to reach tight primal gap <span class="math inline">f(x_k) - f^* \approx 10^{-2}</span> or <span class="math inline">10^{-3}</span>, <span class="math inline">10^{-4}</span>?</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span>: <span class="dv">0</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"m"</span>: <span class="dv">1000</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>: <span class="dv">100</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"methods"</span>: [</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"GD"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">3e-2</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">200</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"GD"</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">7e-2</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">200</span>,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>results, params <span class="op">=</span> run_experiments(params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>(2 points) What can you say about Newton’s method convergence in the same setting <span class="math inline">\mu=0</span>? Try several learning rates smaller, than <span class="math inline">1</span> for the damped Newton method. Does it work? Write your conclusions about the second-order method convergence for a binary logistic regression problem.</p></li>
+<li><p>(5 points) Now switch back to the strongly convex setting <span class="math inline">\mu=1</span>. To avoid directly computing the Hessian matrix in Newton’s method, use the Conjugate Gradient (CG) method to solve the linear system in the Newton step. Develop the <code>newton_method_cg</code> function, which computes the Newton step using CG to solve the system <span class="math inline">\nabla^2 f(x_k) d_k = - \nabla f(x_k), \; x_{k+1} = x_k + \alpha d_k</span> defined by the Hessian. You have to use <a href="https://jax.readthedocs.io/en/latest/_autosummary/jax.scipy.sparse.linalg.cg.html"><code>jax.scipy.sparse.linalg.cg</code></a> function here. So, firstly compute the hessian as it was done in the code, then put it into this linear solver. Compare its performance in terms of computational efficiency and convergence rate to the standard Newton method.</p></li>
+<li><p>(5 points) Finally, implement a Hessian-free version of Newton’s method (HFN) which utilizes Hessian-vector products derived via automatic differentiation. Note, that <code>jax.scipy.sparse.linalg.cg</code> function can take the matvec function, which directly produces the multiplication of any input vector <span class="math inline">x</span>. Implement the HFN method without explicitly forming or storing the Hessian matrix in function <code>newton_method_hfn</code>. Use autograd to compute Hessian-vector products as it is described <a href="https://iclr-blogposts.github.io/2024/blog/bench-hvp/">here</a>. Compare this method’s time complexity and memory requirements against previous implementations.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="stochastic-gradient-methods" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-gradient-methods">Stochastic gradient methods</h3>
+<ol type="1">
+<li><p><strong>Variance reduction for stochastic gradient methods for neural networks</strong>. [20 points]</p>
+<p>Open <a href="https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/VR_exercise.ipynb">colab notebook</a>. Implement SAG and SVRG method. Consider Linear least squares problem with the following setup</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span>: <span class="dv">0</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"m"</span>: <span class="dv">50</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>: <span class="dv">100</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"methods"</span>: [</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SGD"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">1000</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SGD"</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">50</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">1000</span>,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SAG"</span>,</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">1000</span>,</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SVRG"</span>,</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"epoch_length"</span>: <span class="dv">2</span>,</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">1000</span>,</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> run_experiments(params)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, consider strongly convex case with:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span>: <span class="fl">1e-1</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"m"</span>: <span class="dv">50</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>: <span class="dv">100</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"methods"</span>: [</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SGD"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">2000</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SGD"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">50</span>,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">2000</span>,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SAG"</span>,</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">2000</span>,</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SVRG"</span>,</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"epoch_length"</span>: <span class="dv">2</span>,</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">2000</span>,</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And for the convex binary logistic regression:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span>: <span class="dv">0</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"m"</span>: <span class="dv">100</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>: <span class="dv">200</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"methods"</span>: [</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SGD"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">2000</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SAG"</span>,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">2000</span>,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SVRG"</span>,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"epoch_length"</span>: <span class="dv">3</span>,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">2000</span>,</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SGD"</span>,</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">1e-2</span>,</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">100</span>,</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">2000</span>,</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and strongly convex case</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu"</span>: <span class="fl">1e-1</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"m"</span>: <span class="dv">100</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"n"</span>: <span class="dv">200</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"methods"</span>: [</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SGD"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">2e-2</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">3000</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SAG"</span>,</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">2e-2</span>,</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">3000</span>,</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SVRG"</span>,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">2e-2</span>,</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"epoch_length"</span>: <span class="dv">3</span>,</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">2</span>,</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">3000</span>,</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>            <span class="st">"method"</span>: <span class="st">"SGD"</span>,</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>            <span class="st">"learning_rate"</span>: <span class="fl">2e-2</span>,</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"batch_size"</span>: <span class="dv">100</span>,</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"iterations"</span>: <span class="dv">3000</span>,</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Describe the obtained convergence and compare methods.</p>
+<p><img src="lls_VR.svg" class="img-fluid"></p>
+<p><img src="logreg_VR.svg" class="img-fluid"></p></li>
+</ol>
+</section>
+<section id="big-models" class="level3">
+<h3 class="anchored" data-anchor-id="big-models">Big models</h3>
+<ol type="1">
+<li><p><strong>Fit the largest model you can on a single GPU.</strong> [20 points]</p>
+<p>In this assignment, you will train a language model (LM) using the TinyStories dataset, focusing on optimizing model performance within the constraints of Google Colab’s hardware. For the sake of speed, we will do it on the part of the dataset.</p>
+<p><code>Tiny Stories  Once upon a time, there was a little car named Beep. Beep loved to go fast and play in the sun.   Beep was a healthy car because he always had good fuel....</code></p>
+<p>Your objective is to maximize the size of the model without exceeding the available computational resources (~ 16GB VRAM). You could start with the Hugging Face Transformers library and experiment with various memory optimization techniques, such as (but not limited to):</p>
+<pre><code> * Different batch size
+ * Different optimizer
+ * Gradient accumulation
+ * Activation checkpointing
+ * CPU offloading
+ * 8bit optimizers</code></pre>
+<p>You have a baseline of training <code>gpt-2</code> model prepared at the following <a href="https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/TinyStories_baseline.ipynb">colab notebook</a>. You can easily switch it to <code>opt-350m</code>, <code>opt-1.3b</code>, <code>gpt2</code> etc. You can find a great beginner-level guide on the topic <a href="https://huggingface.co/docs/transformers/v4.18.0/en/performance">here</a>.</p>
+<p><code>GPT-2 generation  A long time ago in a galaxy far far away... a little girl named Lily was playing in the garden. She was so excited! She wanted to explore the garden and see what was around her.  Suddenly, she heard a loud noise. Lily looked up and saw a big, hairy creature. Lily was so excited! She ran to the creature and grabbed it by the arm. The creature was so big and hairy that Lily couldn't help but laugh.</code></p>
+<p><img src="gpt2_generation.jpeg" class="img-fluid"></p>
+<p>You have to fill this table with your description/observations.</p>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Setup</th>
+<th style="text-align: center;"># of parameters</th>
+<th style="text-align: center;">GPU peak memory, MB</th>
+<th style="text-align: center;">Final eval loss</th>
+<th style="text-align: center;">Batch Size</th>
+<th style="text-align: center;">Time to run 5 epochs, s</th>
+<th style="text-align: center;">Generation example</th>
+<th style="text-align: center;">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Baseline (OPT-125M)</td>
+<td style="text-align: center;">125 M</td>
+<td style="text-align: center;">9044</td>
+<td style="text-align: center;">1.928</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">442.34</td>
+<td style="text-align: center;"><code>A long time ago in a galaxy far far away... there was a little girl named Lily. She was three years old and loved to explore. One day, she decided to go for a walk in the park. Lily was so excited to go for a walk. She asked her mom, "What do you want to do?" Her mom smiled and said, "I want to explore the galaxy." Lily was so excited to explore the galaxy.</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Baseline (GPT2-S)</td>
+<td style="text-align: center;">124 M</td>
+<td style="text-align: center;">13016</td>
+<td style="text-align: center;">2.001</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">487.75</td>
+<td style="text-align: center;"><code>A long time ago in a galaxy far far away... a little girl named Lily was playing in the garden. She was so excited! She wanted to explore the garden and see what was around her. Suddenly, she heard a loud noise. Lily looked up and saw a big, hairy creature. Lily was so excited! She ran to the creature and grabbed it by the arm. The creature was so big and hairy that Lily couldn't help but laugh.</code></td>
+<td style="text-align: center;">The generation seems more interesting, despite the fact, that eval loss is higher.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>For each unique trick for memory optimization, you will get 4 points (maximum 20 points). A combination of tricks is not counted as a unique trick, but will, probably, be necessary to train big models. The maximum grade is bounded with the size of the trained model: * If the model size you train is &lt;= 125M - you can get a maximum of 8 points. * If the model size you train is 126M &lt;= 350M - you can get a maximum of 12 points. * If the model size you train is 350M &lt;= 1B - you can get a maximum of 16 points. * If you fit 1B model or more - you can get a maximum 20 points.</p></li>
 </ol>
 
 
