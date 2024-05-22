@@ -1504,9 +1504,9 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     In this problem we will try to detect anomalies in time series with neural network. 
 
-    :::{.plotly} 
-    anomaly_detection.html
-    :::
+:::{.plotly} 
+anomaly_detection.html
+:::
 
     We will train the model to reconstruct normal data and when the reconstruction error for the actual data on trained model is high, we report an anomaly. Start with this notebook [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/time_series_anomaly.ipynb). The default solution is adam and after training it can detect 4 out of 5 anomalies. Train and compare several methods on the same problem. For each method try to find hyperparameters, which ensures at least 3 out of 5 anomalies detection. Present learning curves and anomaly predictions for each method.
 
@@ -1520,7 +1520,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     In this assignment, you will train a language model (LM) using the TinyStories dataset, focusing on optimizing model performance within the constraints of Google Colab's hardware. For the sake of speed, we will do it on the part of the dataset.
     
-    ```Tiny Stories
+    ```Tiny_Stories
     Once upon a time, there was a little car named Beep. Beep loved to go fast and play in the sun. 
     Beep was a healthy car because he always had good fuel....
     ```
@@ -1536,7 +1536,7 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     You have a baseline of training `gpt-2` model prepared at the following [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/TinyStories_baseline.ipynb). You can easily switch it to `opt-350m`, `opt-1.3b`, `gpt2` etc. You can find a great beginner-level guide on the topic [here](https://huggingface.co/docs/transformers/v4.18.0/en/performance).
 
-    ```GPT-2 generation
+    ```GPT2
     A long time ago in a galaxy far far away... a little girl named Lily was playing in the garden. She was so excited! She wanted to explore the garden and see what was around her.
     Suddenly, she heard a loud noise. Lily looked up and saw a big, hairy creature. Lily was so excited! She ran to the creature and grabbed it by the arm. The creature was so big and hairy that Lily couldn't help but laugh. 
     ```
