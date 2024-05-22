@@ -216,7 +216,9 @@ window.Quarto = {
   <li><a href="#proximal-gradient-method" id="toc-proximal-gradient-method" class="nav-link" data-scroll-target="#proximal-gradient-method">Proximal Gradient Method</a></li>
   <li><a href="#newton-and-quasinewton-methods" id="toc-newton-and-quasinewton-methods" class="nav-link" data-scroll-target="#newton-and-quasinewton-methods">Newton and quasinewton methods</a></li>
   <li><a href="#stochastic-gradient-methods" id="toc-stochastic-gradient-methods" class="nav-link" data-scroll-target="#stochastic-gradient-methods">Stochastic gradient methods</a></li>
+  <li><a href="#neural-network-training" id="toc-neural-network-training" class="nav-link" data-scroll-target="#neural-network-training">Neural Network training</a></li>
   <li><a href="#big-models" id="toc-big-models" class="nav-link" data-scroll-target="#big-models">Big models</a></li>
+  <li><a href="#admm" id="toc-admm" class="nav-link" data-scroll-target="#admm">ADMM</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/hse24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1720,6 +1722,18 @@ f(w) = -\sum_{i=1}^n \left[ y_i \log(p(y_i=1 | x_i; w)) + (1-y_i) \log(1-p(y_i=1
 <p><img src="logreg_VR.svg" class="img-fluid"></p></li>
 </ol>
 </section>
+<section id="neural-network-training" class="level3">
+<h3 class="anchored" data-anchor-id="neural-network-training">Neural Network training</h3>
+<ol type="1">
+<li><p><strong>Anomaly detection with neural network.</strong> [20 points]</p>
+<p>In this problem we will try to detect anomalies in time series with neural network.</p>
+<p>:::{.plotly} anomaly_detection.html :::</p>
+<p>We will train the model to reconstruct normal data and when the reconstruction error for the actual data on trained model is high, we report an anomaly. Start with this notebook <a href="https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/time_series_anomaly.ipynb">colab notebook</a>. The default solution is adam and after training it can detect 4 out of 5 anomalies. Train and compare several methods on the same problem. For each method try to find hyperparameters, which ensures at least 3 out of 5 anomalies detection. Present learning curves and anomaly predictions for each method.</p>
+<pre><code> * SGD with momentum [5 points] from optax
+ * Adadelta [5 points] from optax
+ * BFGS [10 points] implemented manually</code></pre></li>
+</ol>
+</section>
 <section id="big-models" class="level3">
 <h3 class="anchored" data-anchor-id="big-models">Big models</h3>
 <ol type="1">
@@ -1825,6 +1839,9 @@ f(w) = -\sum_{i=1}^n \left[ y_i \log(p(y_i=1 | x_i; w)) + (1-y_i) \log(1-p(y_i=1
 </table>
 <p>For each unique trick for memory optimization, you will get 4 points (maximum 20 points). A combination of tricks is not counted as a unique trick, but will, probably, be necessary to train big models. The maximum grade is bounded with the size of the trained model: * If the model size you train is &lt;= 125M - you can get a maximum of 8 points. * If the model size you train is 126M &lt;= 350M - you can get a maximum of 12 points. * If the model size you train is 350M &lt;= 1B - you can get a maximum of 16 points. * If you fit 1B model or more - you can get a maximum 20 points.</p></li>
 </ol>
+</section>
+<section id="admm" class="level3">
+<h3 class="anchored" data-anchor-id="admm">ADMM</h3>
 
 
 </section>
