@@ -1498,6 +1498,22 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
 
     ![](logreg_VR.svg)
 
+### Neural Network training
+
+1. **Anomaly detection with neural network.** [20 points] 
+
+    In this problem we will try to detect anomalies in time series with neural network. 
+
+    :::{.plotly} 
+    anomaly_detection.html
+    :::
+
+    We will train the model to reconstruct normal data and when the reconstruction error for the actual data on trained model is high, we report an anomaly. Start with this notebook [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/time_series_anomaly.ipynb). The default solution is adam and after training it can detect 4 out of 5 anomalies. Train and compare several methods on the same problem. For each method try to find hyperparameters, which ensures at least 3 out of 5 anomalies detection. Present learning curves and anomaly predictions for each method.
+
+        * SGD with momentum [5 points] from optax
+        * Adadelta [5 points] from optax
+        * BFGS [10 points] implemented manually
+
 ### Big models
 
 1. **Fit the largest model you can on a single GPU.** [20 points]
@@ -1543,3 +1559,5 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
         * If the model size you train is 126M <= 350M - you can get a maximum of 12 points.
         * If the model size you train is 350M <= 1B - you can get a maximum of 16 points.
         * If you fit 1B model or more - you can get a maximum 20 points.
+
+### ADMM
