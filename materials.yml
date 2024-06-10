@@ -139,7 +139,7 @@
   materials: /lectures/lec_18/lec_18.pdf
   notes: /notes/18.pdf
   seminar: /seminars/sem_18/sem_18.pdf
-  youtube: 
+  youtube: https://youtu.be/yXXmbD-8JfI
   download: 
 
 - title: "Вопросы обучения больших моделей. Lars, Lamb. Learning rate schedulers. Warm-up. Клиппинг."
@@ -155,5 +155,5 @@
   materials: /lectures/lec_20/lec_20.pdf
   notes: /notes/20.pdf
   seminar: /seminars/sem_20/sem_20.pdf
-  youtube: 
+  youtube: https://youtu.be/Hxumm0r6YM8
   download: 
