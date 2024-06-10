@@ -1,5 +1,5 @@
 ---
-title: Conjugate functions. Dual (sub)gradient method. Augmented Lagrangian method. ADMM.
+title: Large batch distributed training. CPU offloadings. Quantization
 author: Seminar
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format:
