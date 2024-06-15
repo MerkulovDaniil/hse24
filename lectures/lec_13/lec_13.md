@@ -468,8 +468,44 @@ $$
 
 ![Illustration of Frank-Wolfe (conditional gradient) algorithm](FW.pdf)
 
-## Convergence
+## Convergence (1/2)
 
-## Comparison to PGD
+Consider the problem
+$$
+f(x) \rightarrow \min\limits_{x \in S},
+$$
+where $f$ is convex and $L$-smooth. The Frank-Wolfe method is given by:
+$$
+\begin{cases}
+x_{k + 1} = \gamma_k x_{k} + (1 - \gamma_k)s_k \\
+s_k = \arg \min\limits_{x \in S} f^{I}_{x_k}(x) = \arg \min\limits_{x \in S} \left\langle \nabla f(x_k), x \right\rangle
+\end{cases},
+$$
+where $f^{I}_{x_k}(x)$ is the first-order Taylor approximation at the point $x_k$. For $\gamma_k = \frac{k - 1}{k + 1}$, it holds that
+$$
+f(x_k) - f(x^*) \leqslant \frac{2 L R^2}{k + 1},
+$$
+where $R = \max\limits_{x, y \in S} \|x - y\|$. Thus, we have sublinear convergence.
 
-# Projected Subradient Descent (PSD)
+## Convergence (2/2)
+$L$-smoothness:
+$$
+f(x) - f(y) - \langle \nabla f(y), x - y \rangle \leqslant \frac{L}{2} \|x - y\|^2, \quad \forall x, y \in S
+$$
+$$
+\begin{aligned}
+f\left(x_{k+1}\right) - f\left(x_k\right) &\leqslant \left\langle \nabla f\left(x_k\right), x_{k+1} - x_k \right\rangle + \frac{L}{2} \left\|x_{k+1} - x_k\right\|^2 \\
+&= (1 - \gamma_k) \left\langle \nabla f\left(x_k\right), s_k - x_k \right\rangle + \frac{L (1 - \gamma_k)^2}{2} \left\|s_k - x_k\right\|^2 
+\end{aligned}
+$$
+
+Convexity:
+$$ f(x) - f(y) - \langle \nabla f(y), x - y \rangle \geqslant 0 \quad \forall x, y \in S \Rightarrow \quad x := x^*, y := x_k \Rightarrow \quad \langle \nabla f(x_k), x^* - x_k \rangle \leqslant f(x^*) - f(x_k) $$
+$$ f\left(x_{k+1}\right) - f\left(x_k\right) \leqslant (1 - \gamma_k) \left\langle \nabla f\left(x_k\right), x^* - x_k \right\rangle + \frac{L (1 - \gamma_k)^2}{2} R^2 \leqslant (1 - \gamma_k) \left( f(x^*) - f(x_k) \right) + (1 - \gamma_k)^2 \frac{L R^2}{2} $$
+$$ f\left(x_{k+1}\right) - f(x^*) \leqslant \gamma_k \left( f(x_k) - f(x^*) \right) + (1 - \gamma_k)^2 \frac{L R^2}{2} $$
+
+Denote $\delta_k = \frac{f\left(x_k\right) - f\left(x^*\right)}{L R^2}$. Then the inequality can be rewritten as
+$$
+\delta_{k+1} \leqslant \gamma_k \delta_k + \frac{(1 - \gamma_k)^2}{2} = \frac{k - 1}{k + 1} \delta_k + \frac{2}{(k + 1)^2}.
+$$
+Starting from the inequality $\delta_2 \leqslant \frac{1}{2}$, applying induction on $k$ yields the desired result.
