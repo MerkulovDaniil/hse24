@@ -23,6 +23,8 @@
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
 \newcommand{\vect}[1]{\boldsymbol{\mathbf{#1}}}
 
+%%% === CONDITIONAL PACKAGE
+\usepackage{ifthen}
 
 %%% === TEMPLATE
 \setbeamerfont{title}{series=\bfseries}
@@ -55,21 +57,25 @@
 
 %%% === BACKGROUND IMAGE SETUP
 \AtBeginDocument{
-  \setbeamertemplate{title page}{
-    \begin{tikzpicture}[remember picture,overlay]
-      \node[anchor=center, xshift=0pt, yshift=0pt] at (current page.center) {
-        \includegraphics[width=1.05\paperwidth, height=1.05\paperheight]{\bgimage}
-      };
-      \node[fill=white, fill opacity=0.7, text opacity=1, inner sep=10pt, rounded corners=10pt] at (current page.center) {
-        \begin{minipage}{0.5\paperwidth}
-          \centering
-          \usebeamerfont{title}\inserttitle\par
-          \vspace*{0.5cm}
-          \usebeamerfont{author}\insertauthor\par
-          \vspace*{0.5cm}
-          \usebeamerfont{institute}\insertinstitute\par
-        \end{minipage}
-      };
-    \end{tikzpicture}
+  \ifthenelse{\isundefined{\bgimage}}{
+    % No background image specified
+  }{
+    \setbeamertemplate{title page}{
+      \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=center, xshift=0pt, yshift=0pt] at (current page.center) {
+          \includegraphics[width=1.05\paperwidth, height=1.05\paperheight]{\bgimage}
+        };
+        \node[fill=white, fill opacity=0.7, text opacity=1, inner sep=10pt, rounded corners=10pt] at (current page.center) {
+          \begin{minipage}{0.5\paperwidth}
+            \centering
+            \usebeamerfont{title}\inserttitle\par
+            \vspace*{0.5cm}
+            \usebeamerfont{author}\insertauthor\par
+            \vspace*{0.5cm}
+            \usebeamerfont{institute}\insertinstitute\par
+          \end{minipage}
+        };
+      \end{tikzpicture}
+    }
   }
 }
