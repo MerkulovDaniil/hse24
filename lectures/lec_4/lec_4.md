@@ -1,5 +1,5 @@
 ---
-title: "Convexity: convex sets, convex functions. Polyak - Lojasiewicz Condition."
+title: "Convexity: convex sets, convex functions. Polyak - Lojasiewicz Condition"
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 # bibliography: ../../files/biblio.bib

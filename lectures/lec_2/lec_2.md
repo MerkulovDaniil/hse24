@@ -1,5 +1,5 @@
 ---
-title: Line search. Matrix calculus. Automatic differentiation.
+title: Line search. Matrix calculus. Automatic differentiation
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 

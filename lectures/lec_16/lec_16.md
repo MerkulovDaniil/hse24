@@ -1,5 +1,5 @@
 ---
-title: "Stochastic Gradient Descent. Finite-sum problems."
+title: "Stochastic Gradient Descent. Finite-sum problems"
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 

@@ -1,5 +1,5 @@
 ---
-title: "Subgradient Method. Specifics of non-smooth problems."
+title: "Subgradient Method. Specifics of non-smooth problems"
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 

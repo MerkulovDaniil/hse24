@@ -1,5 +1,5 @@
 ---
-title: "Optimality conditions. Lagrange function. Karush-Kuhn-Tucker conditions."
+title: "Optimality conditions. Lagrange function. Karush-Kuhn-Tucker conditions"
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 

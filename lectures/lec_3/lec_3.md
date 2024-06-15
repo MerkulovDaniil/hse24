@@ -1,5 +1,5 @@
 ---
-title: Automatic differentiation.
+title: Automatic differentiation
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 

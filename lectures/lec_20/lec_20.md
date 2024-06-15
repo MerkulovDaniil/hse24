@@ -1,5 +1,5 @@
 ---
-title: "Dual methods: Dual Gradient Ascent, Augmented Lagrangian Method, ADMM."
+title: "Dual methods: Dual Gradient Ascent, Augmented Lagrangian Method, ADMM"
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 

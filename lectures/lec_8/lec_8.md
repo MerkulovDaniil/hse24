@@ -1,5 +1,5 @@
 ---
-title: "Linear Programming. Simplex Algorithm. Applications."
+title: "Linear Programming. Simplex Algorithm. Applications"
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 

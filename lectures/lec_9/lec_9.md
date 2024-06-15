@@ -1,5 +1,5 @@
 ---
-title: "Gradient Descent. Convergence for quadratics; smooth convex case; PL case. Lower bounds."
+title: "Gradient Descent. Convergence for quadratics; smooth convex case; PL case. Lower bounds"
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 

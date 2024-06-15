@@ -1,5 +1,5 @@
 ---
-title: Basic linear algebra recap. Convergence rates.
+title: Basic linear algebra recap. Convergence rates
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 

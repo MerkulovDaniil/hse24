@@ -1,5 +1,5 @@
 ---
-title: "Strong convexity criteria. Optimality conditions. Lagrange function."
+title: "Strong convexity criteria. Optimality conditions. Lagrange function"
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 
