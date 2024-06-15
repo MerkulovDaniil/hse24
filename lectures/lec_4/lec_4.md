@@ -12,8 +12,8 @@ format:
         section-titles: false
         incremental: true
         include-in-header: ../../files/header.tex  # Custom LaTeX commands and preamble
-        header-includes: |
-            \titlegraphic{\includegraphics[width=0.5\paperwidth]{back4.png}}
+header-includes:
+  - \newcommand{\bgimage}{../../files/back4.png}
 ---
 
 # Convex sets

@@ -10,8 +10,8 @@ format:
         section-titles: false
         incremental: true
         include-in-header: ../../files/header.tex  # Custom LaTeX commands and preamble
-        header-includes: |
-            \titlegraphic{\includegraphics[width=0.5\paperwidth]{back17.jpeg}}
+header-includes:
+  - \newcommand{\bgimage}{../../files/back17.jpeg}
 ---
 
 # Finite-sum problem

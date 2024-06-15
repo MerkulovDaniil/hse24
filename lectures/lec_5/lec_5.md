@@ -10,8 +10,8 @@ format:
         section-titles: false
         incremental: true
         include-in-header: ../../files/header.tex  # Custom LaTeX commands and preamble
-        header-includes: |
-            \titlegraphic{\includegraphics[width=0.5\paperwidth]{back5.png}}
+header-includes:
+  - \newcommand{\bgimage}{../../files/back5.png}
 ---
 
 # Strong convexity criteria

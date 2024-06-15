@@ -10,8 +10,8 @@ format:
         section-titles: true
         incremental: true
         include-in-header: ../../files/header.tex  # Custom LaTeX commands and preamble
-        header-includes: |
-            \titlegraphic{\includegraphics[width=0.5\paperwidth]{back2.png}}
+header-includes:
+  - \newcommand{\bgimage}{../../files/back2.png}
 ---
 
 # Line search
