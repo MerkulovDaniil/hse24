@@ -357,7 +357,7 @@ for any $\lambda = [\lambda_1, \ldots, \lambda_m] \in \Delta_m$ - probability si
 For the function $f(x)$, defined on $S \subseteq \mathbb{R}^n$, the following set:
 
 $$
-\text{epi } f = \left\{[x,\mu] \in S \times \mathbb{R}: f(x) \le \mu\right\}
+\text{epi } f = \left\{(x,\mu) \in S \times \mathbb{R}: f(x) \le \mu\right\}
 $$
 
 is called **epigraph** of the function $f(x)$. 
