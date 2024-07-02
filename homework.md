@@ -6,7 +6,7 @@ toc: true
 
 ### Linear algebra basics
 
-1. [10 points] Prove that the matrix $xy^T$ has rank equals to one.
+1. [10 points] Prove that the matrix $xy^T$ has rank equals to one or zero.
 
 1. [20 points] Find SVD of the following matrices:
 
