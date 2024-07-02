@@ -7,7 +7,7 @@
 \usepackage{tikz}
 \usepackage{cancel}
 \usepackage{booktabs}
-\usepackage{ stmaryrd }
+\usepackage{stmaryrd}
 \usepackage[export]{adjustbox}
 \usepackage{fontawesome5}
 \usepackage{algorithmic}
@@ -17,11 +17,14 @@
 
 % \LinesNumbered
 \newcommand{\theHalgorithm}{\arabic{algorithm}}
+\newcommand{\theHtable}{\thetable}
 \usepackage[ruled,vlined]{algorithm2e}
 \renewcommand{\algorithmicrequire}{\textbf{Input:}}
 \renewcommand{\algorithmicensure}{\textbf{Output:}}
 \newcommand{\vect}[1]{\boldsymbol{\mathbf{#1}}}
 
+%%% === CONDITIONAL PACKAGE
+\usepackage{ifthen}
 
 %%% === TEMPLATE
 \setbeamerfont{title}{series=\bfseries}
@@ -52,6 +55,27 @@
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
 
-\title{Basic linear algebra recap. Convergence rates. \\Line search.}
-\author{Daniil Merkulov}
-\date{}
+%%% === BACKGROUND IMAGE SETUP
+\AtBeginDocument{
+  \ifthenelse{\isundefined{\bgimage}}{
+    % No background image specified
+  }{
+    \setbeamertemplate{title page}{
+      \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=center, xshift=0pt, yshift=0pt] at (current page.center) {
+          \includegraphics[width=1.05\paperwidth, height=1.05\paperheight]{\bgimage}
+        };
+        \node[fill=white, fill opacity=0.7, text opacity=1, inner sep=10pt, rounded corners=10pt] at (current page.center) {
+          \begin{minipage}{0.5\paperwidth}
+            \centering
+            \usebeamerfont{title}\inserttitle\par
+            \vspace*{0.5cm}
+            \usebeamerfont{author}\insertauthor\par
+            \vspace*{0.5cm}
+            \usebeamerfont{institute}\insertinstitute\par
+          \end{minipage}
+        };
+      \end{tikzpicture}
+    }
+  }
+}

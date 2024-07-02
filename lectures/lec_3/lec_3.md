@@ -1,5 +1,5 @@
 ---
-title: Automatic differentiation.
+title: Automatic differentiation
 author: Daniil Merkulov
 institute: Optimization for ML. Faculty of Computer Science. HSE University
 format: 
@@ -10,8 +10,8 @@ format:
         section-titles: false
         incremental: true
         include-in-header: ../../files/header.tex  # Custom LaTeX commands and preamble
-        header-includes: |
-            \titlegraphic{\includegraphics[width=0.5\paperwidth]{back3.png}}
+header-includes:
+  - \newcommand{\bgimage}{../../files/back3.png}
 ---
 
 # Automatic differentiation

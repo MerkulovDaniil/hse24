@@ -37,7 +37,7 @@ $$
 
 for any $x_1, x_2 \in S$ and $0 \le \lambda \le 1$ for some $\mu > 0$.
 
-![Strongly convex function is greater or equal than Taylor quadratic approximation at any point](strong_convexity.pdf){width=250}
+![Strongly convex function is greater or equal than global quadratic lower bound at any point](strong_convexity.pdf){width=250}
 
 # Differential Criteria of Convexity
 
