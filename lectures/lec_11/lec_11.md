@@ -91,7 +91,7 @@ Find $\partial f(x)$, if $f(x) = |x|$
 
 :::: {.columns}
 ::: {.column width="50%"}
-* If $x_0 \in \mathbf{ri } S$, then $\partial f(x_0)$ is a convex compact set.
+* If $x_0 \in \mathbf{ri } (S)$, then $\partial f(x_0)$ is a convex compact set.
 * The convex function $f(x)$ is differentiable at the point $x_0\Rightarrow \partial f(x_0) = \{\nabla f(x_0)\}$.
 * If $\partial f(x_0) \neq \emptyset \quad \forall x_0 \in S$, then $f(x)$ is convex on $S$.
 
@@ -141,7 +141,7 @@ $$
 ::: {.column width="50%"}
 :::{.callout-theorem}
 ### Moreau - Rockafellar theorem (subdifferential of a linear combination)
-Let $f_i(x)$ be convex functions on convex sets $S_i, \; i = \overline{1,n}$. Then if $\bigcap\limits_{i=1}^n \mathbf{ri } S_i \neq \emptyset$ then the function $f(x) = \sum\limits_{i=1}^n a_i f_i(x), \; a_i > 0$ has a subdifferential $\partial_S f(x)$ on the set $S = \bigcap\limits_{i=1}^n S_i$ and 
+Let $f_i(x)$ be convex functions on convex sets $S_i, \; i = \overline{1,n}$. Then if $\bigcap\limits_{i=1}^n \mathbf{ri } (S_i) \neq \emptyset$ then the function $f(x) = \sum\limits_{i=1}^n a_i f_i(x), \; a_i > 0$ has a subdifferential $\partial_S f(x)$ on the set $S = \bigcap\limits_{i=1}^n S_i$ and 
 $$
 \partial_S f(x) = \sum\limits_{i=1}^n a_i \partial_{S_i} f_i(x)
 $$
@@ -209,8 +209,8 @@ Let us sum the obtained equality for $k = 0, \ldots, T-1$:
 
 $$
 \begin{split}
-\uncover<+->{ \sum\limits_{k = 0}^{T-1}2\alpha_k \langle g_k, x_k - x^* \rangle &=  \| x_0 - x^* \|^2 - \| x_{T} - x^* \|^2 + \sum\limits_{k=0}^{T-1}\alpha_k^2 \|g_k^2\| \\ }
-\uncover<+->{ &\leq \| x_0 - x^* \|^2 + \sum\limits_{k=0}^{T-1}\alpha_k^2 \|g_k^2\| \\ }
+\uncover<+->{ \sum\limits_{k = 0}^{T-1}2\alpha_k \langle g_k, x_k - x^* \rangle &=  \| x_0 - x^* \|^2 - \| x_{T} - x^* \|^2 + \sum\limits_{k=0}^{T-1}\alpha_k^2 \|g_k\|^2 \\ }
+\uncover<+->{ &\leq \| x_0 - x^* \|^2 + \sum\limits_{k=0}^{T-1}\alpha_k^2 \|g_k\|^2 \\ }
 \uncover<+->{&\leq R^2 + G^2\sum\limits_{k=0}^{T-1}\alpha_k^2}
 \end{split}
 $$

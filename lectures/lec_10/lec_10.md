@@ -177,7 +177,7 @@ $$
 Let's introduce the idea of momentum, proposed by Polyak in 1964. Recall that the momentum update is
 
 $$
-x^{k+1} = x^k - \alpha \nabla f(x^k) + \beta (x^k - x_{k-1}).
+x^{k+1} = x^k - \alpha \nabla f(x^k) + \beta (x^k - x^{k-1}).
 $$
 
 . . .
@@ -278,7 +278,7 @@ $$
 
 The method will be convergent if $\rho(M) < 1$, and the optimal parameters can be computed by optimizing the spectral radius
 $$
-\alpha^*, \beta^* = \arg \min_{\alpha, \beta} \max_{\lambda \in [\mu, L]} \rho(M) \quad \alpha^* = \dfrac{4}{(\sqrt{L} + \sqrt{\mu})^2}; \quad \beta^* = \left(\dfrac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^2.
+\alpha^*, \beta^* = \arg \min_{\alpha, \beta} \max_{i} \rho(M_i) \quad \alpha^* = \dfrac{4}{(\sqrt{L} + \sqrt{\mu})^2}; \quad \beta^* = \left(\dfrac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^2.
 $$
 
 . . .
